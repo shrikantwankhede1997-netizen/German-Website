@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>German Language Practice</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+        }
+        a {
+            display: block;
+            padding: 15px 20px;
+            background: #ffffff;
+            text-decoration: none;
+            color: #0056b3;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: background 0.2s;
+        }
+        a:hover {
+            background: #e9ecef;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>German Language Practice</h1>
+    <p>Select a topic below to start practicing:</p>
+
+    <ul>
+      <!-- This is the Jekyll code that creates the list automatically -->
+      {% for file in site.static_files %}
+        {% if file.path contains '/activities/' and file.extname == '.html' %}
+          <li>
+            <a href="{{ site.baseurl }}{{ file.path }}">
+              {{ file.basename | replace: '-', ' ' | capitalize }}
+            </a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+
+</body>
+</html>

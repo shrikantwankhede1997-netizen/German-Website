@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interaktiver Wortschatz-Trainer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+        
+        /* Custom scrollbar for long examples */
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #cbd5e1; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen text-slate-800 font-sans antialiased overflow-x-hidden">
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const rawData = {
+ "flashcards": [
+  {
+   "front": { "text": "Erstellung" },
+   "back": { "text": "Create / Creation" },
+   "example": "Die Erstellung des Berichts dauert zwei Tage.",
+   "hint": { "text": "Similar to 'stellen' (to place/put), but with 'er-' prefix often meaning to produce or bring into existence." }
+  },
+  {
+   "front": { "text": "Durchführung" },
+   "back": { "text": "conducting / conduction" },
+   "example": "Die Durchführung des Projekts war sehr erfolgreich.",
+   "hint": { "text": "Think of 'durch' (through) and 'führen' (to lead) - leading something through to completion." }
+  },
+  {
+   "front": { "text": "Pflege" },
+   "back": { "text": "maintain / care" },
+   "example": "Die Pflege der Kundendatenbank ist wichtig.",
+   "hint": { "text": "Often used in the context of nursing or caring for something." }
+  },
+  {
+   "front": { "text": "Abstimmung" },
+   "back": { "text": "co-ordination / vote" },
+   "example": "Die Abstimmung mit dem Team findet morgen statt.",
+   "hint": { "text": "Related to 'Stimme' (voice) - bringing voices together or tuning." }
+  },
+  {
+   "front": { "text": "Führungskräften" },
+   "back": { "text": "Management / Executives" },
+   "example": "Die Schulung richtet sich an alle Führungskräfte.",
+   "hint": { "text": "Compound word: 'Führung' (leadership) + 'Kräften' (forces/powers)." }
+  },
+  {
+   "front": { "text": "Hinsichtlich" },
+   "back": { "text": "regarding" },
+   "example": "Hinsichtlich der Kosten gibt es noch offene Fragen.",
+   "hint": { "text": "Contains 'Sicht' (view/sight)." }
+  },
+  {
+   "front": { "text": "Arbeitspaketen" },
+   "back": { "text": "work packages" },
+   "example": "Das Projekt ist in mehrere Arbeitspakete unterteilt.",
+   "hint": { "text": "Literal translation of the English term." }
+  },
+  {
+   "front": { "text": "Terminvorgaben" },
+   "back": { "text": "Deadlines" },
+   "example": "Wir müssen die Terminvorgaben strikt einhalten.",
+   "hint": { "text": "Compound word: 'Termin' (appointment/date) + 'Vorgaben' (guidelines/specifications)." }
+  },
+  {
+   "front": { "text": "Anlage" },
+   "back": { "text": "Attachment / Creation / Facility" },
+   "example": "Bitte finden Sie das Dokument in der Anlage.",
+   "hint": { "text": "A versatile word, often means something attached or laid out." }
+  },
+  {
+   "front": { "text": "Ressourcenauslastung" },
+   "back": { "text": "Resource utilization" },
+   "example": "Die Ressourcenauslastung liegt aktuell bei 90 Prozent.",
+   "hint": { "text": "Compound word: 'Ressourcen' (resources) + 'Auslastung' (utilization/capacity)." }
+  },
+  {
+   "front": { "text": "Berücksichtigung" },
+   "back": { "text": "Consideration / taking into account" },
+   "example": "Unter Berücksichtigung aller Fakten haben wir uns entschieden.",
+   "hint": { "text": "Related to 'Rücksicht' (consideration)." }
+  },
+  {
+   "front": { "text": "Soll-Ist Analysen" },
+   "back": { "text": "Target / Actual analysis" },
+   "example": "Die Soll-Ist Analysen zeigen eine kleine Abweichung.",
+   "hint": { "text": "'Soll' (should be) vs 'Ist' (is)." }
+  },
+  {
+   "front": { "text": "Arbeitsaufwänden" },
+   "back": { "text": "Workloads" },
+   "example": "Wir müssen in dieser Phase mit höheren Arbeitsaufwänden rechnen.",
+   "hint": { "text": "Compound word: 'Arbeits' (work) + 'Aufwänden' (efforts/expenditures)." }
+  },
+  {
+   "front": { "text": "Schulung" },
+   "back": { "text": "Training" },
+   "example": "Die Schulung für die neue Software beginnt um 9 Uhr.",
+   "hint": { "text": "Derived from 'Schule' (school)." }
+  },
+  {
+   "front": { "text": "Qualitative Prüfung" },
+   "back": { "text": "Qualitative review / examination" },
+   "example": "Jedes neue Produkt durchläuft eine qualitative Prüfung.",
+   "hint": { "text": "Similar to the English term." }
+  },
+  {
+   "front": { "text": "Abhängigkeiten" },
+   "back": { "text": "Dependencies" },
+   "example": "Wir müssen die Abhängigkeiten zwischen den Aufgaben klären.",
+   "hint": { "text": "Derived from 'abhängen' (to depend)." }
+  },
+  {
+   "front": { "text": "Einschränkungen" },
+   "back": { "text": "Constraints / restrictions" },
+   "example": "Aufgrund des Budgets gibt es einige Einschränkungen.",
+   "hint": { "text": "Think of 'ein' (in) and 'schränken' (to limit)." }
+  },
+  {
+   "front": { "text": "Planungsqualität" },
+   "back": { "text": "Planning quality" },
+   "example": "Eine hohe Planungsqualität verhindert spätere Fehler.",
+   "hint": { "text": "Compound word." }
+  },
+  {
+   "front": { "text": "Ausgeprägte" },
+   "back": { "text": "pronounced / distinct" },
+   "example": "Sie hat eine sehr ausgeprägte Kommunikationsfähigkeit.",
+   "hint": { "text": "Related to 'prägen' (to stamp/coin)." }
+  },
+  {
+   "front": { "text": "Arbeitsweise" },
+   "back": { "text": "work ethic / working method / work style" },
+   "example": "Seine strukturierte Arbeitsweise ist für das Team vorbildlich.",
+   "hint": { "text": "Compound word: 'Arbeits' (work) + 'Weise' (way/manner)." }
+  },
+  {
+   "front": { "text": "Steuers / -ung" },
+   "back": { "text": "control / management" },
+   "example": "Die Steuerung der Anlage erfolgt vollelektronisch.",
+   "hint": { "text": "Related to 'steuern' (to steer)." }
+  },
+  {
+   "front": { "text": "Überwachung / überwacht" },
+   "back": { "text": "monitoring / monitored" },
+   "example": "Die Überwachung der Server läuft rund um die Uhr.",
+   "hint": { "text": "Think of 'über' (over) and 'wachen' (to watch)." }
+  },
+  {
+   "front": { "text": "Förderprojekt" },
+   "back": { "text": "Funding project" },
+   "example": "Dies ist ein staatlich unterstütztes Förderprojekt.",
+   "hint": { "text": "Compound word: 'Förder' (funding/support) + 'projekt'." }
+  },
+  {
+   "front": { "text": "Einrichtung" },
+   "back": { "text": "establishment / facility / setup" },
+   "example": "Die Einrichtung des neuen Büros ist fast abgeschlossen.",
+   "hint": { "text": "Related to 'einrichten' (to furnish/set up)." }
+  },
+  {
+   "front": { "text": "Führenden Kund / -innen" },
+   "back": { "text": "Leading customers" },
+   "example": "Wir arbeiten eng mit unseren führenden Kunden zusammen.",
+   "hint": { "text": "'Führend' (leading) + 'Kund' (customer)." }
+  },
+  {
+   "front": { "text": "Raumfahrtindustrie" },
+   "back": { "text": "Space industry" },
+   "example": "Das Unternehmen stellt Teile für die Raumfahrtindustrie her.",
+   "hint": { "text": "Compound word: 'Raum' (space) + 'Fahrt' (journey/travel) + 'Industrie'." }
+  },
+  {
+   "front": { "text": "Nachverfolgung" },
+   "back": { "text": "Tracking / follow-up" },
+   "example": "Die Nachverfolgung der Lieferungen ist online jederzeit möglich.",
+   "hint": { "text": "Think of 'nach' (after) and 'verfolgen' (to pursue/track)." }
+  },
+  {
+   "front": { "text": "Projektfortschritts" },
+   "back": { "text": "Project Progress" },
+   "example": "Den aktuellen Bericht des Projektfortschritts finden Sie im Ordner.",
+   "hint": { "text": "Compound word: 'Projekt' + 'Fortschritt' (progress)." }
+  },
+  {
+   "front": { "text": "Berichterstattung" },
+   "back": { "text": "Reporting" },
+   "example": "Die monatliche Berichterstattung an den Vorstand ist Pflicht.",
+   "hint": { "text": "Derived from 'Bericht' (report)." }
+  },
+  {
+   "front": { "text": "anhand" },
+   "back": { "text": "based upon / by means of" },
+   "example": "Anhand dieses Beispiels können wir das Problem besser verstehen.",
+   "hint": { "text": "Think of 'Hand' (hand) - having something at hand to base something on." }
+  },
+  {
+   "front": { "text": "Eigenverantwortliche" },
+   "back": { "text": "Self-reliant / autonomous" },
+   "example": "Wir suchen eine eigenverantwortliche Mitarbeiterin für dieses Team.",
+   "hint": { "text": "Compound word: 'Eigen' (own) + 'Verantwortung' (responsibility)." }
+  },
+  {
+   "front": { "text": "Auftragserteilung" },
+   "back": { "text": "Order placement" },
+   "example": "Nach der Auftragserteilung beginnen wir sofort mit der Arbeit.",
+   "hint": { "text": "Compound word: 'Auftrag' (order) + 'Erteilung' (issuing/giving)." }
+  },
+  {
+   "front": { "text": "Fachabteilung" },
+   "back": { "text": "Specialist departments" },
+   "example": "Bitte leiten Sie das Problem an die zuständige Fachabteilung weiter.",
+   "hint": { "text": "Compound word: 'Fach' (subject/specialty) + 'Abteilung' (department)." }
+  },
+  {
+   "front": { "text": "Schnittstelle" },
+   "back": { "text": "Interface" },
+   "example": "Unsere Software bietet eine direkte Schnittstelle zur Buchhaltung.",
+   "hint": { "text": "Compound word: 'Schnitt' (cut/intersection) + 'Stelle' (place/position)." }
+  },
+  {
+   "front": { "text": "Sicherstellung" },
+   "back": { "text": "ensuring adherence / guaranteeing" },
+   "example": "Die Sicherstellung der Datenqualität hat bei uns oberste Priorität.",
+   "hint": { "text": "Compound word: 'Sicher' (safe/secure) + 'Stellung' (position)." }
+  },
+  {
+   "front": { "text": "Vollständigen" },
+   "back": { "text": "complete" },
+   "example": "Bitte senden Sie uns die vollständigen Unterlagen bis Freitag.",
+   "hint": { "text": "Related to 'voll' (full) and 'ständig' (constant)." }
+  },
+  {
+   "front": { "text": "Rechtssicheren" },
+   "back": { "text": "legally compliant / legally secure" },
+   "example": "Wir benötigen einen rechtssicheren Vertrag für diese Partnerschaft.",
+   "hint": { "text": "Compound word: 'Recht' (law/right) + 'Sicher' (secure)." }
+  },
+  {
+   "front": { "text": "Lieferanten" },
+   "back": { "text": "Suppliers" },
+   "example": "Unsere Lieferanten kommen hauptsächlich aus Europa.",
+   "hint": { "text": "Derived from 'liefern' (to deliver)." }
+  },
+  {
+   "front": { "text": "Mitwirkung" },
+   "back": { "text": "Participation / cooperation" },
+   "example": "Wir danken Ihnen für Ihre aktive Mitwirkung an diesem Projekt.",
+   "hint": { "text": "Think of 'mit' (with) and 'wirken' (to work/act)." }
+  },
+  {
+   "front": { "text": "Geeigneter" },
+   "back": { "text": "suitable / appropriate" },
+   "example": "Wir haben noch keinen geeigneteren Kandidaten für die Stelle gefunden.",
+   "hint": { "text": "Related to 'eigen' (own) - possessing the qualities for." }
+  },
+  {
+   "front": { "text": "Lösungsmaßnahmen" },
+   "back": { "text": "Solutions / solution measures" },
+   "example": "Wir müssen umgehend Lösungsmaßnahmen für dieses Problem ergreifen.",
+   "hint": { "text": "Compound word: 'Lösung' (solution) + 'Maßnahmen' (measures)." }
+  },
+  {
+   "front": { "text": "Abteilungsleitung" },
+   "back": { "text": "Department Head / leadership" },
+   "example": "Die Abteilungsleitung hat dem neuen Budgetvorschlag zugestimmt.",
+   "hint": { "text": "Compound word: 'Abteilung' (department) + 'Leitung' (leadership/management)." }
+  },
+  {
+   "front": { "text": "Entsprechender" },
+   "back": { "text": "corresponding / respective" },
+   "example": "Mit entsprechender Vorbereitung wird das Meeting sicher ein Erfolg.",
+   "hint": { "text": "Derived from 'entsprechen' (to correspond)." }
+  },
+  {
+   "front": { "text": "Anlagenbau" },
+   "back": { "text": "Plant Engineering" },
+   "example": "Unser Unternehmen ist auf komplexen Anlagenbau spezialisiert.",
+   "hint": { "text": "Compound word: 'Anlagen' (plants/facilities) + 'Bau' (construction)." }
+  },
+  {
+   "front": { "text": "Schienenfahrzeugbau" },
+   "back": { "text": "Railway Vehicle construction" },
+   "example": "Er arbeitet seit zehn Jahren als Ingenieur im Schienenfahrzeugbau.",
+   "hint": { "text": "Compound word: 'Schienen' (rails) + 'Fahrzeug' (vehicle) + 'Bau' (construction)." }
+  },
+  {
+   "front": { "text": "Wünschenswert" },
+   "back": { "text": "desirable" },
+   "example": "Gute Englischkenntnisse sind für diese Position wünschenswert.",
+   "hint": { "text": "Compound word: 'Wünschen' (wish) + 'wert' (worth)." }
+  },
+  {
+   "front": { "text": "Sicherer Umgang" },
+   "back": { "text": "Proficient use / safe handling" },
+   "example": "Ein sicherer Umgang mit MS Office wird zwingend vorausgesetzt.",
+   "hint": { "text": "'Sicher' (safe/secure) + 'Umgang' (handling/dealing)." }
+  },
+  {
+   "front": { "text": "Anwendungen" },
+   "back": { "text": "Applications (MS Office & others)" },
+   "example": "Wir nutzen verschiedene cloud-basierte Anwendungen in der Firma.",
+   "hint": { "text": "Similar to the English term." }
+  },
+  {
+   "front": { "text": "Je nach Projekt" },
+   "back": { "text": "Depending on the project" },
+   "example": "Je nach Projekt können die technischen Anforderungen stark variieren.",
+   "hint": { "text": "'Je nach' means 'depending on'." }
+  },
+  {
+   "front": { "text": "Wirtschaftlicher Lösungen" },
+   "back": { "text": "Economical solutions" },
+   "example": "Wir suchen stets nach innovativen und wirtschaftlichen Lösungen.",
+   "hint": { "text": "'Wirtschaft' (economy) + 'Lösungen' (solutions)." }
+  },
+  {
+   "front": { "text": "Mitarbeitenden" },
+   "back": { "text": "Employees" },
+   "example": "Das Unternehmen beschäftigt über 500 Mitarbeitende weltweit.",
+   "hint": { "text": "Derived from 'mit' (with) and 'arbeiten' (work) - those who work with you." }
+  },
+  {
+   "front": { "text": "Anspruchsvollen" },
+   "back": { "text": "demanding / challenging" },
+   "example": "Das ist ein sehr anspruchsvolles Projekt für unser Team.",
+   "hint": { "text": "Compound word: 'Anspruch' (claim/demand) + 'voll' (full of)." }
+  },
+  {
+   "front": { "text": "Umsetzung" },
+   "back": { "text": "implementation" },
+   "example": "Die praktische Umsetzung der Strategie beginnt im nächsten Quartal.",
+   "hint": { "text": "Related to 'umsetzen' (to implement/realize)." }
+  },
+  {
+   "front": { "text": "Erschließungsmaßnahmen" },
+   "back": { "text": "development projects / development measures" },
+   "example": "Die Erschließungsmaßnahmen für das neue Industriegebiet starten bald.",
+   "hint": { "text": "Compound word: 'Erschließung' (development/opening up) + 'Maßnahmen' (measures)." }
+  },
+  {
+   "front": { "text": "Gestalten" },
+   "back": { "text": "to shape something / to design" },
+   "example": "Wir möchten die Zukunft unseres Unternehmens aktiv mitgestalten.",
+   "hint": { "text": "Related to 'Gestalt' (form/shape)." }
+  },
+  {
+   "front": { "text": "Begleitung" },
+   "back": { "text": "support / accompany / accompaniment" },
+   "example": "Das Projekt fand unter der fachlichen Begleitung eines externen Beraters statt.",
+   "hint": { "text": "Derived from 'begleiten' (to accompany)." }
+  },
+  {
+   "front": { "text": "Inbetriebnahme" },
+   "back": { "text": "commissioning" },
+   "example": "Die offizielle Inbetriebnahme der neuen Anlage ist für Mai geplant.",
+   "hint": { "text": "Compound word: 'in' (in) + 'Betrieb' (operation) + 'nahme' (taking)." }
+  },
+  {
+   "front": { "text": "Projekt beteiligten" },
+   "back": { "text": "Project participants" },
+   "example": "Alle am Projekt beteiligten Personen wurden über die Änderung informiert.",
+   "hint": { "text": "Derived from 'beteiligen' (to participate)." }
+  },
+  {
+   "front": { "text": "Auftraggeber" },
+   "back": { "text": "Clients / principals" },
+   "example": "Unser Auftraggeber erwartet höchste Qualität und Pünktlichkeit.",
+   "hint": { "text": "Compound word: 'Auftrag' (order) + 'Geber' (giver)." }
+  },
+  {
+   "front": { "text": "Behörden" },
+   "back": { "text": "authorities / civil servants" },
+   "example": "Wir müssen die Pläne rechtzeitig bei den lokalen Behörden einreichen.",
+   "hint": { "text": "Official bodies or departments." }
+  },
+  {
+   "front": { "text": "Stellst" },
+   "back": { "text": "ensure / provide" },
+   "example": "Du stellst sicher, dass alle Daten im System korrekt sind.",
+   "hint": { "text": "From 'stellen' (to place/put/provide)." }
+  },
+  {
+   "front": { "text": "Gesetzlichen" },
+   "back": { "text": "legal / statutory" },
+   "example": "Wir müssen zwingend alle gesetzlichen Vorgaben erfüllen.",
+   "hint": { "text": "Derived from 'Gesetz' (law)." }
+  },
+  {
+   "front": { "text": "Anforderungen" },
+   "back": { "text": "requirements / demands" },
+   "example": "Die neue Software erfüllt alle technischen Anforderungen des Kunden.",
+   "hint": { "text": "Derived from 'fordern' (to demand)." }
+  },
+  {
+   "front": { "text": "Rahmen" },
+   "back": { "text": "framework / as a part of..." },
+   "example": "Im Rahmen dieses Projekts werden wir auch neue Methoden testen.",
+   "hint": { "text": "Also means 'frame' (like a picture frame)." }
+  },
+  {
+   "front": { "text": "Bezogen" },
+   "back": { "text": "related" },
+   "example": "Bezogen auf Ihre gestrige E-Mail sende ich Ihnen hier die Datei.",
+   "hint": { "text": "Derived from 'beziehen' (to refer/relate)." }
+  },
+  {
+   "front": { "text": "Herausforderungen" },
+   "back": { "text": "challenges" },
+   "example": "Der Klimawandel stellt uns vor völlig neue Herausforderungen.",
+   "hint": { "text": "Think of 'heraus' (out) and 'fordern' (demand) - demanding something from you." }
+  },
+  {
+   "front": { "text": "Einhaltung" },
+   "back": { "text": "compliance / adherence" },
+   "example": "Die Einhaltung der Sicherheitsregeln auf der Baustelle ist obligatorisch.",
+   "hint": { "text": "Derived from 'einhalten' (to keep/observe)." }
+  },
+  {
+   "front": { "text": "Regulatorischen" },
+   "back": { "text": "regulatory" },
+   "example": "Wir müssen die komplexen regulatorischen Standards der Branche beachten.",
+   "hint": { "text": "Similar to the English term." }
+  },
+  {
+   "front": { "text": "Vorgaben" },
+   "back": { "text": "Specifications / guidelines" },
+   "example": "Bitte halten Sie sich strikt an die internen Design-Vorgaben.",
+   "hint": { "text": "Derived from 'vorgeben' (to specify/dictate)." }
+  },
+  {
+   "front": { "text": "Berichtet / berichten" },
+   "back": { "text": "report / to report" },
+   "example": "Der Projektmanager berichtet jeden Freitag direkt an die Geschäftsführung.",
+   "hint": { "text": "Derived from 'Bericht' (report)." }
+  },
+  {
+   "front": { "text": "Geschäftsleitung" },
+   "back": { "text": "management / executive board" },
+   "example": "Die Geschäftsleitung hat heute Morgen ein neues Wachstumsziel definiert.",
+   "hint": { "text": "Compound word: 'Geschäft' (business) + 'Leitung' (leadership)." }
+  },
+  {
+   "front": { "text": "Fundierte" },
+   "back": { "text": "in-depth / fundamental / well-founded" },
+   "example": "Fundierte Kenntnisse in Python sind für diese Entwicklerposition erforderlich.",
+   "hint": { "text": "Related to 'Fundament' (foundation)." }
+  },
+  {
+   "front": { "text": "Windkraftanlagen" },
+   "back": { "text": "wind turbines" },
+   "example": "Wir planen den Bau von drei neuen Windkraftanlagen an der Küste.",
+   "hint": { "text": "Compound word: 'Wind' + 'Kraft' (power) + 'Anlagen' (facilities/plants)." }
+  },
+  {
+   "front": { "text": "Umfeld" },
+   "back": { "text": "environment / surroundings" },
+   "example": "Wir bieten unseren Angestellten ein dynamisches und modernes Arbeitsumfeld.",
+   "hint": { "text": "Compound word: 'Um' (around) + 'Feld' (field)." }
+  },
+  {
+   "front": { "text": "Zusammenhang mit" },
+   "back": { "text": "related / connection with" },
+   "example": "In diesem Zusammenhang gibt es eine wichtige Änderung der Richtlinien.",
+   "hint": { "text": "Compound word: 'Zusammen' (together) + 'hang' (hanging/connection)." }
+  },
+  {
+   "front": { "text": "Vorlagen" },
+   "back": { "text": "Templates / submissions" },
+   "example": "Nutzen Sie für Rechnungen bitte immer unsere standardisierten Vorlagen.",
+   "hint": { "text": "Derived from 'vorlegen' (to submit/present)." }
+  },
+  {
+   "front": { "text": "Praxisnaher" },
+   "back": { "text": "Practical / applied" },
+   "example": "Der Workshop bietet einen sehr praxisnahen Ansatz zur Problemlösung.",
+   "hint": { "text": "Compound word: 'Praxis' (practice) + 'nah' (near)." }
+  },
+  {
+   "front": { "text": "Vielfältigen" },
+   "back": { "text": "variety / diverse" },
+   "example": "Das Unternehmen hat einen sehr vielfältigen und internationalen Kundenstamm.",
+   "hint": { "text": "Compound word: 'Viel' (many) + 'fältig' (fold)." }
+  },
+  {
+   "front": { "text": "Serienbetreuung" },
+   "back": { "text": "Serial Production / series support" },
+   "example": "Sie ist als Ingenieurin für die Serienbetreuung dieser Motorenbauteile verantwortlich.",
+   "hint": { "text": "Compound word: 'Serien' (series) + 'Betreuung' (support/care)." }
+  },
+  {
+   "front": { "text": "Wirken" },
+   "back": { "text": "participate (work/involve)" },
+   "example": "Ihr positives Wirken im Unternehmen war über die Jahre sehr wertvoll.",
+   "hint": { "text": "To be active or effective." }
+  },
+  {
+   "front": { "text": "Betriebswirtschaft" },
+   "back": { "text": "Business administration" },
+   "example": "Sie studiert Betriebswirtschaft im Master an einer Universität in Berlin.",
+   "hint": { "text": "Compound word: 'Betrieb' (business/operation) + 'Wirtschaft' (economy)." }
+  },
+  {
+   "front": { "text": "Leidenschaft" },
+   "back": { "text": "Passion" },
+   "example": "Gutes Design zu entwickeln ist seine größte berufliche Leidenschaft.",
+   "hint": { "text": "Literally translates to 'creating suffering', but means intense passion." }
+  },
+  {
+   "front": { "text": "Spitzentechnologie" },
+   "back": { "text": "Cutting edge Technologie / high technology" },
+   "example": "Dieser neue Sensor nutzt absolute Spitzentechnologie aus der Forschung.",
+   "hint": { "text": "Compound word: 'Spitze' (peak/top) + 'Technologie'." }
+  },
+  {
+   "front": { "text": "Kennzahlen" },
+   "back": { "text": "key figures / indicators" },
+   "example": "Wir müssen die wichtigsten finanziellen Kennzahlen regelmäßig überwachen.",
+   "hint": { "text": "Compound word: 'Kenn' (know/identify) + 'Zahlen' (numbers)." }
+  },
+  {
+   "front": { "text": "Herangehensweise" },
+   "back": { "text": "approach" },
+   "example": "Wir brauchen eine völlig neue Herangehensweise, um dieses alte Problem zu lösen.",
+   "hint": { "text": "Compound word: 'Herangehen' (approach) + 'Weise' (manner/way)." }
+  },
+  {
+   "front": { "text": "Maß" },
+   "back": { "text": "degree / Measure" },
+   "example": "Das Maß der Dinge in dieser Branche ist die Zuverlässigkeit der Produkte.",
+   "hint": { "text": "Used to denote extent or measurement." }
+  },
+  {
+   "front": { "text": "Eigeninitiative" },
+   "back": { "text": "Self initiative" },
+   "example": "In einem Startup erwarten wir ein hohes Maß an Eigeninitiative von jedem.",
+   "hint": { "text": "Compound word: 'Eigen' (own) + 'Initiative'." }
+  },
+  {
+   "front": { "text": "Aufbereitung" },
+   "back": { "text": "presentation / processing / to present" },
+   "example": "Die visuelle Aufbereitung der komplexen Datenbasis ist sehr gut gelungen.",
+   "hint": { "text": "Derived from 'aufbereiten' (to prepare/process)." }
+  },
+  {
+   "front": { "text": "Namhaften" },
+   "back": { "text": "renowned / well-known" },
+   "example": "Wir arbeiten ausschließlich mit namhaften und zertifizierten Herstellern zusammen.",
+   "hint": { "text": "Derived from 'Name' - having a notable name." }
+  },
+  {
+   "front": { "text": "Unternehmerisch" },
+   "back": { "text": "entrepreneurially" },
+   "example": "Sie denkt und handelt sehr unternehmerisch und risikobewusst.",
+   "hint": { "text": "Derived from 'Unternehmer' (entrepreneur)." }
+  },
+  {
+   "front": { "text": "Souveränes Auftreten" },
+   "back": { "text": "confident demeanor" },
+   "example": "Ein souveränes Auftreten vor dem Kunden ist im Vertrieb enorm wichtig.",
+   "hint": { "text": "Literally 'sovereign appearance'." }
+  },
+  {
+   "front": { "text": "Umsetzbar" },
+   "back": { "text": "Feasible / realizable" },
+   "example": "Diese kreative Idee ist mit dem aktuellen Budget leider nicht umsetzbar.",
+   "hint": { "text": "Derived from 'umsetzen' (to implement)." }
+  },
+  {
+   "front": { "text": "Gemäß" },
+   "back": { "text": "accordance with / according to" },
+   "example": "Gemäß Paragraph 4 des Vertrages sind wir zu dieser Kündigung berechtigt.",
+   "hint": { "text": "Often used in formal contexts." }
+  },
+  {
+   "front": { "text": "Bereichsübergreifenden" },
+   "back": { "text": "cross departmental / interdisciplinary" },
+   "example": "Für Innovationen ist bereichsübergreifendes Denken in der Firma absolut gefragt.",
+   "hint": { "text": "Compound word: 'Bereich' (area/department) + 'übergreifend' (spanning)." }
+  },
+  {
+   "front": { "text": "Weichen" },
+   "back": { "text": "to give way, to set up course / switches (railway)" },
+   "example": "Mit dieser Entscheidung stellen wir frühzeitig die Weichen für die Zukunft.",
+   "hint": { "text": "Can mean yielding or setting direction (like railway switches)." }
+  },
+  {
+   "front": { "text": "Realisieren" },
+   "back": { "text": "to implement, to carry out / realize" },
+   "example": "Wir konnten das schwierige Projekt am Ende doch noch erfolgreich realisieren.",
+   "hint": { "text": "Similar to the English word." }
+  },
+  {
+   "front": { "text": "Neuordnung" },
+   "back": { "text": "reorganising / rearrangement" },
+   "example": "Die geplante Neuordnung der Abteilungen bringt uns viele strukturelle Vorteile.",
+   "hint": { "text": "Compound word: 'Neu' (new) + 'Ordnung' (order)." }
+  },
+  {
+   "front": { "text": "Ausführungsplanung" },
+   "back": { "text": "planning / detailed design / execution planning" },
+   "example": "Die Architekten melden, dass die Ausführungsplanung für das Haus fast abgeschlossen ist.",
+   "hint": { "text": "Compound word: 'Ausführung' (execution) + 'Planung' (planning)." }
+  },
+  {
+   "front": { "text": "Bauausführung" },
+   "back": { "text": "execution construction / execution of building works" },
+   "example": "Als Bauleiter überwacht er täglich die Bauausführung direkt auf der Baustelle.",
+   "hint": { "text": "Compound word: 'Bau' (building/construction) + 'Ausführung' (execution)." }
+  },
+  {
+   "front": { "text": "Leistungserfüllung" },
+   "back": { "text": "performance fulfillment / fulfillment of duties" },
+   "example": "Die genauen Bedingungen zur Leistungserfüllung sind im Dokument vertraglich geregelt.",
+   "hint": { "text": "Compound word: 'Leistung' (performance) + 'Erfüllung' (fulfillment)." }
+  },
+  {
+   "front": { "text": "Vertragsbedingungen" },
+   "back": { "text": "Contractual conditions" },
+   "example": "Bitte lesen Sie die Allgemeinen Vertragsbedingungen vor der Unterschrift genau durch.",
+   "hint": { "text": "Compound word: 'Vertrag' (contract) + 'Bedingungen' (conditions)." }
+  },
+  {
+   "front": { "text": "Sonstigen" },
+   "back": { "text": "other / further" },
+   "example": "Bei sonstigen Fragen zur Installation können Sie sich jederzeit gerne beim Support melden.",
+   "hint": { "text": "Used for miscellaneous items." }
+  },
+  {
+   "front": { "text": "Betreuen" },
+   "back": { "text": "look after / advise / supervise" },
+   "example": "Unsere Agentur wird diesen wichtigen Schlüsselkunden exklusiv betreuen.",
+   "hint": { "text": "To care for or manage." }
+  },
+  {
+   "front": { "text": "Übergreifende" },
+   "back": { "text": "comprehensive / overarching" },
+   "example": "Es gibt viele abteilungsübergreifende Themen, die wir gemeinsam besprechen müssen.",
+   "hint": { "text": "Think of reaching across multiple areas." }
+  },
+  {
+   "front": { "text": "Schnittstellenkoordination" },
+   "back": { "text": "coordinating the interfaces" },
+   "example": "Die Schnittstellenkoordination zwischen Hardware- und Softwareteam ist sehr anspruchsvoll.",
+   "hint": { "text": "Compound word: 'Schnittstellen' (interfaces) + 'Koordination'." }
+  },
+  {
+   "front": { "text": "Erarbeiten Analysen" },
+   "back": { "text": "develop analysis of something" },
+   "example": "Die Analysten erarbeiten derzeit detaillierte Analysen des europäischen Marktes.",
+   "hint": { "text": "'Erarbeiten' (to work out/develop) + 'Analysen'." }
+  },
+  {
+   "front": { "text": "Gegensteuerungsmaßnahmen" },
+   "back": { "text": "countermeasures" },
+   "example": "Wir müssen bei weiteren Verzögerungen sofort massive Gegensteuerungsmaßnahmen einleiten.",
+   "hint": { "text": "Compound word: 'Gegen' (against) + 'Steuerung' (steering) + 'Maßnahmen' (measures)." }
+  },
+  {
+   "front": { "text": "Abweichungen" },
+   "back": { "text": "deviations / variances" },
+   "example": "Bei starken Abweichungen vom Finanzplan müssen wir schnell reagieren.",
+   "hint": { "text": "Derived from 'abweichen' (to deviate)." }
+  },
+  {
+   "front": { "text": "Zielgefährdung" },
+   "back": { "text": "threats to targets / objectives" },
+   "example": "Eine weitere Verzögerung beim Lieferanten führt zu einer akuten Zielgefährdung.",
+   "hint": { "text": "Compound word: 'Ziel' (target/goal) + 'Gefährdung' (threat/endangerment)." }
+  },
+  {
+   "front": { "text": "Beurteilen" },
+   "back": { "text": "assess / judge" },
+   "example": "Die Marktsituation ist aktuell aufgrund der Krise sehr schwer zu beurteilen.",
+   "hint": { "text": "Derived from 'Urteil' (judgment)." }
+  },
+  {
+   "front": { "text": "Nachtragsansprüche" },
+   "back": { "text": "supplementary claims" },
+   "example": "Der Kunde hat wegen der Planänderung hohe Nachtragsansprüche geltend gemacht.",
+   "hint": { "text": "Compound word: 'Nachtrag' (supplement/addendum) + 'Ansprüche' (claims)." }
+  },
+  {
+   "front": { "text": "Mitwirken" },
+   "back": { "text": "participate / contribute" },
+   "example": "An diesem innovativen Großprojekt maßgeblich mitwirken zu können, ist eine Ehre.",
+   "hint": { "text": "To act or work alongside others." }
+  },
+  {
+   "front": { "text": "Routinemäßigen Informations" },
+   "back": { "text": "routine information" },
+   "example": "Dieser Newsletter dient lediglich der routinemäßigen Information aller Mitarbeiter.",
+   "hint": { "text": "'Routinemäßig' means 'routine' or 'customary'." }
+  },
+  {
+   "front": { "text": "Berichtwesen zur Leistungs" },
+   "back": { "text": "reporting on performance" },
+   "example": "Das komplexe Berichtwesen zur Leistungskontrolle wurde letztes Jahr digitalisiert.",
+   "hint": { "text": "'Berichtwesen' (reporting system) + 'zur' (to the/for) + 'Leistung' (performance)." }
+  },
+  {
+   "front": { "text": "Terminentwicklung" },
+   "back": { "text": "deadline development" },
+   "example": "Die aktuelle Terminentwicklung des Bauprojekts ist leider etwas besorgniserregend.",
+   "hint": { "text": "Compound word: 'Termin' (date/deadline) + 'Entwicklung' (development)." }
+  },
+  {
+   "front": { "text": "Verfolgung" },
+   "back": { "text": "monitoring / tracking / pursuit" },
+   "example": "Die konsequente Verfolgung unserer langfristigen Projektziele ist essentiell für den Erfolg.",
+   "hint": { "text": "Derived from 'verfolgen' (to pursue/track)." }
+  },
+  {
+   "front": { "text": "Handlungsfelder" },
+   "back": { "text": "areas of action / fields of activity" },
+   "example": "Wir haben in der Digitalisierung in Deutschland noch einige große Handlungsfelder.",
+   "hint": { "text": "Compound word: 'Handlung' (action) + 'Felder' (fields)." }
+  },
+  {
+   "front": { "text": "Durchsetzungsfähigkeit" },
+   "back": { "text": "Assertiveness" },
+   "example": "Als gute Führungskraft in Krisenzeiten braucht man ein hohes Maß an Durchsetzungsfähigkeit.",
+   "hint": { "text": "Compound word: 'Durchsetzung' (enforcement/assertion) + 'Fähigkeit' (ability)." }
+  },
+  {
+   "front": { "text": "Grobterminplänen" },
+   "back": { "text": "Rough schedule" },
+   "example": "In der frühen Konzeptphase haben wir erst einmal nur mit Grobterminplänen gearbeitet.",
+   "hint": { "text": "Compound word: 'Grob' (rough) + 'Terminplänen' (schedules)." }
+  },
+  {
+   "front": { "text": "Vereinbarte Maßnahmen" },
+   "back": { "text": "agreed measures" },
+   "example": "Die gestern im Meeting vereinbarten Maßnahmen müssen nun schnellstmöglich umgesetzt werden.",
+   "hint": { "text": "'Vereinbaren' means 'to agree upon'." }
+  },
+  {
+   "front": { "text": "Prinzipversuche" },
+   "back": { "text": "experiments / principle tests" },
+   "example": "Wir führen zunächst einige Prinzipversuche im Labor durch, bevor wir den Prototyp bauen.",
+   "hint": { "text": "Compound word: 'Prinzip' + 'Versuche' (tests/attempts)." }
+  },
+  {
+   "front": { "text": "Versuchsergebnisse" },
+   "back": { "text": "test results" },
+   "example": "Die jüngsten Versuchsergebnisse bestätigen erfreulicherweise unsere ursprüngliche Theorie.",
+   "hint": { "text": "Compound word: 'Versuchs' (test) + 'Ergebnisse' (results)." }
+  },
+  {
+   "front": { "text": "Erkenntnisse" },
+   "back": { "text": "findings / insights" },
+   "example": "Diese wissenschaftliche Langzeitstudie liefert uns viele wichtige und neue Erkenntnisse.",
+   "hint": { "text": "Derived from 'erkennen' (to recognize)." }
+  },
+  {
+   "front": { "text": "Adressatengerecht" },
+   "back": { "text": "tailored to target audience" },
+   "example": "Die Präsentation muss adressatengerecht aufbereitet werden, damit auch Laien sie verstehen.",
+   "hint": { "text": "Compound word: 'Adressaten' (addressees/audience) + 'gerecht' (fair/suitable)." }
+  },
+  {
+   "front": { "text": "Wendest" },
+   "back": { "text": "proficient / turn (verb)" },
+   "example": "Du wendest die erlernte Methode in diesem Fallbeispiel absolut richtig an.",
+   "hint": { "text": "Contextually related to applying knowledge (anwenden)." }
+  },
+  {
+   "front": { "text": "Nachunternehmervergabe" },
+   "back": { "text": "Subcontracting" },
+   "example": "Die finale Nachunternehmervergabe für die Elektroinstallationen ist für nächste Woche fest geplant.",
+   "hint": { "text": "Compound word: 'Nachunternehmer' (subcontractor) + 'Vergabe' (awarding)." }
+  },
+  {
+   "front": { "text": "Monatliche Leistungsmeldung" },
+   "back": { "text": "monthly performance report" },
+   "example": "Bitte reichen Sie die monatliche Leistungsmeldung stets fristgerecht bis zum dritten Werktag ein.",
+   "hint": { "text": "'Monatlich' (monthly) + 'Leistung' (performance) + 'Meldung' (report/notification)." }
+  },
+  {
+   "front": { "text": "Deckungsbeitrag" },
+   "back": { "text": "contribution Margin" },
+   "example": "Der Deckungsbeitrag dieses neuen Softwareprodukts ist für unser Unternehmen sehr profitabel.",
+   "hint": { "text": "Compound word: 'Deckung' (cover) + 'Beitrag' (contribution)." }
+  }
+ ]
+};
+        const vocabData = rawData.flashcards.map(fc => ({
+            front: fc.front.text,
+            back: fc.back.text,
+            example: fc.example || "",
+            hint: fc.hint?.text || ""
+        }));
+
+        function App() {
+            // Deck State
+            const [activeDeck, setActiveDeck] = React.useState(vocabData);
+            const [currentIndex, setCurrentIndex] = React.useState(0);
+            const [knownCards, setKnownCards] = React.useState([]);
+            const [learningCards, setLearningCards] = React.useState([]);
+            const [isFinished, setIsFinished] = React.useState(false);
+            const [history, setHistory] = React.useState([]); // NEW: Tracks history for Undo
+            
+            // Visual & Interaction State
+            const [isFlipped, setIsFlipped] = React.useState(false);
+            const [showHint, setShowHint] = React.useState(false);
+            const [isReversed, setIsReversed] = React.useState(false);
+            const [disableFlipAnim, setDisableFlipAnim] = React.useState(false); // NEW: Prevents flip animation on swipe
+            
+            // Physics / Drag State
+            const [dragX, setDragX] = React.useState(0);
+            const [isDragging, setIsDragging] = React.useState(false);
+            const [swipeAnim, setSwipeAnim] = React.useState(null); // 'left' or 'right'
+            const dragStartX = React.useRef(null);
+
+            // Helper to instantly reset flip without showing a rotating animation
+            const instantResetFlip = () => {
+                setDisableFlipAnim(true);
+                setIsFlipped(false);
+                setTimeout(() => setDisableFlipAnim(false), 50);
+            };
+
+            const toggleFlip = () => {
+                // Ensure we don't accidentally re-enable animation if it was disabled
+                setDisableFlipAnim(false); 
+                setIsFlipped(!isFlipped);
+            };
+            
+            const toggleHint = (e) => { e.stopPropagation(); setShowHint(!showHint); };
+
+            const handleBgClick = (e) => {
+                if (e.target.closest('button')) return; // Ignore buttons
+                if (Math.abs(dragX) > 10) return; // Ignore if it was a drag
+                toggleFlip();
+            };
+
+            const handleAnswer = (isKnown) => {
+                if (swipeAnim) return; // Prevent double clicks
+                
+                // Save to history for undo feature
+                setHistory(prev => [...prev, {
+                    card: activeDeck[currentIndex],
+                    index: currentIndex,
+                    wasKnown: isKnown
+                }]);
+
+                setSwipeAnim(isKnown ? 'right' : 'left');
+                
+                // Wait for elegant swipe away animation
+                setTimeout(() => {
+                    if (isKnown) {
+                        setKnownCards(prev => [...prev, activeDeck[currentIndex]]);
+                    } else {
+                        setLearningCards(prev => [...prev, activeDeck[currentIndex]]);
+                    }
+
+                    if (currentIndex < activeDeck.length - 1) {
+                        setCurrentIndex(prev => prev + 1);
+                        setShowHint(false);
+                        instantResetFlip(); // Resets flip silently!
+                    } else {
+                        setIsFinished(true);
+                    }
+                    
+                    // Instantly reset position 
+                    setSwipeAnim(null);
+                    setDragX(0);
+                }, 300); 
+            };
+
+            // Undo logic
+            const handleUndo = (e) => {
+                if (e) e.stopPropagation();
+                if (history.length === 0 || swipeAnim) return;
+
+                const lastAction = history[history.length - 1];
+                setHistory(prev => prev.slice(0, -1)); // pop last action
+
+                // Remove from respective pile
+                if (lastAction.wasKnown) {
+                    setKnownCards(prev => prev.slice(0, -1));
+                } else {
+                    setLearningCards(prev => prev.slice(0, -1));
+                }
+
+                setCurrentIndex(lastAction.index);
+                setIsFinished(false);
+                setShowHint(false);
+                instantResetFlip(); // Reset flip silently!
+            };
+
+            // Toolbar functions
+            const handleRestartAll = () => {
+                setActiveDeck([...vocabData]);
+                setCurrentIndex(0);
+                setKnownCards([]);
+                setLearningCards([]);
+                setHistory([]);
+                setIsFinished(false);
+                setShowHint(false);
+                instantResetFlip();
+            };
+
+            const handleShuffle = () => {
+                const shuffled = [...activeDeck];
+                for (let i = shuffled.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+                }
+                setActiveDeck(shuffled);
+                setCurrentIndex(0);
+                setKnownCards([]);
+                setLearningCards([]);
+                setHistory([]);
+                setIsFinished(false);
+                setShowHint(false);
+                instantResetFlip();
+            };
+
+            const handleReverse = () => {
+                setIsReversed(!isReversed);
+                instantResetFlip();
+            };
+
+            const handleStudyRemaining = () => {
+                setActiveDeck([...learningCards]);
+                setCurrentIndex(0);
+                setKnownCards([]);
+                setLearningCards([]);
+                setHistory([]);
+                setIsFinished(false);
+                setShowHint(false);
+                instantResetFlip();
+            };
+
+            const handleDragStart = (clientX) => {
+                if (swipeAnim) return;
+                dragStartX.current = clientX;
+                setIsDragging(true);
+            };
+
+            const handleDragMove = (clientX) => {
+                if (!isDragging || swipeAnim || dragStartX.current === null) return;
+                const deltaX = clientX - dragStartX.current;
+                setDragX(deltaX);
+            };
+
+            const handleDragEnd = () => {
+                if (!isDragging || swipeAnim) return;
+                setIsDragging(false);
+                dragStartX.current = null;
+                
+                const threshold = 100; // px
+                if (dragX > threshold) {
+                    handleAnswer(true);
+                } else if (dragX < -threshold) {
+                    handleAnswer(false);
+                } else {
+                    // Snap back (handled by CSS transition below)
+                    setDragX(0);
+                }
+            };
+
+            let dragStyle = {
+                touchAction: 'pan-y', // Vital: Allows vertical scrolling, captures horizontal swipe
+                userSelect: 'none',
+            };
+
+            if (isDragging) {
+                dragStyle.transform = `translateX(${dragX}px) rotate(${dragX * 0.05}deg)`;
+                dragStyle.transition = 'none'; // Instant follow finger
+            } else if (swipeAnim === 'right') {
+                const startX = Math.max(dragX, 50);
+                dragStyle.transform = `translateX(${startX + 100}vw) rotate(15deg)`;
+                dragStyle.transition = 'transform 0.3s ease-out';
+            } else if (swipeAnim === 'left') {
+                const startX = Math.min(dragX, -50);
+                dragStyle.transform = `translateX(${startX - 100}vw) rotate(-15deg)`;
+                dragStyle.transition = 'transform 0.3s ease-out';
+            } else {
+                // Smooth snap back (no spring)
+                dragStyle.transform = `translateX(0px) rotate(0deg)`;
+                dragStyle.transition = 'transform 0.3s ease-out';
+            }
+
+            // Flip style now conditionally respects disableFlipAnim to stop FOUT (Flash of Unwanted Text)
+            const flipStyle = {
+                transition: disableFlipAnim ? 'none' : 'transform 0.5s ease-out',
+                transformStyle: 'preserve-3d',
+                transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
+            };
+
+            if (isFinished) {
+                const score = Math.round((knownCards.length / activeDeck.length) * 100) || 0;
+                
+                return (
+                    <div className="flex flex-col items-center justify-center min-h-[100dvh] p-4 sm:p-8 w-full max-w-screen-xl mx-auto bg-[#f8f9fa] font-sans">
+                        <div className="w-full max-w-md bg-white rounded-[2.5rem] p-8 sm:p-10 shadow-sm border border-gray-200 text-center relative overflow-hidden">
+                            <h2 className="text-3xl font-bold text-[#001d35] mb-2 relative z-10">Geschafft! 🎉</h2>
+                            <p className="text-gray-500 mb-8 font-medium relative z-10">Dein Ergebnis</p>
+                            
+                            {/* Circular Progress */}
+                            <div className="relative w-40 h-40 mx-auto mb-8 z-10">
+                                <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="45" fill="none" stroke="#f1f5f9" strokeWidth="10" />
+                                    <circle 
+                                        cx="50" cy="50" r="45" fill="none" stroke="#2563eb" strokeWidth="10" 
+                                        strokeDasharray={`${(score / 100) * 283} 283`}
+                                        className="transition-all duration-1000 ease-out"
+                                        strokeLinecap="round"
+                                    />
+                                </svg>
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-4xl font-bold text-[#001d35]">{score}%</span>
+                                </div>
+                            </div>
+                            
+                            <div className="flex justify-between items-center bg-[#f8f9fa] rounded-2xl p-4 mb-4 border border-gray-100 relative z-10">
+                                <span className="font-semibold text-gray-600 flex items-center"><span className="w-3 h-3 rounded-full bg-[#c4eed0] border border-[#a3d9b6] mr-2"></span> Gewusst</span>
+                                <span className="text-xl font-bold text-[#001d35]">{knownCards.length}</span>
+                            </div>
+                            <div className="flex justify-between items-center bg-[#f8f9fa] rounded-2xl p-4 mb-8 border border-gray-100 relative z-10">
+                                <span className="font-semibold text-gray-600 flex items-center"><span className="w-3 h-3 rounded-full bg-[#f9dedc] border border-[#f0c3c0] mr-2"></span> Noch lernen</span>
+                                <span className="text-xl font-bold text-[#001d35]">{learningCards.length}</span>
+                            </div>
+
+                            <div className="space-y-3 relative z-10">
+                                {history.length > 0 && (
+                                    <button 
+                                        onClick={handleUndo}
+                                        className="w-full bg-white text-gray-600 border border-gray-200 font-semibold py-4 rounded-full hover:bg-gray-50 transition-colors shadow-sm"
+                                    >
+                                        <i className="fas fa-undo mr-2"></i> Letzte Karte rückgängig
+                                    </button>
+                                )}
+                                {learningCards.length > 0 && (
+                                    <button 
+                                        onClick={handleStudyRemaining}
+                                        className="w-full bg-[#2563eb] text-white font-semibold py-4 rounded-full hover:bg-blue-700 transition-colors shadow-sm"
+                                    >
+                                        Noch zu lernende wiederholen
+                                    </button>
+                                )}
+                                <button 
+                                    onClick={handleRestartAll}
+                                    className="w-full bg-[#e9f1fb] text-[#001d35] font-semibold py-4 rounded-full hover:bg-[#d3e3fd] transition-colors shadow-sm"
+                                >
+                                    Ganzes Set neu starten
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                );
+            }
+
+            const card = activeDeck[currentIndex];
+
+            return (
+                <div 
+                    className="flex flex-col items-center justify-center min-h-[100dvh] p-4 sm:p-8 w-full max-w-screen-xl mx-auto bg-[#f8f9fa] font-sans overflow-hidden cursor-pointer"
+                    onClick={handleBgClick} 
+                >
+                    
+                    {/* Top Toolbar */}
+                    <div className="flex justify-between items-center w-full max-w-lg lg:max-w-xl mb-6">
+                        {/* Progress Header */}
+                        <div className="bg-white rounded-full px-5 py-2 text-[#001d35] font-medium shadow-sm border border-gray-200 text-sm sm:text-base flex items-center gap-2">
+                            <i className="fas fa-layer-group text-[#2563eb]"></i>
+                            {currentIndex + 1} / {activeDeck.length}
+                        </div>
+                        
+                        {/* Controls */}
+                        <div className="flex gap-2 sm:gap-3">
+                            <button 
+                                onClick={handleUndo}
+                                disabled={history.length === 0}
+                                className={`w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center text-sm sm:text-base transition-all shadow-sm active:scale-90 border ${history.length === 0 ? 'bg-gray-100 border-gray-200 text-gray-300 cursor-not-allowed' : 'bg-white border-gray-200 text-gray-500 hover:text-blue-600 hover:bg-gray-50'}`}
+                                title="Rückgängig"
+                            >
+                                <i className="fas fa-undo"></i>
+                            </button>
+                            <button 
+                                onClick={(e) => { e.stopPropagation(); handleReverse(); }}
+                                className={`w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center text-sm sm:text-base transition-all shadow-sm active:scale-90 border ${isReversed ? 'bg-[#d3e3fd] border-[#a8c7fa] text-[#001d35]' : 'bg-white border-gray-200 text-gray-500 hover:text-[#2563eb] hover:bg-gray-50'}`}
+                                title="Sprache wechseln"
+                            >
+                                <i className="fas fa-exchange-alt"></i>
+                            </button>
+                            <button 
+                                onClick={(e) => { e.stopPropagation(); handleShuffle(); }}
+                                className="w-10 h-10 sm:w-11 sm:h-11 bg-white text-gray-500 border border-gray-200 rounded-full flex items-center justify-center text-sm sm:text-base hover:bg-gray-50 hover:text-[#2563eb] transition-all shadow-sm active:scale-90"
+                                title="Mischen"
+                            >
+                                <i className="fas fa-random"></i>
+                            </button>
+                            <button 
+                                onClick={(e) => { e.stopPropagation(); handleRestartAll(); }}
+                                className="w-10 h-10 sm:w-11 sm:h-11 bg-white text-gray-500 border border-gray-200 rounded-full flex items-center justify-center text-sm sm:text-base hover:bg-gray-50 hover:text-[#2563eb] transition-all shadow-sm active:scale-90"
+                                title="Neu starten"
+                            >
+                                <i className="fas fa-redo"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Flashcard Container (with Deck logic attached) */}
+                    <div className="perspective-1000 w-full max-w-lg lg:max-w-xl mb-8 h-[60vh] max-h-[28rem] min-h-[24rem] relative">
+                        
+                        {/* Static Underlying Deck Effect 2 */}
+                        {currentIndex + 2 < activeDeck.length && (
+                            <div className="absolute inset-0 w-full h-full bg-white border border-gray-200 rounded-[2.5rem] transform scale-[0.92] translate-y-6 opacity-40 z-0"></div>
+                        )}
+                        
+                        {/* Static Underlying Deck Effect 1 */}
+                        {currentIndex + 1 < activeDeck.length && (
+                            <div className="absolute inset-0 w-full h-full bg-white border border-gray-200 shadow-sm rounded-[2.5rem] transform scale-[0.96] translate-y-3 opacity-80 z-0"></div>
+                        )}
+
+                        {/* Top Draggable Card */}
+                        <div 
+                            style={{ ...dragStyle, zIndex: 10 }}
+                            className="w-full h-full relative"
+                            onMouseDown={(e) => handleDragStart(e.clientX)}
+                            onMouseMove={(e) => handleDragMove(e.clientX)}
+                            onMouseUp={handleDragEnd}
+                            onMouseLeave={handleDragEnd}
+                            onTouchStart={(e) => handleDragStart(e.touches[0].clientX)}
+                            onTouchMove={(e) => handleDragMove(e.touches[0].clientX)}
+                            onTouchEnd={handleDragEnd}
+                        >
+                            <div 
+                                className="relative w-full h-full transform-style-3d shadow-sm hover:shadow border border-gray-200 rounded-[2.5rem]"
+                                style={flipStyle}
+                            >
+                                {/* Front Face */}
+                                <div className="absolute inset-0 backface-hidden bg-white flex flex-col items-center justify-center rounded-[2.5rem] p-6 sm:p-8 text-center">
+                                    <span className="absolute top-6 left-8 text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wider flex items-center bg-gray-50 px-3 py-1 rounded-full border border-gray-100">
+                                        <i className={`fas ${isReversed ? 'fa-globe-americas text-[#1a73e8]' : 'fa-language text-[#1a73e8]'} mr-2`}></i>
+                                        {isReversed ? 'Englisch' : 'Deutsch'}
+                                    </span>
+                                    
+                                    <div className="w-full flex-grow flex items-center justify-center px-2 mt-8 mb-4">
+                                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-[#001d35] break-words hyphens-auto w-full" style={{ wordBreak: 'break-word' }}>
+                                            {isReversed ? card.back : card.front}
+                                        </h2>
+                                    </div>
+                                    <p className="text-gray-400 pb-4 text-sm font-medium">Tippen zum Umdrehen</p>
+                                </div>
+
+                                {/* Back Face (Explicitly rotated via Tailwind utility to prevent mirroring) */}
+                                <div className="absolute inset-0 backface-hidden [transform:rotateY(180deg)] bg-white flex flex-col items-center justify-center rounded-[2.5rem] p-6 sm:p-8 text-center overflow-y-auto custom-scrollbar">
+                                    <span className="absolute top-6 right-8 text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wider hidden sm:flex items-center bg-gray-50 px-3 py-1 rounded-full border border-gray-100">
+                                        {isReversed ? 'Deutsch' : 'Englisch'}
+                                    </span>
+                                    
+                                    <div className="w-full flex-grow flex flex-col items-center justify-center pt-12 sm:pt-4">
+                                        <h2 className="text-2xl sm:text-3xl font-bold text-[#001d35] mb-6 leading-tight break-words hyphens-auto w-full px-2" style={{ wordBreak: 'break-word' }}>
+                                            {isReversed ? card.front : card.back}
+                                        </h2>
+                                        
+                                        <div className="w-full bg-[#f8f9fa] rounded-2xl p-4 mb-4 border border-gray-100 shadow-sm text-left">
+                                            <span className="text-xs text-[#2563eb] font-bold uppercase tracking-widest mb-2 flex items-center"><i className="fas fa-comment-dots mr-2"></i>Beispiel</span>
+                                            <p className="text-base sm:text-lg text-[#001d35] font-medium italic leading-relaxed">
+                                                "{card.example}"
+                                            </p>
+                                        </div>
+                                    </div>
+                                    
+                                    {/* Hint Section */}
+                                    <div className="mt-2 w-full pb-2 z-10" onClick={(e) => e.stopPropagation()}>
+                                        <button 
+                                            onClick={toggleHint}
+                                            className="text-xs sm:text-sm bg-white hover:bg-gray-50 border border-gray-200 transition-colors rounded-full px-4 py-2 font-medium text-gray-600 focus:outline-none shadow-sm active:scale-95"
+                                        >
+                                            <i className={`fas fa-${showHint ? 'eye-slash' : 'lightbulb'} text-yellow-500 mr-2`}></i>
+                                            {showHint ? 'Tipp ausblenden' : 'Tipp anzeigen'}
+                                        </button>
+                                        
+                                        {showHint && (
+                                            <div className="mt-4 p-4 bg-yellow-50 rounded-2xl border border-yellow-100 text-sm italic text-gray-800 shadow-sm text-left leading-relaxed">
+                                                {card.hint}
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Bottom Action Controls */}
+                    <div className="flex items-center justify-center gap-6 sm:gap-12 w-full max-w-sm relative z-20">
+                        <button 
+                            onClick={(e) => { e.stopPropagation(); handleAnswer(false); }}
+                            className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#f9dedc] text-[#8c1d18] flex items-center justify-center hover:bg-[#f2b8b5] transition-all shadow-sm hover:shadow-md active:scale-90"
+                            title="Noch lernen (Links wischen)"
+                        >
+                            <i className="fas fa-times text-2xl sm:text-3xl"></i>
+                        </button>
+                        
+                        <div className="flex flex-col items-center text-gray-400 font-bold tracking-widest text-xs pointer-events-none">
+                            <span>SWIPE</span>
+                            <div className="flex gap-2 mt-1">
+                                <i className="fas fa-chevron-left text-[10px]"></i>
+                                <i className="fas fa-chevron-right text-[10px]"></i>
+                            </div>
+                        </div>
+
+                        <button 
+                            onClick={(e) => { e.stopPropagation(); handleAnswer(true); }}
+                            className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#c4eed0] text-[#0d652d] flex items-center justify-center hover:bg-[#a3d9b6] transition-all shadow-sm hover:shadow-md active:scale-90"
+                            title="Gewusst (Rechts wischen)"
+                        >
+                            <i className="fas fa-check text-2xl sm:text-3xl"></i>
+                        </button>
+                    </div>
+
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
