@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B2 German Conjunctions Mastery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #f8fafc; /* Very light gray/slate matching the image */
+        }
+        .correct-anim { animation: pulseGreen 0.5s ease; }
+        .wrong-anim { animation: shakeRed 0.5s ease; }
+        @keyframes pulseGreen {
+            0% { transform: scale(1); background-color: #f3f4f6; }
+            50% { transform: scale(1.02); background-color: #d1fae5; }
+            100% { transform: scale(1); background-color: #10b981; color: white; }
+        }
+        @keyframes shakeRed {
+            0%, 100% { transform: translateX(0); background-color: #f3f4f6; }
+            25% { transform: translateX(-5px); background-color: #fee2e2; }
+            75% { transform: translateX(5px); background-color: #ef4444; color: white; }
+        }
+        
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
+        .tab-btn {
+            padding: 0.5rem 1rem;
+            color: #4b5563; /* gray-600 */
+            transition: all 0.2s;
+            cursor: pointer;
+            border-radius: 0.25rem;
+            border: 2px solid transparent;
+        }
+        .tab-btn:hover {
+            color: #4f46e5; /* indigo-600 */
+        }
+        .tab-btn.active {
+            border: 2px solid #4f46e5;
+            color: #4f46e5;
+            font-weight: 600;
+        }
+
+        /* Modal animations */
+        .modal-enter { animation: fadeIn 0.2s ease-out forwards; }
+        .modal-exit { animation: fadeOut 0.2s ease-in forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0; transform: scale(0.95); }
+        }
+    </style>
+</head>
+<body class="text-gray-800 font-sans leading-relaxed p-4 md:p-8">
+
+    <div class="max-w-5xl mx-auto space-y-8">
+        
+        <!-- Header -->
+        <header class="text-center pt-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#3F3BCE] mb-3">B2 German Conjunctions Mastery</h1>
+            <p class="text-lg text-gray-600">The ultimate guide to connecting clauses in Goethe B2</p>
+        </header>
+
+        <!-- Explainer Section -->
+        <section class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4 border-b border-gray-100 pb-4">Grammar Guide</h2>
+            
+            <p class="mb-6 text-gray-700">At the B2 level, knowing the meaning of a word isn't enough; you must know exactly how it affects the <strong>word order</strong> of the sentence. Conjunctions in German are divided into four main structural categories.</p>
+
+            <!-- Tabs -->
+            <div class="flex flex-wrap gap-2 border-b border-gray-200 pb-4 mb-6">
+                <button class="tab-btn active" onclick="openTab('tab1', 'subordinating')">1. Subordinating (Verb at End)</button>
+                <button class="tab-btn" onclick="openTab('tab2', 'coordinating')">2. Coordinating (Pos. 0)</button>
+                <button class="tab-btn" onclick="openTab('tab3', 'multipart')">3. Multi-part</button>
+                <button class="tab-btn" onclick="openTab('tab4', 'adverbs')">4. Adverbs (Verb Pos. 2)</button>
+            </div>
+
+            <!-- Tab 1: Subordinating -->
+            <div id="tab1" class="tab-content active">
+                <div class="bg-indigo-50 border-l-4 border-indigo-600 p-4 mb-6 rounded-r">
+                    <h3 class="font-bold text-indigo-800 mb-1">Rule: Verb gets kicked to the very end!</h3>
+                    <p class="text-sm text-indigo-900">Hauptsatz + [Conjunction] + Subjekt + ... + <strong>Verb</strong>.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg cursor-pointer hover:border-indigo-400 hover:shadow-sm transition" onclick="openModal('sub-dass')"><strong>dass</strong> (that) / <strong>ob</strong> (whether/if)</div>
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg cursor-pointer hover:border-indigo-400 hover:shadow-sm transition" onclick="openModal('sub-weil')"><strong>weil</strong> / <strong>da</strong> (because / since)</div>
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg cursor-pointer hover:border-indigo-400 hover:shadow-sm transition" onclick="openModal('sub-obwohl')"><strong>obwohl</strong> / <strong>obgleich</strong> (although)</div>
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg cursor-pointer hover:border-indigo-400 hover:shadow-sm transition" onclick="openModal('sub-wenn')"><strong>wenn</strong> (if/when) / <strong>falls</strong> (in case)</div>
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg cursor-pointer hover:border-indigo-400 hover:shadow-sm transition" onclick="openModal('sub-damit')"><strong>damit</strong> (so that - for purpose)</div>
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg cursor-pointer hover:border-indigo-400 hover:shadow-sm transition" onclick="openModal('sub-sodass')"><strong>sodass</strong> (so that - for consequence)</div>
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg cursor-pointer hover:border-indigo-400 hover:shadow-sm transition" onclick="openModal('sub-indem')"><strong>indem</strong> (by doing... - method)</div>
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg cursor-pointer hover:border-indigo-400 hover:shadow-sm transition" onclick="openModal('sub-alsob')"><strong>als ob</strong> (as if + Konjunktiv II)</div>
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg cursor-pointer hover:border-indigo-400 hover:shadow-sm transition col-span-1 md:col-span-2" onclick="openModal('sub-temporal')"><strong>Temporal:</strong> nachdem, bevor, während, als, bis, seitdem, solange, sobald</div>
+                </div>
+            </div>
+
+            <!-- Tab 2: Coordinating -->
+            <div id="tab2" class="tab-content">
+                <div class="bg-indigo-50 border-l-4 border-indigo-600 p-4 mb-6 rounded-r">
+                    <h3 class="font-bold text-indigo-800 mb-1">Rule: Position 0 (ADUSO)</h3>
+                    <p class="text-sm text-indigo-900">These words take up "Position 0". The subject stays in Position 1, and the conjugated verb stays in Position 2.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg cursor-pointer hover:border-indigo-400 hover:shadow-sm transition" onclick="openModal('coord-aber')"><strong>A</strong>ber (but)</div>
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg cursor-pointer hover:border-indigo-400 hover:shadow-sm transition" onclick="openModal('coord-denn')"><strong>D</strong>enn (because)</div>
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg cursor-pointer hover:border-indigo-400 hover:shadow-sm transition" onclick="openModal('coord-und')"><strong>U</strong>nd (and)</div>
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg cursor-pointer hover:border-indigo-400 hover:shadow-sm transition" onclick="openModal('coord-sondern')"><strong>S</strong>ondern (but rather)</div>
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg cursor-pointer hover:border-indigo-400 hover:shadow-sm transition md:col-span-2" onclick="openModal('coord-oder')"><strong>O</strong>der (or)</div>
+                </div>
+            </div>
+
+            <!-- Tab 3: Multi-part -->
+            <div id="tab3" class="tab-content">
+                <div class="bg-indigo-50 border-l-4 border-indigo-600 p-4 mb-6 rounded-r">
+                    <h3 class="font-bold text-indigo-800 mb-1">Rule: Doppelkonjunktionen</h3>
+                    <p class="text-sm text-indigo-900">Conjunctions that come in pairs to emphasize connection, alternatives, or contrasts.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg cursor-pointer hover:border-indigo-400 hover:shadow-sm transition" onclick="openModal('multi-entweder')"><strong>entweder ... oder</strong> (either ... or)</div>
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg cursor-pointer hover:border-indigo-400 hover:shadow-sm transition" onclick="openModal('multi-weder')"><strong>weder ... noch</strong> (neither ... nor)</div>
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg cursor-pointer hover:border-indigo-400 hover:shadow-sm transition" onclick="openModal('multi-sowohl')"><strong>sowohl ... als auch</strong> (both ... and)</div>
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg cursor-pointer hover:border-indigo-400 hover:shadow-sm transition" onclick="openModal('multi-nichtnur')"><strong>nicht nur ... sondern auch</strong> (not only ... but also)</div>
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg cursor-pointer hover:border-indigo-400 hover:shadow-sm transition" onclick="openModal('multi-zwar')"><strong>zwar ... aber</strong> (it's true that ... but)</div>
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg cursor-pointer hover:border-indigo-400 hover:shadow-sm transition" onclick="openModal('multi-je')"><strong>je ... desto</strong> (the [more] ... the [better])</div>
+                </div>
+            </div>
+
+            <!-- Tab 4: Adverbs -->
+            <div id="tab4" class="tab-content">
+                <div class="bg-indigo-50 border-l-4 border-indigo-600 p-4 mb-6 rounded-r">
+                    <h3 class="font-bold text-indigo-800 mb-1">Rule: Konjunktionaladverbien (Verb in Position 2)</h3>
+                    <p class="text-sm text-indigo-900">These act like conjunctions but are grammatically adverbs. When they start a clause, they take Position 1, forcing the verb directly behind them into Position 2.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg cursor-pointer hover:border-indigo-400 hover:shadow-sm transition" onclick="openModal('adv-deshalb')"><strong>deshalb / deswegen / darum / daher</strong><br><span class="text-sm text-gray-500">therefore / that's why</span></div>
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg cursor-pointer hover:border-indigo-400 hover:shadow-sm transition" onclick="openModal('adv-trotzdem')"><strong>trotzdem / dennoch</strong><br><span class="text-sm text-gray-500">nevertheless / still</span></div>
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg cursor-pointer hover:border-indigo-400 hover:shadow-sm transition" onclick="openModal('adv-ausserdem')"><strong>außerdem / zudem</strong><br><span class="text-sm text-gray-500">furthermore / besides</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODAL OVERLAY -->
+        <div id="grammar-modal" class="fixed inset-0 bg-gray-900 bg-opacity-40 z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300" onclick="handleModalClick(event)">
+            <div class="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto relative transform transition-transform duration-300 scale-95" id="modal-container">
+                <!-- Close Button -->
+                <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+                
+                <div class="p-6 md:p-8">
+                    <h3 id="modal-title" class="text-2xl font-bold text-indigo-700 mb-4 pb-2 border-b"></h3>
+                    <div id="modal-explanation" class="text-gray-700 mb-6 leading-relaxed"></div>
+                    <div class="bg-gray-50 rounded-lg p-4 border border-gray-100">
+                        <h4 class="text-sm uppercase tracking-wider font-bold text-gray-500 mb-3">Examples</h4>
+                        <ul id="modal-examples" class="space-y-4"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Section -->
+        <section class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 border-b border-gray-100 pb-4">Quiz: <span id="current-quiz-title" class="text-indigo-600">Subordinating Conjunctions</span></h2>
+            
+            <div id="quiz-container" class="max-w-3xl mx-auto text-center">
+                
+                <!-- Question Screen -->
+                <div id="question-screen" class="space-y-6">
+                    <div class="flex justify-between items-center text-sm font-medium text-gray-500">
+                        <span id="question-counter">Question 1 / 20</span>
+                        <span id="score-counter">Score: 0</span>
+                    </div>
+                    
+                    <h3 id="question-text" class="text-xl md:text-2xl font-medium text-gray-800 py-4 leading-relaxed">
+                        <!-- Question goes here -->
+                    </h3>
+
+                    <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <!-- Options injected via JS -->
+                    </div>
+
+                    <div id="feedback-message" class="p-4 text-left font-medium rounded-lg text-lg hidden">
+                        <!-- Feedback goes here -->
+                    </div>
+
+                    <button id="next-btn" onclick="nextQuestion()" class="hidden w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition duration-200">
+                        Next Question
+                    </button>
+                </div>
+
+                <!-- Results Screen -->
+                <div id="result-screen" class="hidden space-y-6">
+                    <h3 class="text-3xl font-bold text-gray-800">Prüfung Beendet!</h3>
+                    <p class="text-xl text-gray-600">You scored <span id="final-score" class="font-bold text-indigo-600"></span> out of <span id="total-score"></span>.</p>
+                    
+                    <div id="result-message" class="text-lg font-medium p-6 rounded-lg bg-gray-50 border"></div>
+
+                    <button onclick="startQuiz(currentCategory)" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition duration-200 mt-4">
+                        Retry This Category
+                    </button>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const explanationData = {
+            'sub-dass': {
+                title: 'dass (that) / ob (whether/if)',
+                explanation: 'These introduce dependent clauses. <strong>"Dass"</strong> states a fact or a statement. <strong>"Ob"</strong> introduces an indirect yes/no question or expresses uncertainty. The conjugated verb always gets sent to the very end of the clause.',
+                examples: [
+                    'Ich weiß, <strong>dass</strong> du für die B2-Prüfung <strong>lernst</strong>.<br><span class="text-gray-500 text-sm">I know that you are studying for the B2 exam.</span>',
+                    'Können Sie mir sagen, <strong>ob</strong> der Zug pünktlich <strong>ankommt</strong>?<br><span class="text-gray-500 text-sm">Can you tell me whether the train is arriving on time?</span>'
+                ]
+            },
+            'sub-weil': {
+                title: 'weil / da (because / since)',
+                explanation: 'Both express a reason or cause and send the verb to the end. <strong>"Da"</strong> is often used at the beginning of a sentence to state a known reason, while <strong>"weil"</strong> usually appears in the middle.',
+                examples: [
+                    'Ich lerne Deutsch, <strong>weil</strong> ich in Berlin arbeiten <strong>möchte</strong>.<br><span class="text-gray-500 text-sm">I am learning German because I want to work in Berlin.</span>',
+                    '<strong>Da</strong> es stark <strong>regnet</strong>, bleiben wir heute zu Hause.<br><span class="text-gray-500 text-sm">Since it is raining heavily, we are staying home today.</span>'
+                ]
+            },
+            'sub-obwohl': {
+                title: 'obwohl / obgleich (although)',
+                explanation: 'These express a concession or an unexpected consequence. <strong>"Obgleich"</strong> is simply a more formal, written synonym for <strong>"obwohl"</strong>. Verb goes to the end.',
+                examples: [
+                    'Er geht zur Arbeit, <strong>obwohl</strong> er stark erkältet <strong>ist</strong>.<br><span class="text-gray-500 text-sm">He is going to work although he has a bad cold.</span>',
+                    '<strong>Obgleich</strong> sie sich gut <strong>vorbereitete</strong>, bestand sie die Prüfung nicht.<br><span class="text-gray-500 text-sm">Although she prepared well, she did not pass the exam. (Formal)</span>'
+                ]
+            },
+            'sub-wenn': {
+                title: 'wenn (if/when) / falls (in case)',
+                explanation: '<strong>"Wenn"</strong> is used for conditions (if) and temporal events in the present/future (when). <strong>"Falls"</strong> specifically means "in case" and is purely conditional, expressing a slightly lower probability.',
+                examples: [
+                    'Ich rufe dich an, <strong>wenn</strong> ich zu Hause <strong>ankomme</strong>.<br><span class="text-gray-500 text-sm">I will call you when I arrive at home.</span>',
+                    'Nimm einen Regenschirm mit, <strong>falls</strong> es später <strong>regnet</strong>.<br><span class="text-gray-500 text-sm">Take an umbrella with you in case it rains later.</span>'
+                ]
+            },
+            'sub-damit': {
+                title: 'damit (so that)',
+                explanation: 'Expresses purpose or intention (so that). It is grammatically required instead of "um...zu" when the subject of the main clause is <strong>different</strong> from the subject of the subordinate clause.',
+                examples: [
+                    'Ich spreche laut, <strong>damit</strong> alle mich besser <strong>verstehen</strong>.<br><span class="text-gray-500 text-sm">I am speaking loudly so that everyone can understand me better.</span>'
+                ]
+            },
+            'sub-sodass': {
+                title: 'sodass (so that / with the result that)',
+                explanation: 'Unlike "damit" (which is intention), <strong>"sodass"</strong> expresses the actual consequence or result of an action.',
+                examples: [
+                    'Der Sturm war extrem stark, <strong>sodass</strong> viele Bäume <strong>umfielen</strong>.<br><span class="text-gray-500 text-sm">The storm was extremely strong, so that many trees fell over.</span>'
+                ]
+            },
+            'sub-indem': {
+                title: 'indem (by doing...)',
+                explanation: 'Describes the method or means by which an action is achieved. It answers the question "How?".',
+                examples: [
+                    'Man kann sein Vokabular erweitern, <strong>indem</strong> man deutsche Bücher <strong>liest</strong>.<br><span class="text-gray-500 text-sm">One can expand their vocabulary by reading German books.</span>'
+                ]
+            },
+            'sub-alsob': {
+                title: 'als ob (as if)',
+                explanation: 'Expresses an unreal comparison. It is almost always followed by the <strong>Konjunktiv II</strong> (subjunctive mood) to show that the statement is not actually true.',
+                examples: [
+                    'Er tut so, <strong>als ob</strong> er der Chef <strong>wäre</strong>.<br><span class="text-gray-500 text-sm">He acts as if he were the boss.</span>'
+                ]
+            },
+            'sub-temporal': {
+                title: 'Temporal Subordinating Conjunctions',
+                explanation: 'These express time relationships and all send the verb to the end of the clause.',
+                examples: [
+                    '<strong>Nachdem:</strong> (After) Requires a tense shift. -> <strong>Nachdem</strong> er <strong>gegessen hatte</strong>, <strong>ging</strong> er schlafen.',
+                    '<strong>Bevor:</strong> (Before) -> Wasch dir die Hände, <strong>bevor</strong> du <strong>isst</strong>.',
+                    '<strong>Während:</strong> (While/Simultaneous) -> Er hört Musik, <strong>während</strong> er <strong>arbeitet</strong>.',
+                    '<strong>Als:</strong> (When - single past event) -> <strong>Als</strong> ich ein Kind <strong>war</strong>, spielte ich oft draußen.',
+                    '<strong>Bis:</strong> (Until) -> Wir warten, <strong>bis</strong> der Regen <strong>aufhört</strong>.',
+                    '<strong>Seitdem:</strong> (Since - continuing) -> <strong>Seitdem</strong> er in Berlin <strong>lebt</strong>, spricht er fließend Deutsch.',
+                    '<strong>Solange:</strong> (As long as) -> Du darfst hier bleiben, <strong>solange</strong> du leise <strong>bist</strong>.',
+                    '<strong>Sobald:</strong> (As soon as) -> Ich melde mich, <strong>sobald</strong> ich das Ergebnis <strong>habe</strong>.'
+                ]
+            },
+            'coord-aber': {
+                title: 'Aber (but)',
+                explanation: 'Position 0. Expresses a limitation, restriction, or contrast without changing the word order of the following clause (Subject is Pos 1, Verb is Pos 2).',
+                examples: [
+                    'Ich möchte ein Auto kaufen, <strong>aber</strong> ich <strong>habe</strong> nicht genug Geld.<br><span class="text-gray-500 text-sm">I want to buy a car, but I don\'t have enough money.</span>'
+                ]
+            },
+            'coord-denn': {
+                title: 'Denn (because)',
+                explanation: 'Position 0. Means the exact same thing as "weil", but <strong>"denn" does not change the word order</strong>. The verb stays in Position 2.',
+                examples: [
+                    'Wir bleiben heute zu Hause, <strong>denn</strong> das Wetter <strong>ist</strong> schrecklich.<br><span class="text-gray-500 text-sm">We are staying home today because the weather is terrible.</span>'
+                ]
+            },
+            'coord-und': {
+                title: 'Und (and)',
+                explanation: 'Position 0. Simply links two clauses chronologically or logically without altering word order.',
+                examples: [
+                    'Er geht in den Supermarkt <strong>und</strong> er <strong>kauft</strong> frisches Gemüse.<br><span class="text-gray-500 text-sm">He is going to the supermarket and he is buying fresh vegetables.</span>'
+                ]
+            },
+            'coord-sondern': {
+                title: 'Sondern (but rather / instead)',
+                explanation: 'Position 0. Used exclusively after a <strong>negative statement</strong> (nicht / kein) to offer a correction or a contrasting alternative.',
+                examples: [
+                    'Das ist <strong>nicht</strong> mein Auto, <strong>sondern</strong> es <strong>gehört</strong> meiner Schwester.<br><span class="text-gray-500 text-sm">That is not my car, but rather it belongs to my sister.</span>'
+                ]
+            },
+            'coord-oder': {
+                title: 'Oder (or)',
+                explanation: 'Position 0. Connects two alternatives or choices.',
+                examples: [
+                    'Gehen wir ins Kino, <strong>oder</strong> bleiben wir heute Abend zu Hause?<br><span class="text-gray-500 text-sm">Are we going to the cinema, or are we staying home tonight?</span>'
+                ]
+            },
+            'multi-entweder': {
+                title: 'entweder ... oder (either ... or)',
+                explanation: 'Presents two mutually exclusive alternatives. "Entweder" can take Position 1 (verb follows immediately) or Position 0.',
+                examples: [
+                    'Wir können <strong>entweder</strong> nach Italien fahren <strong>oder</strong> wir fliegen nach Spanien.<br><span class="text-gray-500 text-sm">We can either drive to Italy or we fly to Spain.</span>'
+                ]
+            },
+            'multi-weder': {
+                title: 'weder ... noch (neither ... nor)',
+                explanation: 'A double negative. It connects two items or clauses that are both negated. Note: No additional negative words (nicht/kein) are used.',
+                examples: [
+                    'Er spricht <strong>weder</strong> Englisch <strong>noch</strong> versteht er Französisch.<br><span class="text-gray-500 text-sm">He speaks neither English, nor does he understand French.</span>'
+                ]
+            },
+            'multi-sowohl': {
+                title: 'sowohl ... als auch (both ... and)',
+                explanation: 'Connects two positive, non-exclusive traits or actions, emphasizing that both apply.',
+                examples: [
+                    'Die neue Kollegin ist <strong>sowohl</strong> freundlich <strong>als auch</strong> sehr kompetent.<br><span class="text-gray-500 text-sm">The new colleague is both friendly and very competent.</span>'
+                ]
+            },
+            'multi-nichtnur': {
+                title: 'nicht nur ... sondern auch (not only ... but also)',
+                explanation: 'Escalates an additive connection. The second part ("sondern auch") usually carries more weight or introduces something surprising.',
+                examples: [
+                    'Er hat <strong>nicht nur</strong> den Zug verpasst, <strong>sondern</strong> er hat <strong>auch</strong> sein Handy verloren.<br><span class="text-gray-500 text-sm">Not only did he miss the train, but he also lost his phone.</span>'
+                ]
+            },
+            'multi-zwar': {
+                title: 'zwar ... aber (it is true that ... but)',
+                explanation: 'Expresses a concession or limitation. You concede a point in the first half ("zwar"), but introduce a restriction in the second half ("aber").',
+                examples: [
+                    'Das Hotel ist <strong>zwar</strong> sehr teuer, <strong>aber</strong> der Service ist unschlagbar.<br><span class="text-gray-500 text-sm">It is true that the hotel is very expensive, but the service is unbeatable.</span>'
+                ]
+            },
+            'multi-je': {
+                title: 'je ... desto/umso (the [more] ... the [better])',
+                explanation: 'Used for comparative correlations. <strong>"Je"</strong> introduces a subordinate clause (Verb at the END). <strong>"Desto/umso"</strong> introduces the main clause (Verb immediately after the comparative word in Position 2).',
+                examples: [
+                    '<strong>Je</strong> mehr ich <strong>übe</strong>, <strong>desto</strong> besser <strong>wird</strong> mein Deutsch.<br><span class="text-gray-500 text-sm">The more I practice, the better my German becomes.</span>'
+                ]
+            },
+            'adv-deshalb': {
+                title: 'deshalb / deswegen / darum / daher (therefore / that\'s why)',
+                explanation: 'These are all synonyms acting as conjunctive adverbs. They state a logical consequence. Since they are adverbs, if they are placed at the beginning of the clause (Position 1), the <strong>conjugated verb must immediately follow in Position 2</strong>.',
+                examples: [
+                    'Ich habe verschlafen. <strong>Deshalb habe</strong> ich den Bus verpasst.<br><span class="text-gray-500 text-sm">I overslept. That is why I missed the bus.</span>'
+                ]
+            },
+            'adv-trotzdem': {
+                title: 'trotzdem / dennoch (nevertheless / still)',
+                explanation: 'Express a strong contrast or an unexpected outcome despite the preceding statement. They occupy Position 1, forcing the verb into Position 2.',
+                examples: [
+                    'Das Wetter war extrem schlecht. <strong>Trotzdem sind</strong> wir wandern gegangen.<br><span class="text-gray-500 text-sm">The weather was extremely bad. Nevertheless, we went hiking.</span>'
+                ]
+            },
+            'adv-ausserdem': {
+                title: 'außerdem / zudem (furthermore / besides)',
+                explanation: 'Used to add an additional argument or point to a statement. Takes Position 1, verb in Position 2.',
+                examples: [
+                    'Die Wohnung ist sehr hell. <strong>Außerdem liegt</strong> sie direkt im Zentrum.<br><span class="text-gray-500 text-sm">The apartment is very bright. Furthermore, it is located right in the center.</span>'
+                ]
+            }
+        };
+
+        const quizzes = {
+            subordinating: [
+                { question: "Die Firma musste Insolvenz anmelden, _____ sie massive Verluste gemacht hatte.", options: ["weil", "denn", "deshalb", "trotzdem"], answer: "weil", explanation: "Verb 'hatte' is at the end! This requires a subordinating conjunction like 'weil'." },
+                { question: "Die Eltern sparen Geld, _____ ihre Kinder später studieren können.", options: ["damit", "um ... zu", "sodass", "indem"], answer: "damit", explanation: "'damit' expresses purpose (so that) when the subjects are different." },
+                { question: "Er spricht so respektlos, _____ er der Direktor wäre.", options: ["als wenn", "als ob", "als", "dass"], answer: "als ob", explanation: "'als ob' (as if) is used with Konjunktiv II to describe an unreal comparison." },
+                { question: "Man kann sein Deutsch verbessern, _____ man Podcasts hört.", options: ["indem", "dadurch", "weil", "sodass"], answer: "indem", explanation: "'indem' means 'by doing...'. It explains the method." },
+                { question: "_____ die Verhandlungen gescheitert waren, riefen sie zum Streik auf.", options: ["Nachdem", "Bevor", "Während", "Bis"], answer: "Nachdem", explanation: "Requires a tense shift. They failed (Plusquamperfekt) BEFORE the strike (Präteritum)." },
+                { question: "Ich wusste nicht, _____ du heute früher Feierabend machst.", options: ["dass", "ob", "weil", "wenn"], answer: "dass", explanation: "Introduces a fact that was unknown ('dass' = that)." },
+                { question: "Können Sie mir sagen, _____ der Zug pünktlich ankommt?", options: ["ob", "dass", "wenn", "falls"], answer: "ob", explanation: "Indirect yes/no question requires 'ob' (whether/if)." },
+                { question: "_____ ich ein Kind war, habe ich oft draußen gespielt.", options: ["Als", "Wenn", "Während", "Wann"], answer: "Als", explanation: "'Als' is used for a single block of time/event in the past." },
+                { question: "Wir bleiben zu Hause, _____ das Wetter sich nicht bald bessert.", options: ["falls", "obwohl", "damit", "als"], answer: "falls", explanation: "'falls' means 'in case' or conditional 'if'." },
+                { question: "_____ es stark regnete, fand das Konzert im Freien statt.", options: ["Obwohl", "Weil", "Trotzdem", "Da"], answer: "Obwohl", explanation: "Concession with verb at the end requires 'obwohl' (although)." },
+                { question: "Bitte waschen Sie sich die Hände, _____ Sie mit dem Essen beginnen.", options: ["bevor", "nachdem", "während", "seitdem"], answer: "bevor", explanation: "'bevor' means before. Verb is at the end." },
+                { question: "_____ sie ihre Hausaufgaben macht, hört sie immer Musik.", options: ["Während", "Bevor", "Nachdem", "Bis"], answer: "Während", explanation: "'Während' expresses two simultaneous actions (while)." },
+                { question: "Wir warten hier im Trockenen, _____ der Regen aufhört.", options: ["bis", "seit", "als", "während"], answer: "bis", explanation: "'bis' means until. Denotes an endpoint." },
+                { question: "_____ er nach Berlin gezogen ist, hat er eine neue Stelle gefunden.", options: ["Seitdem", "Als", "Wenn", "Nachdem"], answer: "Seitdem", explanation: "'Seitdem' indicates a starting point in the past continuing onwards (since)." },
+                { question: "Du darfst hier bleiben, _____ du keinen Lärm machst.", options: ["solange", "sobald", "bis", "während"], answer: "solange", explanation: "'solange' (as long as) sets a condition based on duration." },
+                { question: "Wir rufen Sie an, _____ die Testergebnisse vorliegen.", options: ["sobald", "solange", "als", "bis"], answer: "sobald", explanation: "'sobald' (as soon as) means immediately after an event occurs." },
+                { question: "Der Chef redet so leise, _____ man ihn kaum verstehen kann.", options: ["sodass", "damit", "um", "weil"], answer: "sodass", explanation: "'sodass' expresses a direct consequence (so that)." },
+                { question: "_____ wir heute einen Feiertag haben, bleiben die Geschäfte geschlossen.", options: ["Da", "Denn", "Deshalb", "Darum"], answer: "Da", explanation: "'Da' (since/because) acts like 'weil', but is preferred when starting a sentence." },
+                { question: "Ich besuche dich morgen, _____ ich bis dahin gesund bin.", options: ["wenn", "ob", "als", "weil"], answer: "wenn", explanation: "'wenn' is used for future/present conditional (if)." },
+                { question: "_____ er sich große Mühe gab, bestand er die Prüfung nicht.", options: ["Obgleich", "Trotzdem", "Weil", "Daher"], answer: "Obgleich", explanation: "'Obgleich' is a formal synonym for 'obwohl' (although)." }
+            ],
+            coordinating: [
+                { question: "Er antwortete nicht, _____ er verließ den Raum.", options: ["sondern", "aber", "obwohl", "und"], answer: "sondern", explanation: "'sondern' is used after a negative statement to offer a contrasting alternative." },
+                { question: "Wir müssen die Strategie ändern, _____ die Konkurrenz gewinnt.", options: ["denn", "weil", "da", "deshalb"], answer: "denn", explanation: "'denn' means because, but keeps verb 'gewinnt' in Pos 2." },
+                { question: "Ich würde gerne kommen, _____ ich habe leider keine Zeit.", options: ["aber", "obwohl", "trotzdem", "sondern"], answer: "aber", explanation: "'aber' (but) is Pos 0, keeping subject 'ich' in Pos 1, verb 'habe' in Pos 2." },
+                { question: "Fahren wir ans Meer, _____ bleiben wir zu Hause?", options: ["oder", "entweder", "noch", "als"], answer: "oder", explanation: "'oder' connects two alternatives in Pos 0." },
+                { question: "Das Team hat hart gearbeitet _____ das Projekt pünktlich beendet.", options: ["und", "dass", "damit", "sodass"], answer: "und", explanation: "'und' connects logically without changing verb position." },
+                { question: "Das Essen war sehr teuer, _____ es hat überhaupt nicht geschmeckt.", options: ["aber", "denn", "sondern", "weil"], answer: "aber", explanation: "Contrast requiring Pos 0. 'Es' is Pos 1, 'hat' is Pos 2." },
+                { question: "Sie kauft kein neues Auto, _____ sie repariert das alte.", options: ["sondern", "aber", "und", "oder"], answer: "sondern", explanation: "Contradicts a negative ('kein') with a correction." },
+                { question: "Ich nehme einen Regenschirm mit, _____ es sieht nach Regen aus.", options: ["denn", "weil", "da", "deshalb"], answer: "denn", explanation: "Reason. Verb 'sieht' is Pos 2, so it must be 'denn'." },
+                { question: "Möchtest du einen Kaffee, _____ trinkst du lieber einen Tee?", options: ["oder", "und", "aber", "denn"], answer: "oder", explanation: "Presenting a choice (Pos 0)." },
+                { question: "Er studiert Medizin _____ sie arbeitet in einer Bank.", options: ["und", "aber", "denn", "oder"], answer: "und", explanation: "Simple addition of two independent clauses." },
+                { question: "Das ist nicht mein Fehler, _____ es ist dein Fehler!", options: ["sondern", "aber", "denn", "und"], answer: "sondern", explanation: "Replacing a negated fact with the truth." },
+                { question: "Ich trinke gerne Wasser, _____ Cola mag ich gar nicht.", options: ["aber", "sondern", "denn", "oder"], answer: "aber", explanation: "Simple contrast. No negation in the first clause, so 'aber'." },
+                { question: "Wir gehen jetzt schlafen, _____ wir müssen morgen früh aufstehen.", options: ["denn", "weil", "deshalb", "da"], answer: "denn", explanation: "Verb 'müssen' is in Pos 2. 'denn' takes Pos 0." },
+                { question: "Entscheide dich jetzt, _____ es ist zu spät.", options: ["oder", "aber", "und", "denn"], answer: "oder", explanation: "Implied alternative: 'do this, OR (else) it's too late'." },
+                { question: "Er hat viel gelernt, _____ er hat die Prüfung bestanden.", options: ["und", "aber", "sondern", "denn"], answer: "und", explanation: "Logical sequence of main clauses." },
+                { question: "Sie spricht nicht nur Englisch, _____ sie spricht auch fließend Spanisch.", options: ["sondern", "aber", "und", "denn"], answer: "sondern", explanation: "Part of 'nicht nur ... sondern auch' (not only ... but also)." },
+                { question: "Er ist sehr reich, _____ er ist trotzdem unglücklich.", options: ["aber", "denn", "sondern", "oder"], answer: "aber", explanation: "Expressing a contradiction/limitation." },
+                { question: "Das Konzert fällt aus, _____ der Sänger ist krank.", options: ["denn", "weil", "da", "deswegen"], answer: "denn", explanation: "Pos 0 reason. 'der Sänger' is Pos 1, 'ist' is Pos 2." },
+                { question: "Bleibst du heute hier, _____ fährst du nach Hause?", options: ["oder", "und", "aber", "sondern"], answer: "oder", explanation: "Question showing alternatives." },
+                { question: "Sie haben das Haus gekauft _____ sie renovieren es jetzt.", options: ["und", "aber", "denn", "oder"], answer: "und", explanation: "Connecting chronologically related main clauses." }
+            ],
+            multipart: [
+                { question: "Wir können _____ an die Ostsee fahren _____ in den Alpen wandern. Beides ist okay.", options: ["entweder ... oder", "weder ... noch", "sowohl ... als auch", "zwar ... aber"], answer: "entweder ... oder", explanation: "Mutually exclusive alternatives (either ... or)." },
+                { question: "Das Handy ist _____ optisch ansprechend, _____ technisch lässt es zu wünschen übrig.", options: ["zwar ... aber", "nicht nur ... sondern auch", "sowohl ... als auch", "entweder ... oder"], answer: "zwar ... aber", explanation: "Conceding a positive point before a negative contrast." },
+                { question: "_____ intensiver du dich vorbereitest, _____ höher sind deine Chancen.", options: ["Je ... desto", "Sowohl ... als auch", "Entweder ... oder", "Weder ... noch"], answer: "Je ... desto", explanation: "'Je' + Verb End, 'desto' + Verb Pos 2." },
+                { question: "Ich trinke _____ Kaffee _____ schwarzen Tee; ich vertrage kein Koffein.", options: ["weder ... noch", "entweder ... oder", "sowohl ... als auch", "nicht nur ... sondern auch"], answer: "weder ... noch", explanation: "Negates both options (neither ... nor)." },
+                { question: "Die Managerin ist _____ fachlich kompetent, _____ auch menschlich ein Vorbild.", options: ["nicht nur ... sondern", "sowohl ... als auch", "zwar ... aber", "entweder ... oder"], answer: "nicht nur ... sondern", explanation: "Used with 'auch'. 'nicht nur ... sondern (auch)' = not only ... but also." },
+                { question: "Er spricht _____ fließend Französisch _____ ein bisschen Arabisch.", options: ["sowohl ... als auch", "weder ... noch", "je ... desto", "zwar ... aber"], answer: "sowohl ... als auch", explanation: "Adding two positive qualities together (both ... and)." },
+                { question: "Wir haben _____ Zeit _____ Geld für einen Urlaub in diesem Jahr.", options: ["weder ... noch", "entweder ... oder", "sowohl ... als auch", "je ... desto"], answer: "weder ... noch", explanation: "Double negative context implies 'neither time nor money'." },
+                { question: "Das Auto ist _____ alt, _____ es fährt noch einwandfrei.", options: ["zwar ... aber", "entweder ... oder", "weder ... noch", "nicht nur ... sondern auch"], answer: "zwar ... aber", explanation: "Expectation limitation: 'It is true that it's old, but...'" },
+                { question: "_____ mehr Sport er macht, _____ besser fühlt er sich.", options: ["Je ... desto", "Sowohl ... als auch", "Nicht nur ... sondern", "Zwar ... aber"], answer: "Je ... desto", explanation: "Comparative correlation. The more... the better..." },
+                { question: "Sie hat _____ den Flug gebucht, _____ auch gleich das Hotel reserviert.", options: ["nicht nur ... sondern", "sowohl ... als auch", "weder ... noch", "entweder ... oder"], answer: "nicht nur ... sondern", explanation: "'sondern' pairs with 'auch' here to emphasize the additional action." },
+                { question: "Das Hotel bietet _____ ein Schwimmbad _____ eine Sauna.", options: ["sowohl ... als auch", "weder ... noch", "zwar ... aber", "je ... desto"], answer: "sowohl ... als auch", explanation: "Positive listing of amenities." },
+                { question: "Er wird _____ heute Abend ankommen _____ erst morgen früh.", options: ["entweder ... oder", "weder ... noch", "sowohl ... als auch", "zwar ... aber"], answer: "entweder ... oder", explanation: "Expressing uncertainty between two options." },
+                { question: "Sie interessiert sich _____ für Politik _____ für Wirtschaft; nur Kunst mag sie.", options: ["weder ... noch", "sowohl ... als auch", "entweder ... oder", "nicht nur ... sondern auch"], answer: "weder ... noch", explanation: "Since she ONLY likes art, she likes neither politics nor economics." },
+                { question: "_____ teurer das Restaurant ist, _____ besser sollte der Service sein.", options: ["Je ... umso", "Sowohl ... als auch", "Zwar ... aber", "Weder ... noch"], answer: "Je ... umso", explanation: "'umso' is a direct synonym for 'desto' in this context." },
+                { question: "Der Film war _____ sehr spannend, _____ das Ende war vorhersehbar.", options: ["zwar ... aber", "nicht nur ... sondern auch", "entweder ... oder", "weder ... noch"], answer: "zwar ... aber", explanation: "It's true it was exciting, but the end was predictable." },
+                { question: "Du kannst _____ mit dem Bus fahren _____ den Zug nehmen.", options: ["entweder ... oder", "weder ... noch", "zwar ... aber", "je ... desto"], answer: "entweder ... oder", explanation: "Presenting travel alternatives." },
+                { question: "Wir suchen Mitarbeiter, die _____ motiviert _____ teamfähig sind.", options: ["sowohl ... als auch", "weder ... noch", "entweder ... oder", "zwar ... aber"], answer: "sowohl ... als auch", explanation: "Requires both positive traits." },
+                { question: "Er hat _____ das Fenster zerbrochen, _____ auch noch gelogen.", options: ["nicht nur ... sondern", "sowohl ... als auch", "zwar ... aber", "weder ... noch"], answer: "nicht nur ... sondern", explanation: "Escalation of bad actions (not only ... but also)." },
+                { question: "_____ kälter es draußen wird, _____ mehr Heizkosten müssen wir zahlen.", options: ["Je ... desto", "Entweder ... oder", "Weder ... noch", "Sowohl ... als auch"], answer: "Je ... desto", explanation: "Correlation between cold and heating costs." },
+                { question: "Das Projekt war _____ ein finanzieller Erfolg, _____ auch ein Imagegewinn.", options: ["nicht nur ... sondern", "zwar ... aber", "weder ... noch", "entweder ... oder"], answer: "nicht nur ... sondern", explanation: "Two significant positive outcomes emphasized together." }
+            ],
+            adverbs: [
+                { question: "Die Firma machte Verluste, _____ musste sie Insolvenz anmelden.", options: ["deshalb", "weil", "denn", "obwohl"], answer: "deshalb", explanation: "Verb 'musste' is in Pos 2. 'Deshalb' takes Pos 1." },
+                { question: "Er hat sich vorbereitet. _____ war er am Ende extrem nervös.", options: ["Dennoch", "Obwohl", "Weil", "Daher"], answer: "Dennoch", explanation: "'Dennoch' (nevertheless) takes Pos 1, verb 'war' is Pos 2. Unexpected contrast." },
+                { question: "Die Wohnung ist zentral. _____ verfügt sie über einen Balkon.", options: ["Zudem", "Trotzdem", "Deshalb", "Stattdessen"], answer: "Zudem", explanation: "'Zudem' (furthermore) adds a positive point." },
+                { question: "Wir haben nicht unterschrieben, _____ können wir noch Änderungen vornehmen.", options: ["daher", "weil", "obwohl", "dennoch"], answer: "daher", explanation: "'daher' (therefore) shows consequence and takes Pos 1." },
+                { question: "Das Wetter war katastrophal. _____ haben wir den Ausflug genossen.", options: ["Trotzdem", "Deswegen", "Außerdem", "Folglich"], answer: "Trotzdem", explanation: "'Trotzdem' (still/nevertheless) expresses contrast." },
+                { question: "Er hat verschlafen. _____ hat er den wichtigen Zug verpasst.", options: ["Infolgedessen", "Trotzdem", "Außerdem", "Stattdessen"], answer: "Infolgedessen", explanation: "'Infolgedessen' (as a result) logically connects the consequence." },
+                { question: "Ich habe heute keine Zeit. _____ komme ich morgen vorbei.", options: ["Stattdessen", "Zudem", "Deshalb", "Dennoch"], answer: "Stattdessen", explanation: "'Stattdessen' means 'instead', offering an alternative action." },
+                { question: "Sie arbeitet Vollzeit. _____ studiert sie noch abends.", options: ["Außerdem", "Deswegen", "Daher", "Folglich"], answer: "Außerdem", explanation: "'Außerdem' (furthermore) adds an additional impressive fact." },
+                { question: "Der Vertrag wurde gekündigt. _____ müssen wir neue Partner suchen.", options: ["Folglich", "Dennoch", "Zudem", "Trotzdem"], answer: "Folglich", explanation: "'Folglich' (consequently) states the logical next step." },
+                { question: "Es gab einen Stau. _____ bin ich zu spät gekommen.", options: ["Deswegen", "Weil", "Denn", "Trotzdem"], answer: "Deswegen", explanation: "'Deswegen' (that's why) takes Pos 1, putting verb 'bin' in Pos 2." },
+                { question: "Wir müssen uns beeilen, _____ verpassen wir den Flug.", options: ["andernfalls", "deshalb", "zudem", "außerdem"], answer: "andernfalls", explanation: "'andernfalls' means 'otherwise' or 'or else'." },
+                { question: "Er war schwer krank. _____ ging er jeden Tag zur Arbeit.", options: ["Trotzdem", "Daher", "Folglich", "Zudem"], answer: "Trotzdem", explanation: "Shows strong contrast to the expected logical outcome." },
+                { question: "Das Buch ist spannend. _____ ist es sehr gut geschrieben.", options: ["Darüber hinaus", "Trotzdem", "Deshalb", "Andernfalls"], answer: "Darüber hinaus", explanation: "'Darüber hinaus' (furthermore / moreover) adds another positive." },
+                { question: "Mein Auto ist kaputt. _____ fahre ich heute mit dem Bus.", options: ["Darum", "Weil", "Denn", "Dennoch"], answer: "Darum", explanation: "'Darum' (therefore/for that reason) explains the consequence." },
+                { question: "Sie wollte nicht ins Kino gehen. _____ blieb sie zu Hause.", options: ["Stattdessen", "Trotzdem", "Zudem", "Außerdem"], answer: "Stattdessen", explanation: "Instead of doing X, she did Y." },
+                { question: "Die Preise sind stark gestiegen. _____ kaufen weniger Leute ein.", options: ["Folglich", "Trotzdem", "Dennoch", "Zudem"], answer: "Folglich", explanation: "Logical consequence of high prices." },
+                { question: "Er hat sich nicht entschuldigt. _____ hat er mich beleidigt.", options: ["Vielmehr", "Deshalb", "Daher", "Andernfalls"], answer: "Vielmehr", explanation: "'Vielmehr' (rather / on the contrary) escalates a negative statement." },
+                { question: "Ich habe den Wecker nicht gehört. _____ habe ich verschlafen.", options: ["Daher", "Trotzdem", "Dennoch", "Zudem"], answer: "Daher", explanation: "Direct causal relationship requiring a Pos 1 adverb." },
+                { question: "Die Maschine ist alt. _____ funktioniert sie noch perfekt.", options: ["Dennoch", "Deshalb", "Folglich", "Darum"], answer: "Dennoch", explanation: "Formal synonym for trotzdem (nevertheless)." },
+                { question: "Bitte zahlen Sie die Rechnung. _____ müssen wir Mahngebühren erheben.", options: ["Sonst", "Deshalb", "Darum", "Folglich"], answer: "Sonst", explanation: "'Sonst' is a common alternative to 'andernfalls' (otherwise)." }
+            ]
+        };
+
+        let currentCategory = 'subordinating';
+        let currentQuizData = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answeringAllowed = true;
+
+        const screens = {
+            question: document.getElementById('question-screen'),
+            result: document.getElementById('result-screen')
+        };
+
+        function showScreen(screenName) {
+            Object.values(screens).forEach(screen => screen.classList.add('hidden'));
+            screens[screenName].classList.remove('hidden');
+        }
+
+        // Tab Logic
+        function openTab(tabId, category) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+            
+            const titles = {
+                subordinating: "Subordinating Conjunctions (Verb at End)",
+                coordinating: "Coordinating Conjunctions (Position 0)",
+                multipart: "Multi-part Conjunctions",
+                adverbs: "Conjunctive Adverbs (Verb Position 2)"
+            };
+            document.getElementById('current-quiz-title').innerText = titles[category];
+            currentCategory = category;
+            
+            startQuiz(category);
+        }
+
+        // Modal Logic
+        const modalOverlay = document.getElementById('grammar-modal');
+        const modalContainer = document.getElementById('modal-container');
+
+        function openModal(conjunctionId) {
+            const data = explanationData[conjunctionId];
+            if(!data) return;
+
+            document.getElementById('modal-title').innerText = data.title;
+            document.getElementById('modal-explanation').innerHTML = data.explanation;
+            
+            const examplesList = document.getElementById('modal-examples');
+            examplesList.innerHTML = '';
+            data.examples.forEach(ex => {
+                const li = document.createElement('li');
+                li.innerHTML = ex;
+                examplesList.appendChild(li);
+            });
+
+            modalOverlay.classList.remove('hidden');
+            // Trigger reflow for animation
+            void modalOverlay.offsetWidth;
+            
+            modalOverlay.classList.remove('opacity-0');
+            modalOverlay.classList.add('opacity-100');
+            modalContainer.classList.remove('scale-95');
+            modalContainer.classList.add('scale-100');
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('opacity-100');
+            modalOverlay.classList.add('opacity-0');
+            modalContainer.classList.remove('scale-100');
+            modalContainer.classList.add('scale-95');
+            
+            // Wait for transition to finish before hiding completely
+            setTimeout(() => {
+                modalOverlay.classList.add('hidden');
+            }, 300);
+        }
+
+        function handleModalClick(event) {
+            // Close if clicking exactly on the dark overlay (outside the white box)
+            if (event.target === modalOverlay) {
+                closeModal();
+            }
+        }
+
+        // Quiz Logic
+        function startQuiz(category) {
+            currentQuizData = JSON.parse(JSON.stringify(quizzes[category])); // Deep copy
+            currentQuestionIndex = 0;
+            score = 0;
+            shuffleArray(currentQuizData);
+            currentQuizData.forEach(q => shuffleArray(q.options));
+            showScreen('question');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            answeringAllowed = true;
+            const q = currentQuizData[currentQuestionIndex];
+            
+            document.getElementById('question-counter').innerText = `Question ${currentQuestionIndex + 1} / ${currentQuizData.length}`;
+            document.getElementById('score-counter').innerText = `Score: ${score}`;
+            
+            let formattedQuestion = q.question.replace(/_____/g, '<span class="text-indigo-600 font-bold border-b-2 border-indigo-600 px-4">_____</span>');
+            document.getElementById('question-text').innerHTML = formattedQuestion;
+            
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            
+            q.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.innerText = opt;
+                btn.className = "bg-gray-50 hover:bg-gray-100 text-gray-800 font-medium py-4 px-4 rounded-lg border border-gray-200 transition duration-200 ease-in-out text-lg shadow-sm";
+                btn.onclick = () => selectAnswer(btn, opt, q.answer, q.explanation);
+                optionsContainer.appendChild(btn);
+            });
+
+            document.getElementById('feedback-message').classList.add('hidden');
+            document.getElementById('next-btn').classList.add('hidden');
+        }
+
+        function selectAnswer(selectedBtn, selectedOpt, correctOpt, explanation) {
+            if (!answeringAllowed) return;
+            answeringAllowed = false;
+
+            const isCorrect = selectedOpt === correctOpt;
+            const feedbackBox = document.getElementById('feedback-message');
+            const options = document.getElementById('options-container').children;
+
+            for (let btn of options) {
+                btn.disabled = true;
+                btn.classList.remove('hover:bg-gray-100', 'shadow-sm', 'cursor-pointer');
+                if (btn.innerText === correctOpt) {
+                    btn.classList.add('bg-green-500', 'text-white', 'border-green-600', 'shadow-md');
+                    btn.classList.remove('bg-gray-50', 'text-gray-800', 'border-gray-200');
+                } else if (btn === selectedBtn && !isCorrect) {
+                    btn.classList.add('bg-red-500', 'text-white', 'border-red-600');
+                    btn.classList.remove('bg-gray-50', 'text-gray-800', 'border-gray-200');
+                } else {
+                    btn.classList.add('opacity-50'); 
+                }
+            }
+
+            feedbackBox.classList.remove('hidden', 'bg-green-50', 'text-green-900', 'border-green-200', 'bg-red-50', 'text-red-900', 'border-red-200');
+            
+            if (isCorrect) {
+                score++;
+                feedbackBox.classList.add('bg-green-50', 'text-green-900', 'border', 'border-green-200');
+                feedbackBox.innerHTML = `<div class="font-bold text-green-700 mb-1">Richtig! (Correct)</div><div class="text-sm">${explanation}</div>`;
+                selectedBtn.classList.add('correct-anim');
+            } else {
+                feedbackBox.classList.add('bg-red-50', 'text-red-900', 'border', 'border-red-200');
+                feedbackBox.innerHTML = `<div class="font-bold text-red-700 mb-1">Falsch! (Incorrect)</div><div class="text-sm">${explanation}</div>`;
+                selectedBtn.classList.add('wrong-anim');
+            }
+
+            document.getElementById('score-counter').innerText = `Score: ${score}`;
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < currentQuizData.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            showScreen('result');
+            document.getElementById('final-score').innerText = score;
+            document.getElementById('total-score').innerText = currentQuizData.length;
+            
+            const resultMsg = document.getElementById('result-message');
+            const percentage = score / currentQuizData.length;
+            
+            if (percentage >= 0.8) {
+                resultMsg.innerHTML = "<strong>Hervorragend! (Great Job!)</strong><br>You have an excellent grasp of this conjunction category.";
+                resultMsg.className = "text-lg font-medium p-6 rounded-lg bg-green-50 text-green-800 border border-green-200";
+            } else if (percentage >= 0.6) {
+                resultMsg.innerHTML = "<strong>Gut gemacht! (Well done!)</strong><br>You have a solid understanding, but reviewing the rules in the tabs above will help perfect it.";
+                resultMsg.className = "text-lg font-medium p-6 rounded-lg bg-indigo-50 text-indigo-800 border border-indigo-200";
+            } else {
+                resultMsg.innerHTML = "<strong>Weiter üben! (Keep practicing)</strong><br>This category is tricky because of how it changes verb positions. Review the grammar guide above and try again!";
+                resultMsg.className = "text-lg font-medium p-6 rounded-lg bg-orange-50 text-orange-800 border border-orange-200";
+            }
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        // Add keyboard support to close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape" && !modalOverlay.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+
+        // Auto-start the first quiz when the page loads
+        window.onload = () => {
+            startQuiz('subordinating');
+        };
+    </script>
+</body>
+</html>
