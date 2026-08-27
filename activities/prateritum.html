@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>German Past Tenses: Minimalist Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Minimalist layout with Soothing Pixel/Retro UI Palette */
+            --bg-color: #F8FAFC; /* Slate 50 */
+            --text-main: #334155; /* Slate 700 */
+            --color-praet: #FF6B6B; /* Soft Red */
+            --color-perf: #F4D03F; /* Soft Yellow */
+            --color-plusq: #48C9B0; /* Soft Teal */
+            --color-part: #5DADE2; /* Soft Blue */
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+        }
+
+        /* Smooth interactions */
+        .card-hover {
+            transition: all 0.2s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+        }
+
+        /* Quiz Animations */
+        .correct-anim { animation: pulseGreen 0.4s ease; }
+        .wrong-anim { animation: pulseRed 0.4s ease; }
+        
+        @keyframes pulseGreen {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        @keyframes pulseRed {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-4px); }
+            75% { transform: translateX(4px); }
+        }
+
+        /* Tabs and Modals */
+        .tab-content { display: none; opacity: 0; transition: opacity 0.3s ease; }
+        .tab-content.active { display: block; opacity: 1; }
+        
+        .modal-enter { animation: fadeIn 0.2s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8 min-h-screen text-slate-700">
+
+    <div class="max-w-5xl mx-auto space-y-12 pb-12">
+        
+        <header class="text-center pt-8 mb-4">
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-slate-800 mb-3">
+                German Past Tenses
+            </h1>
+            <p class="text-lg text-slate-500 font-medium">Über Vergangenes berichten: Tempusformen</p>
+        </header>
+
+        <section class="bg-white rounded-3xl p-6 md:p-10 shadow-sm border border-slate-100 relative">
+            <h2 class="text-2xl font-bold mb-10 flex items-center gap-3 text-slate-800">
+                <span class="bg-slate-100 text-slate-500 rounded-full w-8 h-8 flex items-center justify-center text-sm">1</span> 
+                Timeline of Events
+            </h2>
+            
+            <div class="relative py-4">
+                <!-- Desktop connecting line -->
+                <div class="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-slate-100 -translate-y-1/2 z-0"></div>
+                <!-- Mobile connecting line -->
+                <div class="md:hidden absolute left-[27px] top-0 bottom-0 w-0.5 bg-slate-100 z-0"></div>
+
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-stretch gap-6 md:gap-6 relative z-10">
+                    
+                    <!-- Plusquamperfekt Node -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm w-full md:w-1/3 flex flex-col relative overflow-hidden">
+                        <div class="absolute top-0 left-0 right-0 h-1 bg-[var(--color-plusq)]"></div>
+                        <div class="text-[var(--color-plusq)] text-sm font-bold uppercase tracking-wider mb-2">Past of the Past</div>
+                        <h3 class="text-xl font-bold mb-3">Plusquamperfekt</h3>
+                        <p class="text-slate-500 text-sm mb-4 flex-grow">Happened <span class="font-medium text-slate-700">before</span> another event in the past.</p>
+                        <div class="bg-slate-50 p-3 rounded-xl text-sm font-medium text-slate-600 border border-slate-100">
+                            "Ich hatte gelernt..."
+                        </div>
+                    </div>
+
+                    <!-- Präteritum/Perfekt Node -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm w-full md:w-1/3 flex flex-col relative overflow-hidden">
+                        <div class="absolute top-0 left-0 right-0 h-1 bg-[var(--color-praet)]"></div>
+                        <div class="text-[var(--color-praet)] text-sm font-bold uppercase tracking-wider mb-2">The Standard Past</div>
+                        <h3 class="text-xl font-bold mb-3">Präteritum / Perfekt</h3>
+                        <p class="text-slate-500 text-sm mb-4 flex-grow">The main event that occurred in the past.</p>
+                        <div class="bg-slate-50 p-3 rounded-xl text-sm font-medium text-slate-600 border border-slate-100">
+                            "...dann machte ich die Prüfung."
+                        </div>
+                    </div>
+
+                    <!-- Präsens Node -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm w-full md:w-1/3 flex flex-col relative overflow-hidden opacity-70">
+                        <div class="absolute top-0 left-0 right-0 h-1 bg-slate-300"></div>
+                        <div class="text-slate-400 text-sm font-bold uppercase tracking-wider mb-2">The Present</div>
+                        <h3 class="text-xl font-bold mb-3">Präsens</h3>
+                        <p class="text-slate-500 text-sm mb-4 flex-grow">Happening right now.</p>
+                        <div class="bg-slate-50 p-3 rounded-xl text-sm font-medium text-slate-600 border border-slate-100">
+                            "Ich bin glücklich."
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-3xl p-6 md:p-10 shadow-sm border border-slate-100">
+            <h2 class="text-2xl font-bold mb-8 flex items-center gap-3 text-slate-800">
+                <span class="bg-slate-100 text-slate-500 rounded-full w-8 h-8 flex items-center justify-center text-sm">2</span> 
+                Grammar Rules
+            </h2>
+            
+            <!-- Tabs -->
+            <div class="flex flex-wrap gap-2 pb-6 mb-6">
+                <button id="btn-tab1" class="tab-btn px-6 py-2.5 rounded-full font-semibold transition-all duration-200 text-white bg-[var(--color-praet)] shadow-sm" onclick="openTab('tab1', 'praeteritum')">Präteritum</button>
+                <button id="btn-tab2" class="tab-btn px-6 py-2.5 rounded-full font-semibold transition-all duration-200 text-slate-500 bg-slate-50 hover:bg-slate-100" onclick="openTab('tab2', 'perfekt')">Perfekt</button>
+                <button id="btn-tab3" class="tab-btn px-6 py-2.5 rounded-full font-semibold transition-all duration-200 text-slate-500 bg-slate-50 hover:bg-slate-100" onclick="openTab('tab3', 'plusquamperfekt')">Plusquamperfekt</button>
+                <button id="btn-tab4" class="tab-btn px-6 py-2.5 rounded-full font-semibold transition-all duration-200 text-slate-500 bg-slate-50 hover:bg-slate-100" onclick="openTab('tab4', 'partizip')">Partizip II</button>
+            </div>
+
+            <div id="tab1" class="tab-content active">
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-slate-800 mb-1">Präteritum</h3>
+                    <p class="text-slate-500">The written past tense.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-6 bg-white border border-slate-100 rounded-2xl cursor-pointer card-hover md:col-span-2 shadow-sm" onclick="openModal('praet-verwendung')">
+                        <h4 class="text-lg font-bold text-[var(--color-praet)] mb-2">Verwendung (Usage)</h4>
+                        <p class="text-sm text-slate-600 mb-4">Von Ereignissen schriftlich berichten (z.B. in Zeitungsartikeln und Romanen). Bei Hilfs- und Modalverben.</p>
+                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Click to read more &rarr;</span>
+                    </div>
+                    
+                    <div class="p-6 bg-white border border-slate-100 rounded-2xl cursor-pointer card-hover shadow-sm" onclick="openModal('praet-regelmaessig')">
+                        <h4 class="text-lg font-bold text-slate-800 mb-3">Regelmäßige Verben</h4>
+                        <div class="bg-slate-50 p-3 rounded-lg font-mono text-sm text-slate-700 mb-3">Verbstamm + -t- + Endung</div>
+                        <p class="text-sm text-slate-500">z.B. machen – sie mach-t-e</p>
+                    </div>
+
+                    <div class="p-6 bg-white border border-slate-100 rounded-2xl cursor-pointer card-hover shadow-sm" onclick="openModal('praet-unregelmaessig')">
+                        <h4 class="text-lg font-bold text-slate-800 mb-3">Unregelmäßige Verben</h4>
+                        <div class="bg-slate-50 p-3 rounded-lg font-mono text-sm text-slate-700 mb-3">Präteritumstamm + Endung</div>
+                        <p class="text-sm text-slate-500">z.B. gehen – er ging. <span class="font-medium text-slate-800">Keine Endung bei 1. und 3. Person Singular!</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab2" class="tab-content">
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-slate-800 mb-1">Perfekt</h3>
+                    <p class="text-slate-500">The spoken past tense.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-6 bg-white border border-slate-100 rounded-2xl cursor-pointer card-hover md:col-span-2 shadow-sm" onclick="openModal('perf-verwendung')">
+                        <h4 class="text-lg font-bold text-[var(--color-perf)] mb-2">Verwendung (Usage)</h4>
+                        <p class="text-sm text-slate-600 mb-4">Von Ereignissen mündlich oder schriftlich berichten, z.B. in Gesprächen, E-Mails, Briefen.</p>
+                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Click to read more &rarr;</span>
+                    </div>
+                    <div class="p-6 bg-white border border-slate-100 rounded-2xl cursor-pointer card-hover md:col-span-2 shadow-sm" onclick="openModal('perf-bildung')">
+                        <h4 class="text-lg font-bold text-slate-800 mb-3">Bildung (Formation)</h4>
+                        <div class="bg-slate-50 p-3 rounded-lg font-mono text-sm text-slate-700 mb-3">haben/sein im Präsens + Partizip II</div>
+                        <p class="text-sm text-slate-500">z.B. er hat gearbeitet, sie ist gelaufen</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab3" class="tab-content">
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-slate-800 mb-1">Plusquamperfekt</h3>
+                    <p class="text-slate-500">The past of the past.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-6 bg-white border border-slate-100 rounded-2xl cursor-pointer card-hover md:col-span-2 shadow-sm" onclick="openModal('plusq-verwendung')">
+                        <h4 class="text-lg font-bold text-[var(--color-plusq)] mb-2">Verwendung (Usage)</h4>
+                        <p class="text-sm text-slate-600 mb-4">Von Ereignissen berichten, die <strong class="text-slate-800">vor</strong> einem anderen Ereignis in der Vergangenheit passiert sind.</p>
+                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Click to read more &rarr;</span>
+                    </div>
+                    <div class="p-6 bg-white border border-slate-100 rounded-2xl cursor-pointer card-hover md:col-span-2 shadow-sm" onclick="openModal('plusq-bildung')">
+                        <h4 class="text-lg font-bold text-slate-800 mb-3">Bildung (Formation)</h4>
+                        <div class="bg-slate-50 p-3 rounded-lg font-mono text-sm text-slate-700 mb-3">haben/sein im Präteritum + Partizip II</div>
+                        <p class="text-sm text-slate-500">z.B. er hatte gearbeitet, sie war gelaufen</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab4" class="tab-content">
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-slate-800 mb-1">Bildung Partizip II</h3>
+                    <p class="text-slate-500">Crucial for Perfekt and Plusquamperfekt.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-6 bg-white border border-slate-100 rounded-2xl cursor-pointer card-hover shadow-sm" onclick="openModal('part-regelmaessig')">
+                        <h4 class="text-lg font-bold text-[var(--color-part)] mb-3">Regelmäßige Verben</h4>
+                        <ul class="text-sm space-y-2 text-slate-600">
+                            <li><span class="font-medium text-slate-800">ohne Präfix:</span> machen – <strong>ge</strong>mach<strong>t</strong></li>
+                            <li><span class="font-medium text-slate-800">trennbar:</span> einkaufen – ein<strong>ge</strong>kauf<strong>t</strong></li>
+                            <li><span class="font-medium text-slate-800">untrennbar:</span> erzählen – erzähl<strong>t</strong></li>
+                            <li><span class="font-medium text-slate-800">auf -ieren:</span> programmieren – programmier<strong>t</strong></li>
+                        </ul>
+                    </div>
+                    <div class="p-6 bg-white border border-slate-100 rounded-2xl cursor-pointer card-hover shadow-sm" onclick="openModal('part-unregelmaessig')">
+                        <h4 class="text-lg font-bold text-[var(--color-part)] mb-3">Unregelmäßige Verben</h4>
+                        <ul class="text-sm space-y-2 text-slate-600">
+                            <li><span class="font-medium text-slate-800">ohne Präfix:</span> gießen – <strong>ge</strong>goss<strong>en</strong></li>
+                            <li><span class="font-medium text-slate-800">trennbar:</span> aufgeben – auf<strong>ge</strong>geb<strong>en</strong></li>
+                            <li><span class="font-medium text-slate-800">untrennbar:</span> verstehen – verstand<strong>en</strong></li>
+                        </ul>
+                    </div>
+                    <div class="p-6 bg-orange-50 border border-orange-100 rounded-2xl cursor-pointer card-hover md:col-span-2 shadow-sm" onclick="openModal('part-achtung')">
+                        <h4 class="text-lg font-bold text-orange-600 mb-3">ACHTUNG: Gemischte Verben</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm font-mono text-orange-900 mb-4">
+                            <div>kennen – kannte – hat gekannt</div>
+                            <div>bringen – brachte – hat gebracht</div>
+                            <div>denken – dachte – hat gedacht</div>
+                            <div>wissen – wusste – hat gewusst</div>
+                        </div>
+                        <span class="text-xs font-semibold text-orange-500 uppercase tracking-wider">Click to read explanation &rarr;</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="grammar-modal" class="fixed inset-0 bg-slate-900/40 z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-200 backdrop-blur-sm" onclick="handleModalClick(event)">
+            <div class="bg-white rounded-3xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto relative transform transition-transform duration-200 scale-95" id="modal-container">
+                <button onclick="closeModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-600 transition-colors bg-slate-50 hover:bg-slate-100 rounded-full w-10 h-10 flex items-center justify-center">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+                
+                <div class="p-8 md:p-10">
+                    <h3 id="modal-title" class="text-2xl font-bold text-slate-800 mb-4"></h3>
+                    <div id="modal-explanation" class="text-slate-600 mb-8 leading-relaxed text-lg"></div>
+                    <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+                        <h4 class="text-xs uppercase tracking-wider font-bold text-slate-400 mb-4">Beispiele (Examples)</h4>
+                        <ul id="modal-examples" class="space-y-4 text-slate-700"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="bg-white rounded-3xl p-6 md:p-10 shadow-sm border border-slate-100">
+            <h2 class="text-2xl font-bold mb-8 flex items-center gap-3 text-slate-800">
+                <span class="bg-slate-100 text-slate-500 rounded-full w-8 h-8 flex items-center justify-center text-sm">3</span> 
+                Level: <span class="text-indigo-500 font-extrabold tracking-wide">Comprehensive</span> Boss
+            </h2>
+            
+            <div id="quiz-container" class="max-w-2xl mx-auto">
+                
+                <!-- Question Screen -->
+                <div id="question-screen" class="space-y-8">
+                    <div class="flex justify-between items-center text-sm font-semibold text-slate-400 uppercase tracking-wider">
+                        <span id="question-counter">HP: 1/15</span>
+                        <span id="score-counter" class="text-slate-600">SCORE: 0</span>
+                    </div>
+                    
+                    <div>
+                        <h3 id="question-text" class="text-2xl md:text-3xl font-bold text-slate-800 leading-tight">
+                            <!-- Question injected via JS -->
+                        </h3>
+                    </div>
+
+                    <div id="options-container" class="grid grid-cols-1 gap-3">
+                        <!-- Options injected via JS -->
+                    </div>
+
+                    <div id="feedback-message" class="rounded-2xl p-5 text-left hidden border">
+                        <!-- Feedback goes here -->
+                    </div>
+
+                    <button id="next-btn" onclick="nextQuestion()" class="hidden w-full bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-xl py-4 transition-colors">
+                        Continue &rarr;
+                    </button>
+                </div>
+
+                <!-- Result Screen -->
+                <div id="result-screen" class="hidden space-y-6 text-center py-12">
+                    <h3 class="text-4xl font-bold text-slate-800 mb-2">Stage Clear!</h3>
+                    <p class="text-xl text-slate-500 mb-8">Final Score: <span id="final-score" class="font-bold text-slate-800"></span> / <span id="total-score"></span></p>
+                    
+                    <div id="result-message" class="rounded-2xl p-6 text-lg inline-block text-left w-full border"></div>
+
+                    <div class="pt-6">
+                        <button onclick="startQuiz()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold rounded-xl py-3 px-8 transition-colors inline-flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                            Play Again
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const explanationData = {
+            'praet-verwendung': {
+                title: 'Präteritum: Verwendung',
+                explanation: 'Das Präteritum wird hauptsächlich verwendet, um von Ereignissen <strong class="text-slate-800">schriftlich</strong> zu berichten (z.B. in Zeitungsartikeln und Romanen). In der gesprochenen Sprache nutzen wir es fast immer bei <strong class="text-slate-800">Hilfs- und Modalverben</strong> (haben, sein, können, müssen, etc.).',
+                examples: [
+                    'Gestern <strong class="text-slate-900">war</strong> ich im Kino. (sein -> Präteritum)<br><span class="text-slate-500 text-sm mt-1 block">Yesterday I was at the cinema.</span>',
+                    'Wir <strong class="text-slate-900">mussten</strong> lange warten. (müssen -> Präteritum)<br><span class="text-slate-500 text-sm mt-1 block">We had to wait a long time.</span>',
+                    'Der Bundeskanzler <strong class="text-slate-900">reiste</strong> nach Paris. (Written report)<br><span class="text-slate-500 text-sm mt-1 block">The Chancellor traveled to Paris.</span>'
+                ]
+            },
+            'praet-regelmaessig': {
+                title: 'Präteritum: regelmäßige Verben',
+                explanation: 'Bei regelmäßigen Verben nimmt man den Verbstamm, fügt ein <strong class="text-slate-800">-t-</strong> hinzu und hängt dann die Personalendung an.',
+                examples: [
+                    'machen &rarr; sie mach-t-e<br><span class="text-slate-500 text-sm mt-1 block">she made/did</span>',
+                    'fragen &rarr; sie frag-t-e<br><span class="text-slate-500 text-sm mt-1 block">she asked</span>'
+                ]
+            },
+            'praet-unregelmaessig': {
+                title: 'Präteritum: unregelmäßige Verben',
+                explanation: 'Unregelmäßige Verben ändern ihren Stammvokal. <br><br><strong class="text-slate-800">Wichtige Regel:</strong> Es gibt <strong class="text-slate-800">keine Endung</strong> bei der 1. Person Singular (ich) und der 3. Person Singular (er/sie/es).',
+                examples: [
+                    'gehen &rarr; ich/er <strong class="text-slate-900">ging</strong> (No ending)<br><span class="text-slate-500 text-sm mt-1 block">he went</span>',
+                    'kommen &rarr; ich/sie <strong class="text-slate-900">kam</strong> (No ending)<br><span class="text-slate-500 text-sm mt-1 block">she came</span>'
+                ]
+            },
+            'perf-verwendung': {
+                title: 'Perfekt: Verwendung',
+                explanation: 'Das Perfekt verwendet man, um von Ereignissen <strong class="text-slate-800">mündlich</strong> oder in <strong class="text-slate-800">informellen Texten</strong> (E-Mails, Briefen) zu berichten. Es ist die Standard-Vergangenheitsform im Alltag.',
+                examples: [
+                    'Hast du gestern Fußball <strong class="text-slate-900">gespielt</strong>?<br><span class="text-slate-500 text-sm mt-1 block">Did you play soccer yesterday?</span>',
+                    'Liebe Anna, ich <strong class="text-slate-900">bin</strong> gut in Berlin <strong class="text-slate-900">angekommen</strong>.<br><span class="text-slate-500 text-sm mt-1 block">Dear Anna, I arrived well in Berlin.</span>'
+                ]
+            },
+            'perf-bildung': {
+                title: 'Perfekt: Bildung',
+                explanation: 'Das Perfekt besteht aus zwei Teilen: Einem Hilfsverb (haben oder sein) im Präsens auf Position 2 und dem <strong class="text-slate-800">Partizip II</strong> am Ende des Satzes.',
+                examples: [
+                    'Er <strong class="text-slate-900">hat</strong> das ganze Wochenende <strong class="text-slate-900">gearbeitet</strong>.<br><span class="text-slate-500 text-sm mt-1 block">He worked the whole weekend.</span>',
+                    'Sie <strong class="text-slate-900">ist</strong> schnell nach Hause <strong class="text-slate-900">gelaufen</strong>.<br><span class="text-slate-500 text-sm mt-1 block">She ran home quickly.</span>'
+                ]
+            },
+            'plusq-verwendung': {
+                title: 'Plusquamperfekt: Verwendung',
+                explanation: 'Man benutzt es, um von Ereignissen zu berichten, die <strong class="text-slate-800">vor</strong> einem anderen Ereignis in der Vergangenheit passiert sind. Es ist die "Vorvergangenheit".',
+                examples: [
+                    'Nachdem er das Auto <strong class="text-slate-900">gekauft hatte</strong>, fuhr er nach Italien.<br><span class="text-slate-500 text-sm mt-1 block">After he had bought the car (Event 1), he drove to Italy (Event 2).</span>'
+                ]
+            },
+            'plusq-bildung': {
+                title: 'Plusquamperfekt: Bildung',
+                explanation: 'Genau wie das Perfekt, aber das Hilfsverb (haben oder sein) steht im <strong class="text-slate-800">Präteritum</strong> (hatte / war).',
+                examples: [
+                    'Er <strong class="text-slate-900">hatte</strong> schon lange in der Firma <strong class="text-slate-900">gearbeitet</strong>.<br><span class="text-slate-500 text-sm mt-1 block">He had already worked at the company for a long time.</span>',
+                    'Sie <strong class="text-slate-900">war</strong> noch nie einen Marathon <strong class="text-slate-900">gelaufen</strong>.<br><span class="text-slate-500 text-sm mt-1 block">She had never run a marathon before.</span>'
+                ]
+            },
+            'part-regelmaessig': {
+                title: 'Partizip II: regelmäßige Verben',
+                explanation: 'Regelmäßige Verben enden auf <strong class="text-slate-800">-t</strong>. Abhängig vom Verbtyp (Präfix/Endung) wird ein "ge-" hinzugefügt oder weggelassen.',
+                examples: [
+                    '<strong class="text-slate-800">ohne Präfix:</strong> machen &rarr; <strong class="text-slate-900">ge</strong>mach<strong class="text-slate-900">t</strong>',
+                    '<strong class="text-slate-800">trennbares Verb:</strong> einkaufen &rarr; ein<strong class="text-slate-900">ge</strong>kauf<strong class="text-slate-900">t</strong> (ge steht in der Mitte)',
+                    '<strong class="text-slate-800">untrennbares Verb:</strong> erzählen &rarr; erzähl<strong class="text-slate-900">t</strong> (Kein "ge-")',
+                    '<strong class="text-slate-800">Verben auf -ieren:</strong> programmieren &rarr; programmier<strong class="text-slate-900">t</strong> (Kein "ge-")'
+                ]
+            },
+            'part-unregelmaessig': {
+                title: 'Partizip II: unregelmäßige Verben',
+                explanation: 'Unregelmäßige Verben enden meistens auf <strong class="text-slate-800">-en</strong> und haben oft einen Vokalwechsel im Stamm. Die Regeln für Präfixe bleiben gleich.',
+                examples: [
+                    '<strong class="text-slate-800">ohne Präfix:</strong> gießen &rarr; <strong class="text-slate-900">ge</strong>goss<strong class="text-slate-900">en</strong>',
+                    '<strong class="text-slate-800">trennbares Verb:</strong> aufgeben &rarr; auf<strong class="text-slate-900">ge</strong>geb<strong class="text-slate-900">en</strong>',
+                    '<strong class="text-slate-800">untrennbares Verb:</strong> verstehen &rarr; verstand<strong class="text-slate-900">en</strong>'
+                ]
+            },
+            'part-achtung': {
+                title: 'ACHTUNG: Gemischte Verben',
+                explanation: 'Gemischte Verben haben einen Vokalwechsel wie unregelmäßige Verben, enden aber auf <strong class="text-slate-800">-t/-te</strong> wie regelmäßige Verben. Diese Formen müssen auswendig gelernt werden!',
+                examples: [
+                    '<strong class="text-slate-800">kennen:</strong> kannte &rarr; hat gekannt',
+                    '<strong class="text-slate-800">denken:</strong> dachte &rarr; hat gedacht',
+                    '<strong class="text-slate-800">mögen:</strong> mochte &rarr; hat gemocht',
+                    '<strong class="text-slate-800">bringen:</strong> brachte &rarr; hat gebracht',
+                    '<strong class="text-slate-800">wissen:</strong> wusste &rarr; hat gewusst'
+                ]
+            }
+        };
+
+        const quizzes = {
+            praeteritum: [
+                { question: "In Zeitungsartikeln verwendet man meistens das _____.", options: ["Perfekt", "Präteritum", "Präsens", "Plusquamperfekt"], answer: "Präteritum", explanation: "Präteritum is the standard tense for written reports and news." },
+                { question: "Was ist das Präteritum von 'machen' (sie)?", options: ["macht", "machte", "hat gemacht", "machtete"], answer: "machte", explanation: "Regular verb: Verbstamm (mach) + t + Endung (e)." },
+                { question: "Was ist das Präteritum von 'gehen' (er)?", options: ["geht", "gehte", "ginge", "ging"], answer: "ging", explanation: "Irregular verb. 3rd person singular takes NO ending: er ging." },
+                { question: "Gestern _____ wir keine Zeit für eine Pause.", options: ["haben", "hatten", "hätten", "gehabt"], answer: "hatten", explanation: "Auxiliary verb 'haben' in Präteritum (wir hatten)." },
+                { question: "Bei unregelmäßigen Verben im Präteritum gibt es keine Endung bei der 1. und _____ Person Singular.", options: ["2.", "3.", "1. Plural", "2. Plural"], answer: "3.", explanation: "Ich ging, er/sie/es ging (no ending)." },
+                { question: "Was ist das Präteritum von 'fragen' (sie - singular)?", options: ["fragt", "fragte", "frug", "hat gefragt"], answer: "fragte", explanation: "Regular verb: frag + t + e." },
+                { question: "Was ist das Präteritum von 'kommen' (sie - singular)?", options: ["kommt", "kamte", "kam", "ist gekommen"], answer: "kam", explanation: "Irregular verb. 3rd person singular takes NO ending: sie kam." },
+                { question: "Wir _____ gestern unsere Großeltern.", options: ["besuchten", "besucht", "besuchtet", "haben besucht"], answer: "besuchten", explanation: "Regular Präteritum: besuch + t + en." }
+            ],
+            perfekt: [
+                { question: "Das Perfekt verwendet man oft für Ereignisse, über die man _____ berichtet.", options: ["in Romanen", "in Zeitungen", "mündlich", "in Gesetzestexten"], answer: "mündlich", explanation: "Perfekt is the primary past tense for spoken German (mündlich)." },
+                { question: "Wie bildet man das Perfekt?", options: ["haben/sein im Präsens + Partizip II", "haben/sein im Präteritum + Partizip II", "Verbstamm + te", "Präteritumstamm + Endung"], answer: "haben/sein im Präsens + Partizip II", explanation: "e.g., Er hat gearbeitet." },
+                { question: "Welcher Satz steht im Perfekt?", options: ["Sie ging nach Hause.", "Sie ist nach Hause gelaufen.", "Sie war nach Hause gelaufen.", "Sie läuft nach Hause."], answer: "Sie ist nach Hause gelaufen.", explanation: "'ist' (Präsens) + 'gelaufen' (Partizip II)." },
+                { question: "Ich _____ gestern eine E-Mail an meinen Chef geschrieben.", options: ["bin", "hatte", "habe", "werde"], answer: "habe", explanation: "'schreiben' takes 'haben' as auxiliary." },
+                { question: "Wir _____ am Wochenende ans Meer gefahren.", options: ["haben", "sind", "waren", "hatten"], answer: "sind", explanation: "'fahren' (motion) takes 'sein' as auxiliary." },
+                { question: "Er _____ den ganzen Tag im Garten gearbeitet.", options: ["ist", "habe", "hat", "hatte"], answer: "hat", explanation: "'arbeiten' takes 'haben'. 3rd person singular is 'hat'." },
+                { question: "Wo steht das Partizip II im Hauptsatz?", options: ["Auf Position 2", "Am Anfang", "Ganz am Ende", "Vor dem Objekt"], answer: "Ganz am Ende", explanation: "Auxiliary verb is Pos 2, Partizip II is sent to the end." },
+                { question: "Welche Textart benutzt oft das Perfekt?", options: ["Nachrichten im Fernsehen", "Märchen", "E-Mails und Briefe", "Historische Dokumente"], answer: "E-Mails und Briefe", explanation: "Everyday/informal written texts use Perfekt." }
+            ],
+            plusquamperfekt: [
+                { question: "Wann verwendet man das Plusquamperfekt?", options: ["Für zukünftige Ereignisse", "Für Ereignisse, die gerade passieren", "Für Ereignisse vor einem anderen Ereignis in der Vergangenheit", "Immer in Zeitungsartikeln"], answer: "Für Ereignisse vor einem anderen Ereignis in der Vergangenheit", explanation: "It describes the 'past of the past'." },
+                { question: "Wie wird das Plusquamperfekt gebildet?", options: ["haben/sein im Präsens + Partizip II", "haben/sein im Präteritum + Partizip II", "Präteritumstamm + Partizip II", "Verbstamm + te"], answer: "haben/sein im Präteritum + Partizip II", explanation: "e.g., er hatte (Präteritum) gearbeitet." },
+                { question: "Welcher Satz steht im Plusquamperfekt?", options: ["Ich habe das Buch gelesen.", "Ich las das Buch.", "Ich hatte das Buch gelesen.", "Ich werde das Buch lesen."], answer: "Ich hatte das Buch gelesen.", explanation: "'hatte' (Präteritum von haben) + Partizip II." },
+                { question: "Nachdem ich meine Hausaufgaben _____, ging ich schlafen.", options: ["machte", "gemacht habe", "gemacht hatte", "mache"], answer: "gemacht hatte", explanation: "The homework was done BEFORE going to sleep. Plusquamperfekt is required." },
+                { question: "Er konnte die Tür nicht öffnen, weil er den Schlüssel _____.", options: ["verloren hat", "verliert", "verlor", "verloren hatte"], answer: "verloren hatte", explanation: "Losing the key happened before failing to open the door." },
+                { question: "Wir _____ schon gegessen, als die Gäste ankamen.", options: ["haben", "hatten", "sind", "waren"], answer: "hatten", explanation: "'essen' takes 'haben'. Präteritum is 'hatten'." },
+                { question: "Als ich am Bahnhof ankam, _____ der Zug schon abgefahren.", options: ["ist", "hat", "hatte", "war"], answer: "war", explanation: "'abfahren' takes 'sein'. The train left before I arrived." }
+            ],
+            partizip: [
+                { question: "Wie lautet das Partizip II von 'machen' (regelmäßig, ohne Präfix)?", options: ["macht", "machte", "gemachen", "gemacht"], answer: "gemacht", explanation: "Regelmäßig ohne Präfix: ge + mach + t." },
+                { question: "Wie lautet das Partizip II von 'einkaufen' (regelmäßig, trennbar)?", options: ["eingekauft", "geeinkauft", "einkauft", "eingekaufen"], answer: "eingekauft", explanation: "Trennbar: 'ge' goes between prefix and stem (ein-ge-kauf-t)." },
+                { question: "Verben auf '-ieren' (z.B. programmieren) bilden das Partizip II...", options: ["mit ge- und -en", "mit ge- und -t", "ohne ge-", "immer unregelmäßig"], answer: "ohne ge-", explanation: "programmieren -> programmiert." },
+                { question: "Wie lautet das Partizip II von 'erzählen' (regelmäßig, untrennbar)?", options: ["geerzählt", "erzählt", "erzählen", "erzahlt"], answer: "erzählt", explanation: "Inseparable prefix 'er-'. No 'ge-' is added." },
+                { question: "Wie lautet das Partizip II von 'gießen' (unregelmäßig, ohne Präfix)?", options: ["gegießt", "gegossen", "gegießen", "gegoss"], answer: "gegossen", explanation: "Irregular verb with stem change and -en ending." },
+                { question: "Wie lautet das Partizip II von 'aufgeben' (unregelmäßig, trennbar)?", options: ["aufgegeben", "geaufgeben", "aufgegab", "aufgebt"], answer: "aufgegeben", explanation: "'auf' + 'ge' + 'geben' (irregular ending in -en)." },
+                { question: "Wie lautet das Partizip II von 'verstehen' (unregelmäßig, untrennbar)?", options: ["versteht", "geverstanden", "verstanden", "verstehtet"], answer: "verstanden", explanation: "Inseparable ('ver-') so no 'ge'. Irregular stem change." },
+                { question: "ACHTUNG: Was ist das Präteritum und Partizip II von 'denken' (gemischt)?", options: ["denkte - gedenkt", "dachte - gedacht", "dachte - gedenkt", "denkte - gedacht"], answer: "dachte - gedacht", explanation: "Mixed verb: irregular stem (dach-) + regular endings (-te, -t)." },
+                { question: "ACHTUNG: Was ist das Präteritum von 'wissen' (gemischt)?", options: ["weißte", "wusste", "wisste", "wusst"], answer: "wusste", explanation: "Mixed verb: wissen -> wusste -> hat gewusst." },
+                { question: "ACHTUNG: Welches ist die richtige Formreihe für 'bringen' (gemischt)?", options: ["bringen - brachte - gebracht", "bringen - bringte - gebringt", "bringen - brang - gebrungen", "bringen - brauchte - gebraucht"], answer: "bringen - brachte - gebracht", explanation: "Mixed verb rule applies." }
+            ]
+        };
+
+        let currentQuizData = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answeringAllowed = true;
+        const MAX_QUESTIONS = 20;
+
+        const screens = {
+            question: document.getElementById('question-screen'),
+            result: document.getElementById('result-screen')
+        };
+
+        function showScreen(screenName) {
+            Object.values(screens).forEach(screen => screen.classList.add('hidden'));
+            screens[screenName].classList.remove('hidden');
+        }
+
+        function openTab(tabId, category) {
+            // Reset tab contents
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            
+            // Reset all buttons to default state
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.className = "tab-btn px-6 py-2.5 rounded-full font-semibold transition-all duration-200 text-slate-500 bg-slate-50 hover:bg-slate-100";
+            });
+            
+            // Activate selected tab content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Apply specific active colors based on category
+            const activeBtn = document.getElementById('btn-' + tabId);
+            if(category === 'praeteritum') {
+                activeBtn.className = "tab-btn px-6 py-2.5 rounded-full font-semibold transition-all duration-200 text-white bg-[var(--color-praet)] shadow-sm";
+            } else if (category === 'perfekt') {
+                activeBtn.className = "tab-btn px-6 py-2.5 rounded-full font-semibold transition-all duration-200 text-slate-900 bg-[var(--color-perf)] shadow-sm";
+            } else if (category === 'plusquamperfekt') {
+                activeBtn.className = "tab-btn px-6 py-2.5 rounded-full font-semibold transition-all duration-200 text-white bg-[var(--color-plusq)] shadow-sm";
+            } else if (category === 'partizip') {
+                activeBtn.className = "tab-btn px-6 py-2.5 rounded-full font-semibold transition-all duration-200 text-white bg-[var(--color-part)] shadow-sm";
+            }
+        }
+
+        const modalOverlay = document.getElementById('grammar-modal');
+        const modalContainer = document.getElementById('modal-container');
+
+        function openModal(conjunctionId) {
+            const data = explanationData[conjunctionId];
+            if(!data) return;
+
+            document.getElementById('modal-title').innerHTML = data.title;
+            document.getElementById('modal-explanation').innerHTML = data.explanation;
+            
+            const examplesList = document.getElementById('modal-examples');
+            examplesList.innerHTML = '';
+            data.examples.forEach(ex => {
+                const li = document.createElement('li');
+                li.innerHTML = ex;
+                examplesList.appendChild(li);
+            });
+
+            modalOverlay.classList.remove('hidden');
+            void modalOverlay.offsetWidth; // trigger reflow
+            
+            modalOverlay.classList.remove('opacity-0');
+            modalOverlay.classList.add('opacity-100');
+            modalContainer.classList.remove('scale-95');
+            modalContainer.classList.add('scale-100');
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('opacity-100');
+            modalOverlay.classList.add('opacity-0');
+            modalContainer.classList.remove('scale-100');
+            modalContainer.classList.add('scale-95');
+            
+            setTimeout(() => {
+                modalOverlay.classList.add('hidden');
+            }, 200);
+        }
+
+        function handleModalClick(event) {
+            if (event.target === modalOverlay) {
+                closeModal();
+            }
+        }
+
+        function startQuiz() {
+            // Combine all categories into one massive pool
+            const allQuizzes = [
+                ...quizzes.praeteritum,
+                ...quizzes.perfekt,
+                ...quizzes.plusquamperfekt,
+                ...quizzes.partizip
+            ];
+            
+            // Deep copy and shuffle the combined pool
+            let combinedData = JSON.parse(JSON.stringify(allQuizzes));
+            shuffleArray(combinedData);
+            
+            // Take the top N questions for the run
+            currentQuizData = combinedData.slice(0, MAX_QUESTIONS); 
+            
+            currentQuestionIndex = 0;
+            score = 0;
+            
+            currentQuizData.forEach(q => shuffleArray(q.options));
+            showScreen('question');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            answeringAllowed = true;
+            const q = currentQuizData[currentQuestionIndex];
+            
+            document.getElementById('question-counter').innerText = `HP: ${currentQuestionIndex + 1}/${currentQuizData.length}`;
+            document.getElementById('score-counter').innerText = `SCORE: ${score * 100}`;
+            
+            let formattedQuestion = q.question.replace(/_____/g, '<span class="text-slate-400 border-b-2 border-slate-300 px-6 mx-1"></span>');
+            document.getElementById('question-text').innerHTML = formattedQuestion;
+            
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            
+            q.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.innerText = opt;
+                btn.className = "w-full text-left p-5 rounded-2xl border-2 border-slate-100 bg-white hover:border-slate-300 hover:bg-slate-50 transition-all text-slate-700 font-medium text-lg";
+                btn.onclick = () => selectAnswer(btn, opt, q.answer, q.explanation);
+                optionsContainer.appendChild(btn);
+            });
+
+            document.getElementById('feedback-message').classList.add('hidden');
+            document.getElementById('next-btn').classList.add('hidden');
+        }
+
+        function selectAnswer(selectedBtn, selectedOpt, correctOpt, explanation) {
+            if (!answeringAllowed) return;
+            answeringAllowed = false;
+
+            const isCorrect = selectedOpt === correctOpt;
+            const feedbackBox = document.getElementById('feedback-message');
+            const options = document.getElementById('options-container').children;
+
+            for (let btn of options) {
+                btn.disabled = true;
+                btn.classList.remove('hover:border-slate-300', 'hover:bg-slate-50', 'cursor-pointer');
+                
+                if (btn.innerText === correctOpt) {
+                    btn.classList.add('bg-emerald-50', 'border-emerald-200', 'text-emerald-700');
+                    btn.classList.remove('bg-white', 'border-slate-100');
+                } else if (btn === selectedBtn && !isCorrect) {
+                    btn.classList.add('bg-red-50', 'border-red-200', 'text-red-600');
+                    btn.classList.remove('bg-white', 'border-slate-100');
+                } else {
+                    btn.classList.add('opacity-40'); 
+                }
+            }
+
+            feedbackBox.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-200', 'bg-red-50', 'border-red-200');
+            
+            if (isCorrect) {
+                score++;
+                feedbackBox.classList.add('bg-emerald-50', 'border-emerald-200');
+                feedbackBox.innerHTML = `<div class="text-lg font-bold text-emerald-700 mb-1">Correct!</div><div class="text-sm text-emerald-800/80">${explanation}</div>`;
+                selectedBtn.classList.add('correct-anim');
+            } else {
+                feedbackBox.classList.add('bg-red-50', 'border-red-200');
+                feedbackBox.innerHTML = `<div class="text-lg font-bold text-red-700 mb-1">Incorrect</div><div class="text-sm text-red-800/80">${explanation}</div>`;
+                selectedBtn.classList.add('wrong-anim');
+            }
+
+            document.getElementById('score-counter').innerText = `SCORE: ${score * 100}`;
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < currentQuizData.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            showScreen('result');
+            document.getElementById('final-score').innerText = score * 100;
+            document.getElementById('total-score').innerText = currentQuizData.length * 100;
+            
+            const resultMsg = document.getElementById('result-message');
+            const percentage = score / currentQuizData.length;
+            
+            if (percentage >= 0.8) {
+                resultMsg.innerHTML = "<strong class='text-emerald-700 block mb-1 text-xl'>Hervorragend!</strong>Your grammar foundation is incredibly strong.";
+                resultMsg.className = "rounded-2xl p-6 bg-emerald-50 text-emerald-900 border border-emerald-100 inline-block text-left w-full max-w-md";
+            } else if (percentage >= 0.6) {
+                resultMsg.innerHTML = "<strong class='text-yellow-600 block mb-1 text-xl'>Gut gemacht!</strong>Solid run. Review the rules to achieve a perfect score.";
+                resultMsg.className = "rounded-2xl p-6 bg-yellow-50 text-yellow-900 border border-yellow-100 inline-block text-left w-full max-w-md";
+            } else {
+                resultMsg.innerHTML = "<strong class='text-red-600 block mb-1 text-xl'>Weiter üben!</strong>Check the grammar guide above and try again to improve your score.";
+                resultMsg.className = "rounded-2xl p-6 bg-red-50 text-red-900 border border-red-100 inline-block text-left w-full max-w-md";
+            }
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape" && !modalOverlay.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+
+        window.onload = () => {
+            startQuiz();
+        };
+    </script>
+</body>
+</html>
