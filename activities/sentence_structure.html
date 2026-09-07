@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>German Sentence Structure: TeKaMoLo & Objects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        /* Animations */
+        .correct-anim { animation: pulseGreen 0.5s ease; }
+        .wrong-anim { animation: shakeRed 0.5s ease; }
+        @keyframes pulseGreen {
+            0% { transform: scale(1); background-color: #f3f4f6; }
+            50% { transform: scale(1.02); background-color: #d1fae5; }
+            100% { transform: scale(1); background-color: #10b981; color: white; border-color: #059669; }
+        }
+        @keyframes shakeRed {
+            0%, 100% { transform: translateX(0); background-color: #f3f4f6; }
+            25% { transform: translateX(-5px); background-color: #fee2e2; }
+            75% { transform: translateX(5px); background-color: #ef4444; color: white; border-color: #dc2626; }
+        }
+        
+        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Grammar Highlights */
+        .hl-te { background-color: #dbeafe; color: #1e3a8a; padding: 0.1rem 0.3rem; border-radius: 0.25rem; font-weight: 600; } /* Blue */
+        .hl-ka { background-color: #fee2e2; color: #991b1b; padding: 0.1rem 0.3rem; border-radius: 0.25rem; font-weight: 600; } /* Red */
+        .hl-mo { background-color: #f3e8ff; color: #6b21a8; padding: 0.1rem 0.3rem; border-radius: 0.25rem; font-weight: 600; } /* Purple */
+        .hl-lo { background-color: #d1fae5; color: #065f46; padding: 0.1rem 0.3rem; border-radius: 0.25rem; font-weight: 600; } /* Green */
+        .hl-dat { background-color: #e0e7ff; color: #3730a3; padding: 0.1rem 0.3rem; border-radius: 0.25rem; font-weight: 600; border-bottom: 2px solid #6366f1;} /* Indigo */
+        .hl-akk { background-color: #ffedd5; color: #9a3412; padding: 0.1rem 0.3rem; border-radius: 0.25rem; font-weight: 600; border-bottom: 2px solid #f97316;} /* Orange */
+        .hl-gen { background-color: #fef3c7; color: #b45309; padding: 0.1rem 0.3rem; border-radius: 0.25rem; font-weight: 600; border-bottom: 2px solid #d97706;} /* Amber */
+        .hl-prep { background-color: #cffafe; color: #164e63; padding: 0.1rem 0.3rem; border-radius: 0.25rem; font-weight: 600; border-bottom: 2px solid #06b6d4;} /* Cyan */
+        .hl-pro { text-decoration: underline; text-underline-offset: 4px; }
+        
+        /* View Toggle */
+        .view-hidden { display: none !important; }
+    </style>
+</head>
+<body class="text-gray-800 leading-relaxed min-h-screen flex flex-col">
+
+    <!-- Navbar / Controls -->
+    <nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl">🇩🇪</span>
+                <h1 class="text-xl font-bold text-gray-800 tracking-tight">German Syntax Master</h1>
+            </div>
+            <div class="flex bg-gray-100 p-1 rounded-lg">
+                <button id="btn-explainer" onclick="switchView('explainer')" class="px-6 py-2 rounded-md font-semibold text-sm transition-all bg-white shadow-sm text-indigo-600">📚 Explainer Guide</button>
+                <button id="btn-quiz" onclick="switchView('quiz')" class="px-6 py-2 rounded-md font-semibold text-sm transition-all text-gray-500 hover:text-gray-800">✍️ Comprehensive Quiz</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow p-4 md:p-8 max-w-6xl mx-auto w-full">
+
+        <!-- ========================================== -->
+        <!-- EXPLAINER VIEW                             -->
+        <!-- ========================================== -->
+        <section id="view-explainer" class="space-y-10 fade-in">
+            
+            <!-- Intro -->
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">The "Mittelfeld" Code</h2>
+                <p class="text-lg text-gray-600">German sentence structure is highly logical. Once you understand the hierarchy of adverbial phrases (<span class="font-bold text-indigo-500">TeKaMoLo</span>) and the rules for <span class="font-bold text-indigo-500">Objects</span>, you can build perfect sentences every time.</p>
+            </div>
+
+            <!-- TeKaMoLo Block -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="bg-slate-50 px-6 py-4 border-b border-gray-200">
+                    <h3 class="text-2xl font-bold text-slate-800">1. TeKaMoLo (Adverbial Phrases)</h3>
+                    <p class="text-sm text-slate-500 mt-1">The strict order for answering When, Why, How, and Where.</p>
+                </div>
+                <div class="p-6 md:p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                        <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                            <div class="text-xs uppercase tracking-wider font-bold text-blue-500 mb-1">Te • Temporal</div>
+                            <div class="font-bold text-blue-900 mb-2">When? How long?</div>
+                            <ul class="text-sm text-blue-800 space-y-1">
+                                <li>• heute (today)</li>
+                                <li>• am Morgen (in the morning)</li>
+                                <li>• immer (always)</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-xl border border-red-100">
+                            <div class="text-xs uppercase tracking-wider font-bold text-red-500 mb-1">Ka • Kausal</div>
+                            <div class="font-bold text-red-900 mb-2">Why? Reason?</div>
+                            <ul class="text-sm text-red-800 space-y-1">
+                                <li>• wegen des Regens (due to rain)</li>
+                                <li>• aus Liebe (out of love)</li>
+                                <li>• deshalb (therefore)</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-xl border border-purple-100">
+                            <div class="text-xs uppercase tracking-wider font-bold text-purple-500 mb-1">Mo • Modal</div>
+                            <div class="font-bold text-purple-900 mb-2">How? With whom?</div>
+                            <ul class="text-sm text-purple-800 space-y-1">
+                                <li>• schnell (quickly)</li>
+                                <li>• mit dem Bus (by bus)</li>
+                                <li>• gerne (gladly)</li>
+                            </ul>
+                        </div>
+                        <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100">
+                            <div class="text-xs uppercase tracking-wider font-bold text-emerald-500 mb-1">Lo • Lokal</div>
+                            <div class="font-bold text-emerald-900 mb-2">Where? To where?</div>
+                            <ul class="text-sm text-emerald-800 space-y-1">
+                                <li>• nach Hause (home)</li>
+                                <li>• im Park (in the park)</li>
+                                <li>• aus Berlin (from Berlin)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-lg p-5 border border-gray-200">
+                        <p class="text-sm text-gray-500 uppercase tracking-wider font-bold mb-3">Example Sentence</p>
+                        <p class="text-lg md:text-xl">
+                            Wir fahren <span class="hl-te">heute</span> <span class="hl-ka">wegen des Regens</span> <span class="hl-mo">schnell</span> <span class="hl-lo">nach Hause</span>.
+                        </p>
+                        <p class="text-gray-500 text-sm mt-2 italic">We are driving home quickly today because of the rain.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Objects Block -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="bg-slate-50 px-6 py-4 border-b border-gray-200">
+                    <h3 class="text-2xl font-bold text-slate-800">2. Object Placement (Akkusativ & Dativ)</h3>
+                    <p class="text-sm text-slate-500 mt-1">Rule of thumb: <span class="font-bold">Pronouns are lighter than nouns</span> and float to the front.</p>
+                </div>
+                <div class="p-6 md:p-8 space-y-6">
+                    
+                    <!-- Rule 1 -->
+                    <div class="flex flex-col md:flex-row items-start md:items-center gap-4 bg-white border border-gray-200 p-4 rounded-xl shadow-sm">
+                        <div class="w-full md:w-1/3">
+                            <h4 class="font-bold text-lg text-gray-800">Rule 1: Two Nouns</h4>
+                            <p class="text-sm text-gray-500">Dative Noun comes before Accusative Noun.</p>
+                        </div>
+                        <div class="w-full md:w-2/3 flex items-center flex-wrap gap-2 text-lg">
+                            Der Lehrer gibt <span class="hl-dat">dem Schüler</span> ➔ <span class="hl-akk">den Stift</span>.
+                        </div>
+                    </div>
+
+                    <!-- Rule 2 -->
+                    <div class="flex flex-col md:flex-row items-start md:items-center gap-4 bg-white border border-gray-200 p-4 rounded-xl shadow-sm">
+                        <div class="w-full md:w-1/3">
+                            <h4 class="font-bold text-lg text-gray-800">Rule 2: Pronoun + Noun</h4>
+                            <p class="text-sm text-gray-500">The Pronoun ALWAYS comes before the Noun (regardless of case).</p>
+                        </div>
+                        <div class="w-full md:w-2/3 flex flex-col gap-2 text-lg">
+                            <div>Ich kaufe <span class="hl-dat hl-pro">ihr</span> ➔ <span class="hl-akk">ein Geschenk</span>.</div>
+                            <div>Der Lehrer gibt <span class="hl-akk hl-pro">ihn</span> ➔ <span class="hl-dat">dem Schüler</span>.</div>
+                        </div>
+                    </div>
+
+                    <!-- Rule 3 -->
+                    <div class="flex flex-col md:flex-row items-start md:items-center gap-4 bg-white border border-gray-200 p-4 rounded-xl shadow-sm">
+                        <div class="w-full md:w-1/3">
+                            <h4 class="font-bold text-lg text-gray-800">Rule 3: Two Pronouns</h4>
+                            <p class="text-sm text-gray-500">Accusative Pronoun comes before Dative Pronoun. (The rule flips!)</p>
+                        </div>
+                        <div class="w-full md:w-2/3 flex items-center flex-wrap gap-2 text-lg">
+                            Er gibt <span class="hl-akk hl-pro">es</span> ➔ <span class="hl-dat hl-pro">ihm</span>.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Combining Both Block -->
+            <div class="bg-gradient-to-br from-indigo-900 to-slate-900 rounded-2xl shadow-lg border border-indigo-800 overflow-hidden text-white">
+                <div class="px-6 py-4 border-b border-white/10">
+                    <h3 class="text-2xl font-bold">3. The Ultimate Hierarchy: Objects + TeKaMoLo</h3>
+                </div>
+                <div class="p-6 md:p-8">
+                    <p class="mb-6 text-indigo-100">When you have Pronouns, Nouns, AND TeKaMoLo in the same sentence, follow this master flow from left to right:</p>
+                    
+                    <div class="bg-white/10 rounded-xl p-6 backdrop-blur-sm border border-white/20 mb-6">
+                        <div class="flex flex-wrap gap-2 items-center justify-center font-bold text-sm md:text-base">
+                            <span class="bg-white/20 px-3 py-2 rounded">1. Pronoun Objects (Akk/Dat)</span>
+                            <span class="text-indigo-300">➔</span>
+                            <span class="bg-white/20 px-3 py-2 rounded">2. Dative Noun (Often here)</span>
+                            <span class="text-indigo-300">➔</span>
+                            <span class="bg-white/20 px-3 py-2 rounded text-blue-200">3. Temporal</span>
+                            <span class="text-indigo-300">➔</span>
+                            <span class="bg-white/20 px-3 py-2 rounded text-red-200">4. Kausal</span>
+                            <span class="text-indigo-300">➔</span>
+                            <span class="bg-white/20 px-3 py-2 rounded text-purple-200">5. Modal</span>
+                            <span class="text-indigo-300">➔</span>
+                            <span class="bg-white/20 px-3 py-2 rounded">6. Accusative Noun</span>
+                            <span class="text-indigo-300">➔</span>
+                            <span class="bg-white/20 px-3 py-2 rounded text-emerald-200">7. Lokal</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="bg-black/20 p-4 rounded-lg">
+                            <p class="text-sm text-indigo-200 mb-1">Example: Pronoun + TeKaMoLo</p>
+                            <p class="text-lg">Ich gebe <span class="hl-akk hl-pro text-black">es</span> <span class="hl-dat hl-pro text-black">ihm</span> <span class="hl-te text-black">heute</span>.</p>
+                        </div>
+                        <div class="bg-black/20 p-4 rounded-lg">
+                            <p class="text-sm text-indigo-200 mb-1">Example: Dative Noun + Temporal + Accusative Noun</p>
+                            <p class="text-lg">Wir haben <span class="hl-dat text-black">dem Mann</span> <span class="hl-te text-black">gestern</span> <span class="hl-akk text-black">das Auto</span> verkauft.</p>
+                            <p class="text-xs text-indigo-300 mt-1">*Note: Dative nouns can technically go after Temporal, but usually prefer before.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Genitive Block -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden mt-10 fade-in">
+                <div class="bg-amber-50 px-6 py-4 border-b border-gray-200">
+                    <h3 class="text-2xl font-bold text-amber-900">4. What about the Genitiv (Genitive Case)?</h3>
+                    <p class="text-sm text-amber-700 mt-1">Possession, sticky attributes, and special prepositions.</p>
+                </div>
+                <div class="p-6 md:p-8 space-y-6">
+                    <p class="text-gray-700">The Genitive case rarely gets its own independent, floating slot in the TeKaMoLo hierarchy. Instead, it usually behaves like <strong>glue</strong>, attaching directly to other elements in the sentence.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white border border-gray-200 p-5 rounded-xl shadow-sm">
+                            <h4 class="font-bold text-lg text-gray-800 mb-2">1. Possession (The "Glue" Rule)</h4>
+                            <p class="text-sm text-gray-600 mb-3">When Genitive shows possession, it sticks directly <strong>after</strong> the noun it modifies. If the noun moves in the sentence, the Genitive phrase moves right along with it.</p>
+                            <p class="text-lg mb-1">Ich gebe <span class="hl-dat">dem Bruder</span> <span class="hl-gen">meiner Frau</span> <span class="hl-akk">das Buch</span>.</p>
+                            <p class="text-xs text-gray-500 italic">"meiner Frau" is glued to "dem Bruder".</p>
+                        </div>
+                        
+                        <div class="bg-white border border-gray-200 p-5 rounded-xl shadow-sm">
+                            <h4 class="font-bold text-lg text-gray-800 mb-2">2. Inside Prepositions</h4>
+                            <p class="text-sm text-gray-600 mb-3">Genitive is often part of a prepositional phrase (like <em>wegen</em>, <em>trotz</em>, <em>während</em>), which typically forms the <strong>Kausal</strong> or <strong>Temporal</strong> part of TeKaMoLo.</p>
+                            <p class="text-lg mb-1">Wir bleiben <span class="hl-ka">wegen <span class="hl-gen">des Regens</span></span> zu Hause.</p>
+                            <p class="text-xs text-gray-500 italic">Here, the Genitive is trapped inside the "Why?" (Kausal).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prepositions with Verbs Block -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden mt-10 fade-in">
+                <div class="bg-cyan-50 px-6 py-4 border-b border-gray-200">
+                    <h3 class="text-2xl font-bold text-cyan-900">5. Verbs with Prepositions (Präpositionalobjekte)</h3>
+                    <p class="text-sm text-cyan-700 mt-1">Verbs tied to specific prepositions (e.g., warten auf, sprechen mit, freuen auf).</p>
+                </div>
+                <div class="p-6 md:p-8 space-y-6">
+                    <p class="text-gray-700">Some verbs require a specific preposition. Because these prepositional objects are so strongly tied to the meaning of the verb itself, they tend to sit <strong>at the very back</strong> of the sentence's middle field.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white border border-gray-200 p-5 rounded-xl shadow-sm">
+                            <h4 class="font-bold text-lg text-gray-800 mb-2">1. Placed After TeKaMo</h4>
+                            <p class="text-sm text-gray-600 mb-3">Prepositional Objects generally go <strong>after</strong> Time, Reason, and Manner (TeKaMo), sitting right before the end of the sentence or right before the Lokal element.</p>
+                            <p class="text-lg mb-1">Ich warte <span class="hl-te">heute</span> <span class="hl-mo">geduldig</span> <span class="hl-prep">auf den Bus</span>.</p>
+                        </div>
+                        
+                        <div class="bg-white border border-gray-200 p-5 rounded-xl shadow-sm">
+                            <h4 class="font-bold text-lg text-gray-800 mb-2">2. The "No Float" Pronoun Rule</h4>
+                            <p class="text-sm text-gray-600 mb-3">While pure pronouns (<em>es</em>, <em>ihm</em>) jump to the front of the sentence, <strong>prepositional pronouns</strong> (like <em>auf ihn</em> or da-words like <em>darauf</em>) do NOT float to the front. They stay in the back.</p>
+                            <p class="text-lg mb-1">Ich freue <span class="hl-akk hl-pro text-black">mich</span> <span class="hl-te">morgen</span> <span class="hl-prep">darauf</span>.</p>
+                            <p class="text-xs text-gray-500 italic">"mich" (reflexive pronoun) floats front, "darauf" (prepositional object) stays back.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center pt-8 pb-12">
+                <button onclick="switchView('quiz')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-full shadow-lg transition transform hover:scale-105 text-lg">
+                    I'm Ready! Start the Quiz ➔
+                </button>
+            </div>
+
+        </section>
+
+        <!-- ========================================== -->
+        <!-- QUIZ VIEW                                  -->
+        <!-- ========================================== -->
+        <section id="view-quiz" class="view-hidden max-w-3xl mx-auto w-full fade-in pb-12">
+            
+            <!-- Quiz Header / Progress -->
+            <div id="quiz-header" class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 mb-6">
+                <div class="flex justify-between items-center mb-4">
+                    <span id="q-counter" class="text-sm font-bold text-gray-500 uppercase tracking-wider">Question 1 / 40</span>
+                    <span id="score-counter" class="text-sm font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">Score: 0</span>
+                </div>
+                <!-- Progress Bar -->
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                    <div id="progress-bar" class="bg-indigo-600 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Quiz Question Container -->
+            <div id="quiz-container" class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-200">
+                <h3 id="question-text" class="text-xl md:text-2xl font-medium text-gray-900 mb-8 leading-relaxed">
+                    <!-- Question injected here -->
+                </h3>
+
+                <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Options injected here -->
+                </div>
+
+                <!-- Feedback Area -->
+                <div id="feedback-area" class="mt-6 p-5 rounded-xl hidden border">
+                    <div id="feedback-title" class="font-bold text-lg mb-1"></div>
+                    <div id="feedback-desc" class="text-gray-700"></div>
+                </div>
+
+                <!-- Next Button -->
+                <div class="mt-8 text-right">
+                    <button id="next-btn" onclick="nextQuestion()" class="hidden bg-gray-900 hover:bg-black text-white font-bold py-3 px-8 rounded-xl transition duration-200 shadow-md">
+                        Next Question ➔
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Results Container (Hidden initially) -->
+            <div id="results-container" class="hidden bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-200 text-center">
+                <div class="text-6xl mb-6">🏆</div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">Quiz Complete!</h2>
+                <p class="text-xl text-gray-600 mb-8">You scored <span id="final-score" class="font-bold text-indigo-600 text-2xl"></span> out of <span id="total-questions">40</span>.</p>
+                
+                <div id="results-message" class="text-lg font-medium p-6 rounded-xl mb-8"></div>
+
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <button onclick="startQuiz()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-xl transition shadow-md">
+                        Retry Quiz
+                    </button>
+                    <button onclick="switchView('explainer')" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-3 px-8 rounded-xl transition border border-gray-300">
+                        Review Explainer
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script>
+        // --- DATA: 35 Comprehensive Questions ---
+        const quizData = [
+            // TEKAMOLO (1-8)
+            { q: "What is the correct order for TeKaMoLo?", options: ["Lokal, Modal, Kausal, Temporal", "Temporal, Modal, Lokal, Kausal", "Temporal, Kausal, Modal, Lokal", "Kausal, Temporal, Lokal, Modal"], a: "Temporal, Kausal, Modal, Lokal", exp: "Te (Time), Ka (Reason), Mo (Manner), Lo (Place)." },
+            { q: "Identify the 'Temporal' element: 'Wir gehen wegen des Wetters heute nicht in den Park.'", options: ["wegen des Wetters", "heute", "nicht", "in den Park"], a: "heute", exp: "'Heute' (today) tells us WHEN." },
+            { q: "Identify the 'Kausal' element: 'Er lernt abends aus Interesse fleißig zu Hause.'", options: ["abends", "aus Interesse", "fleißig", "zu Hause"], a: "aus Interesse", exp: "'Aus Interesse' (out of interest) tells us WHY." },
+            { q: "Identify the 'Modal' element: 'Sie fährt morgens mit dem Fahrrad zur Arbeit.'", options: ["morgens", "mit dem Fahrrad", "zur Arbeit", "Sie fährt"], a: "mit dem Fahrrad", exp: "'Mit dem Fahrrad' tells us HOW (in what manner)." },
+            { q: "Identify the 'Lokal' element: 'Ich fliege morgen beruflich nach Spanien.'", options: ["morgen", "beruflich", "nach Spanien", "Ich fliege"], a: "nach Spanien", exp: "'Nach Spanien' tells us WHERE TO." },
+            { q: "Which sentence follows correct TeKaMoLo?", options: ["Ich gehe nach Hause heute schnell.", "Ich gehe heute schnell nach Hause.", "Ich gehe schnell heute nach Hause.", "Ich gehe nach Hause schnell heute."], a: "Ich gehe heute schnell nach Hause.", exp: "Temporal (heute) -> Modal (schnell) -> Lokal (nach Hause)." },
+            { q: "If you only have Kausal and Lokal, what is the order?", options: ["Kausal then Lokal", "Lokal then Kausal", "It doesn't matter", "Lokal always goes first"], a: "Kausal then Lokal", exp: "Ka comes before Lo in TeKaMoLo." },
+            { q: "Choose the correct sentence:", options: ["Wir bleiben heute wegen Krankheit gemütlich im Bett.", "Wir bleiben im Bett heute gemütlich wegen Krankheit.", "Wir bleiben gemütlich heute wegen Krankheit im Bett.", "Wir bleiben wegen Krankheit im Bett heute gemütlich."], a: "Wir bleiben heute wegen Krankheit gemütlich im Bett.", exp: "heute (Te) -> wegen Krankheit (Ka) -> gemütlich (Mo) -> im Bett (Lo)." },
+            
+            // OBJECT PLACEMENT: NOUNS (9-13)
+            { q: "Rule for two Noun objects (Dative & Accusative):", options: ["Accusative Noun before Dative Noun", "Dative Noun before Accusative Noun", "Alphabetical order", "Shortest noun first"], a: "Dative Noun before Accusative Noun", exp: "When dealing with two standard nouns, Dative (receiver) precedes Accusative (direct object)." },
+            { q: "Select the correct sentence:", options: ["Die Frau gibt den Apfel dem Kind.", "Die Frau gibt dem Kind den Apfel.", "Dem Kind die Frau gibt den Apfel.", "Die Frau den Apfel gibt dem Kind."], a: "Die Frau gibt dem Kind den Apfel.", exp: "Dative noun (dem Kind) -> Accusative noun (den Apfel)." },
+            { q: "How do you translate: 'I am buying my mother a present'?", options: ["Ich kaufe ein Geschenk meiner Mutter.", "Ich kaufe meiner Mutter ein Geschenk.", "Ich meiner Mutter kaufe ein Geschenk.", "Ich kaufe für meine Mutter ein Geschenk."], a: "Ich kaufe meiner Mutter ein Geschenk.", exp: "Dative (meiner Mutter) -> Accusative (ein Geschenk)." },
+            { q: "Der Chef erklärt _____ _____.", options: ["das Projekt dem Team", "dem Team das Projekt", "das Team dem Projekt", "dem Projekt das Team"], a: "dem Team das Projekt", exp: "Dative (dem Team) -> Accusative (das Projekt)." },
+            { q: "Wir zeigen _____ _____.", options: ["den Hund den Kindern", "den Kindern den Hund", "die Kinder der Hund", "der Hund den Kindern"], a: "den Kindern den Hund", exp: "Dative plural (den Kindern) -> Accusative (den Hund)." },
+            
+            // OBJECT PLACEMENT: PRONOUN + NOUN (14-19)
+            { q: "Rule when you have one Pronoun and one Noun object:", options: ["Noun always goes first", "Dative object always goes first", "Pronoun always goes first", "Accusative object always goes first"], a: "Pronoun always goes first", exp: "Pronouns are 'lighter' and float to the front, regardless of case." },
+            { q: "Der Lehrer gibt 'es' (das Buch) dem Schüler.", options: ["Der Lehrer gibt dem Schüler es.", "Der Lehrer gibt es dem Schüler.", "Der Lehrer es gibt dem Schüler.", "Es der Lehrer gibt dem Schüler."], a: "Der Lehrer gibt es dem Schüler.", exp: "Pronoun (es) must precede the Noun (dem Schüler)." },
+            { q: "Ich kaufe 'ihr' (meiner Mutter) ein Geschenk.", options: ["Ich kaufe ein Geschenk ihr.", "Ich kaufe ihr ein Geschenk.", "Ich ihr kaufe ein Geschenk.", "Ihr ich kaufe ein Geschenk."], a: "Ich kaufe ihr ein Geschenk.", exp: "Pronoun (ihr) precedes the Noun (ein Geschenk)." },
+            { q: "Er erklärt 'ihn' (den Plan) den Kollegen.", options: ["Er erklärt den Kollegen ihn.", "Er erklärt ihn den Kollegen.", "Er ihn erklärt den Kollegen.", "Ihn er erklärt den Kollegen."], a: "Er erklärt ihn den Kollegen.", exp: "Accusative Pronoun (ihn) precedes Dative Noun (den Kollegen)." },
+            { q: "Sie zeigt 'ihnen' (den Gästen) die Stadt.", options: ["Sie zeigt die Stadt ihnen.", "Sie zeigt ihnen die Stadt.", "Ihnen zeigt sie die Stadt.", "Sie ihnen zeigt die Stadt."], a: "Sie zeigt ihnen die Stadt.", exp: "Dative Pronoun (ihnen) precedes Accusative Noun (die Stadt)." },
+            { q: "Kannst du _____ _____ leihen?", options: ["dein Auto mir", "mir dein Auto", "mir dein Auto", "dein Auto zu mir"], a: "mir dein Auto", exp: "Pronoun (mir) before Noun (dein Auto)." },
+            
+            // OBJECT PLACEMENT: TWO PRONOUNS (20-24)
+            { q: "Rule for two Pronoun objects:", options: ["Dative Pronoun before Accusative Pronoun", "Accusative Pronoun before Dative Pronoun", "Whichever is shorter goes first", "Masculine before Feminine"], a: "Accusative Pronoun before Dative Pronoun", exp: "When BOTH are pronouns, the rule flips! Accusative comes first." },
+            { q: "Translate: 'He gives it to him.' (Assume 'it' is neuter 'es')", options: ["Er gibt ihm es.", "Er gibt es ihm.", "Er ihm es gibt.", "Es gibt er ihm."], a: "Er gibt es ihm.", exp: "Accusative (es) -> Dative (ihm)." },
+            { q: "Ich zeige sie (die Stadt) ihnen (den Gästen).", options: ["Ich zeige ihnen sie.", "Ich zeige sie ihnen.", "Ich sie ihnen zeige.", "Sie ihnen zeige ich."], a: "Ich zeige sie ihnen.", exp: "Accusative (sie) -> Dative (ihnen)." },
+            { q: "Wir schicken es (das Paket) ihm (dem Kunden).", options: ["Wir schicken ihm es.", "Wir schicken es ihm.", "Wir es ihm schicken.", "Ihm es schicken wir."], a: "Wir schicken es ihm.", exp: "Accusative (es) -> Dative (ihm)." },
+            { q: "Sie kauft es (das Buch) ihm (ihrem Bruder).", options: ["Sie kauft ihm es.", "Sie kauft es ihm.", "Sie es ihm kauft.", "Es ihm kauft sie."], a: "Sie kauft es ihm.", exp: "Accusative (es) -> Dative (ihm)." },
+            
+            // MIXED MASTER LEVEL (25-30)
+            { q: "Where do Object Pronouns go in relation to TeKaMoLo?", options: ["After TeKaMoLo", "In the middle of TeKaMoLo", "Before TeKaMoLo", "At the very end of the sentence"], a: "Before TeKaMoLo", exp: "Pronouns are very light and jump straight to the beginning of the middle field." },
+            { q: "Which sentence is correct? (Pronoun + TeKaMoLo)", options: ["Ich gebe es ihm heute.", "Ich gebe heute es ihm.", "Ich gebe es heute ihm.", "Ich heute gebe es ihm."], a: "Ich gebe es ihm heute.", exp: "Pronouns (es ihm) come before Temporal (heute)." },
+            { q: "Where does an Accusative Noun generally belong when TeKaMoLo elements are present?", options: ["Before TeKaMoLo", "After Modal, before Lokal", "At the very beginning", "Between Temporal and Kausal"], a: "After Modal, before Lokal", exp: "Accusative nouns get pushed back, usually sitting right before the Lokal element." },
+            { q: "Which is correct? (Dative Noun + Temporal + Accusative Noun)", options: ["Wir haben gestern dem Mann das Auto verkauft.", "Wir haben dem Mann gestern das Auto verkauft.", "Wir haben das Auto gestern dem Mann verkauft.", "Wir haben dem Mann das Auto gestern verkauft."], a: "Wir haben dem Mann gestern das Auto verkauft.", exp: "Dat Noun (dem Mann) -> Temporal (gestern) -> Akk Noun (das Auto)." },
+            { q: "Choose the correct overall sentence structure:", options: ["Sie hat es ihm schnell im Büro erklärt.", "Sie hat schnell im Büro es ihm erklärt.", "Sie hat es schnell ihm im Büro erklärt.", "Sie hat ihm es im Büro schnell erklärt."], a: "Sie hat es ihm schnell im Büro erklärt.", exp: "Pronouns (es ihm - Akk then Dat) -> Modal (schnell) -> Lokal (im Büro)." },
+            { q: "Ich schicke _____ _____ _____ _____.", options: ["das Paket mit der Post morgen wegen des Streiks", "morgen wegen des Streiks das Paket mit der Post", "wegen des Streiks morgen mit der Post das Paket", "mit der Post das Paket morgen wegen des Streiks"], a: "morgen wegen des Streiks das Paket mit der Post", exp: "Te (morgen) -> Ka (wegen des Streiks) -> Akk Noun (das Paket) -> Lo (mit der Post - how/where it is sent)." },
+            
+            // GENITIVE CASE (31-35)
+            { q: "Where does a Genitive noun indicating possession usually go in a sentence?", options: ["Directly after the noun it modifies", "At the very beginning of the sentence", "Directly before the noun it modifies", "At the end of the sentence"], a: "Directly after the noun it modifies", exp: "Genitive attributes act like glue and attach right after the noun they belong to." },
+            { q: "Translate 'I give the book to my girlfriend's brother':", options: ["Ich gebe dem Bruder meiner Freundin das Buch.", "Ich gebe meiner Freundin dem Bruder das Buch.", "Ich gebe das Buch meiner Freundin dem Bruder.", "Ich gebe dem Bruder das Buch meiner Freundin."], a: "Ich gebe dem Bruder meiner Freundin das Buch.", exp: "'dem Bruder' is the Dative noun. The Genitive 'meiner Freundin' attaches right after it. The Accusative 'das Buch' goes to the end." },
+            { q: "In the sentence 'Wir bleiben wegen des Sturms zu Hause', what structural role does the Genitive phrase 'des Sturms' play?", options: ["It is the Accusative object", "It forms part of the Kausal (Why) phrase", "It is the direct subject", "It forms part of the Lokal (Where) phrase"], a: "It forms part of the Kausal (Why) phrase", exp: "The preposition 'wegen' takes the Genitive case. Together ('wegen des Sturms'), they answer the question 'Why?' (Kausal)." },
+            { q: "Translate 'He reads the teacher's book':", options: ["Er liest das Buch des Lehrers.", "Er liest des Lehrers das Buch.", "Er liest das Buch dem Lehrer.", "Er liest den Lehrer das Buch."], a: "Er liest das Buch des Lehrers.", exp: "'das Buch' (Accusative direct object) + 'des Lehrers' (Genitive possession)." },
+            { q: "If you move an Accusative noun that has a Genitive attribute attached to it, what happens to the Genitive attribute?", options: ["It stays where it was", "It moves together with the Accusative noun", "It becomes a Dative noun", "It jumps to the front of the sentence"], a: "It moves together with the Accusative noun", exp: "The Genitive attribute is glued to its noun. If you rearrange the sentence and move the noun, the Genitive moves with it." },
+            
+            // VERBS WITH PREPOSITIONS (36-40)
+            { q: "Where do prepositional objects (e.g., 'auf den Bus', 'mit dem Chef') typically go in a sentence?", options: ["After TeKaMo, towards the end of the Mittelfeld", "At the very beginning of the Mittelfeld", "Before the Dative pronoun", "Between Temporal and Kausal"], a: "After TeKaMo, towards the end of the Mittelfeld", exp: "Prepositional objects are tied strongly to the verb, so they tend to sit at the back of the sentence." },
+            { q: "Translate: 'I am waiting for him today.'", options: ["Ich warte heute auf ihn.", "Ich warte auf ihn heute.", "Ich heute auf ihn warte.", "Auf ihn warte ich heute immer."], a: "Ich warte heute auf ihn.", exp: "Temporal (heute) comes before the Prepositional Object (auf ihn)." },
+            { q: "How do prepositional pronouns (like 'damit' or 'auf ihn') behave compared to pure pronouns (like 'es' or 'ihm')?", options: ["They stay further back in the sentence like nouns", "They float to the very front just like pure pronouns", "They always go to the very end of the sentence", "They become Temporal elements"], a: "They stay further back in the sentence like nouns", exp: "Unlike pure object pronouns that jump to the front, prepositional pronouns usually stay towards the back (after TeKaMo)." },
+            { q: "Which sentence is correct? (Reflexive Pronoun + Temporal + Prepositional Object)", options: ["Ich freue mich morgen darauf.", "Ich freue darauf mich morgen.", "Ich freue mich darauf morgen.", "Ich morgen freue mich darauf."], a: "Ich freue mich morgen darauf.", exp: "Reflexive pronoun (mich) floats to the front -> Temporal (morgen) -> Prepositional Object (darauf) stays back." },
+            { q: "Choose the correct sentence: (Dative Pronoun + Temporal + Prepositional Object)", options: ["Er hat mir gestern für die Hilfe gedankt.", "Er hat gestern für die Hilfe mir gedankt.", "Er hat für die Hilfe mir gestern gedankt.", "Er hat mir für die Hilfe gestern gedankt."], a: "Er hat mir gestern für die Hilfe gedankt.", exp: "Dative Pronoun (mir) floats to the front -> Temporal (gestern) -> Prepositional object (für die Hilfe) stays back." }
+        ];
+
+        // --- APP STATE ---
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answeringAllowed = true;
+        let shuffledQuestions = [];
+
+        // --- DOM ELEMENTS ---
+        const viewExplainer = document.getElementById('view-explainer');
+        const viewQuiz = document.getElementById('view-quiz');
+        const btnExplainer = document.getElementById('btn-explainer');
+        const btnQuiz = document.getElementById('btn-quiz');
+        
+        const quizHeader = document.getElementById('quiz-header');
+        const quizContainer = document.getElementById('quiz-container');
+        const resultsContainer = document.getElementById('results-container');
+        const qCounter = document.getElementById('q-counter');
+        const scoreCounter = document.getElementById('score-counter');
+        const progressBar = document.getElementById('progress-bar');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const feedbackArea = document.getElementById('feedback-area');
+        const feedbackTitle = document.getElementById('feedback-title');
+        const feedbackDesc = document.getElementById('feedback-desc');
+        const nextBtn = document.getElementById('next-btn');
+
+        // --- FUNCTIONS ---
+        
+        function switchView(view) {
+            if (view === 'explainer') {
+                viewExplainer.classList.remove('view-hidden');
+                viewQuiz.classList.add('view-hidden');
+                btnExplainer.className = "px-6 py-2 rounded-md font-semibold text-sm transition-all bg-white shadow-sm text-indigo-600";
+                btnQuiz.className = "px-6 py-2 rounded-md font-semibold text-sm transition-all text-gray-500 hover:text-gray-800";
+            } else {
+                viewExplainer.classList.add('view-hidden');
+                viewQuiz.classList.remove('view-hidden');
+                btnQuiz.className = "px-6 py-2 rounded-md font-semibold text-sm transition-all bg-white shadow-sm text-indigo-600";
+                btnExplainer.className = "px-6 py-2 rounded-md font-semibold text-sm transition-all text-gray-500 hover:text-gray-800";
+                
+                // If quiz hasn't started or is finished, start it
+                if (shuffledQuestions.length === 0 || currentQuestionIndex >= quizData.length) {
+                    startQuiz();
+                }
+            }
+            window.scrollTo(0, 0);
+        }
+
+        function shuffleArray(array) {
+            let curId = array.length;
+            while (0 !== curId) {
+                let randId = Math.floor(Math.random() * curId);
+                curId -= 1;
+                let tmp = array[curId];
+                array[curId] = array[randId];
+                array[randId] = tmp;
+            }
+            return array;
+        }
+
+        function startQuiz() {
+            // Deep copy and shuffle options only (keep questions in pedagogical order for this large quiz, or shuffle them entirely?)
+            // For a 30 question test, keeping it sequential (TeKaMoLo -> Nouns -> Pronouns -> Mixed) is better for learning.
+            shuffledQuestions = JSON.parse(JSON.stringify(quizData));
+            
+            // Shuffle options for each question
+            shuffledQuestions.forEach(q => {
+                q.shuffledOptions = shuffleArray([...q.options]);
+            });
+
+            currentQuestionIndex = 0;
+            score = 0;
+            
+            quizHeader.classList.remove('hidden');
+            quizContainer.classList.remove('hidden');
+            resultsContainer.classList.add('hidden');
+            
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            answeringAllowed = true;
+            const currentQ = shuffledQuestions[currentQuestionIndex];
+            
+            // Update UI
+            qCounter.innerText = `Question ${currentQuestionIndex + 1} / ${shuffledQuestions.length}`;
+            scoreCounter.innerText = `Score: ${score}`;
+            progressBar.style.width = `${((currentQuestionIndex) / shuffledQuestions.length) * 100}%`;
+            
+            // Replace blanks with styled lines
+            let formattedQ = currentQ.q.replace(/_____/g, '<span class="text-indigo-600 font-bold border-b-2 border-indigo-600 px-4">_____</span>');
+            questionText.innerHTML = formattedQ;
+            
+            optionsContainer.innerHTML = '';
+            feedbackArea.classList.add('hidden');
+            nextBtn.classList.add('hidden');
+
+            currentQ.shuffledOptions.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.innerHTML = opt;
+                btn.className = "text-left bg-gray-50 hover:bg-gray-100 text-gray-800 font-medium py-4 px-5 rounded-xl border-2 border-gray-100 transition duration-200 ease-in-out text-lg shadow-sm";
+                btn.onclick = () => selectAnswer(btn, opt, currentQ.a, currentQ.exp);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function selectAnswer(selectedBtn, selectedOpt, correctOpt, explanation) {
+            if (!answeringAllowed) return;
+            answeringAllowed = false;
+
+            const isCorrect = selectedOpt === correctOpt;
+            const allBtns = optionsContainer.children;
+
+            for (let btn of allBtns) {
+                btn.disabled = true;
+                btn.classList.remove('hover:bg-gray-100', 'shadow-sm', 'cursor-pointer');
+                
+                // Decode HTML entities if necessary to match strings correctly
+                const btnText = document.createElement('textarea');
+                btnText.innerHTML = btn.innerHTML;
+                const decodedBtnText = btnText.value;
+
+                if (decodedBtnText === correctOpt) {
+                    btn.className = "text-left bg-green-500 text-white font-medium py-4 px-5 rounded-xl border-2 border-green-600 shadow-md";
+                } else if (btn === selectedBtn && !isCorrect) {
+                    btn.className = "text-left bg-red-500 text-white font-medium py-4 px-5 rounded-xl border-2 border-red-600";
+                } else {
+                    btn.classList.add('opacity-40');
+                }
+            }
+
+            feedbackArea.classList.remove('hidden', 'bg-green-50', 'border-green-200', 'text-green-900', 'bg-red-50', 'border-red-200', 'text-red-900');
+            
+            if (isCorrect) {
+                score++;
+                selectedBtn.classList.add('correct-anim');
+                feedbackArea.classList.add('bg-green-50', 'border-green-200');
+                feedbackTitle.innerHTML = "✅ Richtig! (Correct)";
+                feedbackTitle.className = "font-bold text-lg mb-1 text-green-700";
+                feedbackDesc.className = "text-green-900";
+            } else {
+                selectedBtn.classList.add('wrong-anim');
+                feedbackArea.classList.add('bg-red-50', 'border-red-200');
+                feedbackTitle.innerHTML = "❌ Falsch! (Incorrect)";
+                feedbackTitle.className = "font-bold text-lg mb-1 text-red-700";
+                feedbackDesc.className = "text-red-900";
+            }
+
+            feedbackDesc.innerHTML = explanation;
+            scoreCounter.innerText = `Score: ${score}`;
+            nextBtn.classList.remove('hidden');
+            
+            // Scroll down a bit on mobile so next button is visible
+            nextBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < shuffledQuestions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            quizHeader.classList.add('hidden');
+            quizContainer.classList.add('hidden');
+            resultsContainer.classList.remove('hidden');
+            
+            document.getElementById('final-score').innerText = score;
+            document.getElementById('total-questions').innerText = shuffledQuestions.length;
+            const resultsMsg = document.getElementById('results-message');
+            
+            const percentage = score / shuffledQuestions.length;
+            
+            if (percentage >= 0.9) {
+                resultsMsg.innerHTML = "<strong>🏆 Meisterhaft! (Masterful!)</strong><br>You have completely mastered the German sentence structure rules. Incredible work!";
+                resultsMsg.className = "text-lg font-medium p-6 rounded-xl mb-8 bg-green-50 text-green-800 border border-green-200";
+            } else if (percentage >= 0.7) {
+                resultsMsg.innerHTML = "<strong>👏 Gut gemacht! (Well done!)</strong><br>You have a very strong understanding of TeKaMoLo and Objects. A little more review on the mixed rules will make you perfect.";
+                resultsMsg.className = "text-lg font-medium p-6 rounded-xl mb-8 bg-blue-50 text-blue-800 border border-blue-200";
+            } else if (percentage >= 0.5) {
+                resultsMsg.innerHTML = "<strong>👍 Nicht schlecht! (Not bad!)</strong><br>You are getting the hang of it, but the combination of rules can be tricky. Read through the explainer guide once more and try again!";
+                resultsMsg.className = "text-lg font-medium p-6 rounded-xl mb-8 bg-yellow-50 text-yellow-800 border border-yellow-200";
+            } else {
+                resultsMsg.innerHTML = "<strong>📚 Weiter üben! (Keep practicing!)</strong><br>German sentence structure takes time. Remember: Pronouns always float to the front! Review the Explainer tab and try the quiz again.";
+                resultsMsg.className = "text-lg font-medium p-6 rounded-xl mb-8 bg-red-50 text-red-800 border border-red-200";
+            }
+            
+            window.scrollTo(0, 0);
+        }
+
+    </script>
+</body>
+</html>
