@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>German Connectors Master: Konnektoren & Satzbau</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        /* Animations */
+        .correct-anim { animation: pulseGreen 0.5s ease; }
+        .wrong-anim { animation: shakeRed 0.5s ease; }
+        @keyframes pulseGreen {
+            0% { transform: scale(1); background-color: #f3f4f6; }
+            50% { transform: scale(1.02); background-color: #d1fae5; }
+            100% { transform: scale(1); background-color: #10b981; color: white; border-color: #059669; }
+        }
+        @keyframes shakeRed {
+            0%, 100% { transform: translateX(0); background-color: #f3f4f6; }
+            25% { transform: translateX(-5px); background-color: #fee2e2; }
+            75% { transform: translateX(5px); background-color: #ef4444; color: white; border-color: #dc2626; }
+        }
+        
+        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Modal Animations */
+        .modal-fade-in { animation: modalFadeIn 0.2s ease-out forwards; }
+        .modal-fade-out { animation: modalFadeOut 0.2s ease-in forwards; }
+        @keyframes modalFadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes modalFadeOut { from { opacity: 1; } to { opacity: 0; } }
+        .modal-scale-in { animation: modalScaleIn 0.2s ease-out forwards; }
+        @keyframes modalScaleIn { from { opacity: 0, transform: scale(0.95); } to { opacity: 1, transform: scale(1); } }
+
+        /* Grammar Highlights */
+        .hl-verb { background-color: #fee2e2; color: #991b1b; padding: 0.1rem 0.3rem; border-radius: 0.25rem; font-weight: 600; } /* Red for verbs */
+        .hl-konn { background-color: #dbeafe; color: #1e3a8a; padding: 0.1rem 0.3rem; border-radius: 0.25rem; font-weight: 600; } /* Blue for connectors */
+        .hl-sub { background-color: #d1fae5; color: #065f46; padding: 0.1rem 0.3rem; border-radius: 0.25rem; font-weight: 600; } /* Green for subjects */
+        
+        /* View Toggle */
+        .view-hidden { display: none !important; }
+    </style>
+</head>
+<body class="text-gray-800 leading-relaxed min-h-screen flex flex-col">
+
+    <!-- Navbar / Controls -->
+    <nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl">🇩🇪</span>
+                <h1 class="text-xl font-bold text-gray-800 tracking-tight">Konnektoren Master</h1>
+            </div>
+            <div class="flex bg-gray-100 p-1 rounded-lg">
+                <button id="btn-explainer" onclick="switchView('explainer')" class="px-6 py-2 rounded-md font-semibold text-sm transition-all bg-white shadow-sm text-indigo-600">📚 Explainer Guide</button>
+                <button id="btn-quiz" onclick="switchView('quiz')" class="px-6 py-2 rounded-md font-semibold text-sm transition-all text-gray-500 hover:text-gray-800">✍️ Ultimate Quiz (60 Qs)</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow p-4 md:p-8 max-w-6xl mx-auto w-full">
+
+        <!-- ========================================== -->
+        <!-- EXPLAINER VIEW                             -->
+        <!-- ========================================== -->
+        <section id="view-explainer" class="space-y-10 fade-in">
+            
+            <!-- Intro -->
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">The Connector Code</h2>
+                <p class="text-lg text-gray-600">Choosing the right connector in German isn't just about meaning; it dictates the entire sentence structure. Master the positioning of verbs to unlock fluent, complex sentences.</p>
+            </div>
+
+            <!-- Structure 1: Kausal, Konzessiv, Konsekutiv -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="bg-slate-50 px-6 py-4 border-b border-gray-200">
+                    <h3 class="text-2xl font-bold text-slate-800">1. Reason, Contrast & Consequence</h3>
+                    <p class="text-sm text-slate-500 mt-1">How the connector changes the verb position. Click the cards below for detailed explanations!</p>
+                </div>
+                <div class="p-6 md:p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        
+                        <!-- Nebensatz -->
+                        <div onclick="openS1Card1Modal()" class="bg-blue-50 p-5 rounded-xl border border-blue-200 cursor-pointer hover:border-blue-400 hover:shadow-md transition-all group relative">
+                            <div class="absolute top-4 right-4 text-blue-300 group-hover:text-blue-500 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <h4 class="font-bold text-blue-900 mb-2 group-hover:text-blue-700 transition-colors">Hauptsatz + Nebensatz</h4>
+                            <p class="text-sm text-blue-800 mb-3">The verb goes to the <strong>very end</strong> of the sentence.</p>
+                            <ul class="text-sm text-blue-900 space-y-2 mb-4 font-semibold">
+                                <li>• weil, da (Grund)</li>
+                                <li>• obwohl (Gegengrund)</li>
+                                <li>• so..., dass / sodass (Folge)</li>
+                            </ul>
+                            <div class="bg-white p-3 rounded-lg border border-blue-200 text-sm">
+                                Er ruft nicht um Hilfe, <span class="hl-konn">obwohl</span> er Angst <span class="hl-verb">hat</span>.
+                            </div>
+                            <div class="mt-4 text-blue-600 text-sm font-semibold flex items-center gap-1 opacity-80 group-hover:opacity-100">
+                                <span>Click for detailed examples</span> ➔
+                            </div>
+                        </div>
+
+                        <!-- Hauptsatz 0 -->
+                        <div onclick="openS1Card2Modal()" class="bg-emerald-50 p-5 rounded-xl border border-emerald-200 cursor-pointer hover:border-emerald-400 hover:shadow-md transition-all group relative">
+                            <div class="absolute top-4 right-4 text-emerald-300 group-hover:text-emerald-500 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <h4 class="font-bold text-emerald-900 mb-2 group-hover:text-emerald-700 transition-colors">Hauptsatz + Hauptsatz</h4>
+                            <p class="text-sm text-emerald-800 mb-3">Connector is in position 0. Subject is next, verb is in <strong>position 2</strong>.</p>
+                            <ul class="text-sm text-emerald-900 space-y-2 mb-4 font-semibold">
+                                <li>• denn (Grund)</li>
+                                <li class="text-emerald-600 italic">No direct equivalent here for Konzessiv or Konsekutiv.</li>
+                            </ul>
+                            <div class="bg-white p-3 rounded-lg border border-emerald-200 text-sm mt-8">
+                                ... <span class="hl-konn">denn</span> die Freunde <span class="hl-verb">waren</span> nicht weit.
+                            </div>
+                            <div class="mt-4 text-emerald-600 text-sm font-semibold flex items-center gap-1 opacity-80 group-hover:opacity-100">
+                                <span>Click for detailed examples</span> ➔
+                            </div>
+                        </div>
+
+                        <!-- Inversion -->
+                        <div onclick="openS1Card3Modal()" class="bg-amber-50 p-5 rounded-xl border border-amber-200 cursor-pointer hover:border-amber-400 hover:shadow-md transition-all group relative">
+                            <div class="absolute top-4 right-4 text-amber-300 group-hover:text-amber-500 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <h4 class="font-bold text-amber-900 mb-2 group-hover:text-amber-700 transition-colors">Hauptsatz + HS (Inversion)</h4>
+                            <p class="text-sm text-amber-800 mb-3">The verb comes <strong>directly behind</strong> the connector!</p>
+                            <ul class="text-sm text-amber-900 space-y-2 mb-4 font-semibold">
+                                <li>• trotzdem (Gegengrund)</li>
+                                <li>• darum, daher, deswegen, deshalb (Folge)</li>
+                            </ul>
+                            <div class="bg-white p-3 rounded-lg border border-amber-200 text-sm">
+                                Heute ist sein Geburtstag, <span class="hl-konn">deshalb</span> <span class="hl-verb">feiern</span> sie zusammen.
+                            </div>
+                            <div class="mt-4 text-amber-600 text-sm font-semibold flex items-center gap-1 opacity-80 group-hover:opacity-100">
+                                <span>Click for detailed examples</span> ➔
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Structure 2: Infinitiv vs. dass -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="bg-purple-50 px-6 py-4 border-b border-gray-200">
+                    <h3 class="text-2xl font-bold text-purple-900">2. Infinitivsätze vs. dass-Sätze</h3>
+                    <p class="text-sm text-purple-700 mt-1">Choosing between "um zu" and "damit" depends on the SUBJECT. Click the cards below for detailed explanations!</p>
+                </div>
+                <div class="p-6 md:p-8 space-y-6">
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Rule 1 Card -->
+                        <div onclick="openRule1Modal()" class="bg-white border border-gray-200 p-5 rounded-xl shadow-sm cursor-pointer hover:border-indigo-400 hover:shadow-md transition-all group relative">
+                            <div class="absolute top-4 right-4 text-indigo-300 group-hover:text-indigo-500 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <h4 class="font-bold text-lg text-gray-800 mb-2 group-hover:text-indigo-700 transition-colors">Rule 1: Same Subject</h4>
+                            <p class="text-sm text-gray-600 mb-3">Use <strong>... zu + Infinitiv</strong> when the subject in the main clause is the SAME as the subject in the subordinate clause.</p>
+                            <ul class="text-sm text-gray-800 space-y-1 mb-3 font-semibold">
+                                <li>• um ... zu (Absicht, Ziel)</li>
+                                <li>• ohne ... zu (Einschränkung)</li>
+                                <li>• (an)statt ... zu (Alternative)</li>
+                            </ul>
+                            <div class="bg-gray-50 p-3 rounded-lg text-sm border">
+                                <span class="hl-sub">Ich</span> rufe an, <span class="hl-konn">um</span> das Event <span class="hl-verb">zu buchen</span>.
+                            </div>
+                            <div class="mt-4 text-indigo-600 text-sm font-semibold flex items-center gap-1 opacity-80 group-hover:opacity-100">
+                                <span>Click for detailed examples</span> ➔
+                            </div>
+                        </div>
+                        
+                        <!-- Rule 2 Card -->
+                        <div onclick="openRule2Modal()" class="bg-white border border-gray-200 p-5 rounded-xl shadow-sm cursor-pointer hover:border-indigo-400 hover:shadow-md transition-all group relative">
+                            <div class="absolute top-4 right-4 text-indigo-300 group-hover:text-indigo-500 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <h4 class="font-bold text-lg text-gray-800 mb-2 group-hover:text-indigo-700 transition-colors">Rule 2: Different Subjects</h4>
+                            <p class="text-sm text-gray-600 mb-3">You MUST use a <strong>dass-Satz</strong> when the subjects are DIFFERENT.</p>
+                            <ul class="text-sm text-gray-800 space-y-1 mb-3 font-semibold">
+                                <li>• damit (Absicht, Ziel)*</li>
+                                <li>• ohne dass (Einschränkung)</li>
+                                <li>• (an)statt dass (Alternative)</li>
+                            </ul>
+                            <div class="bg-gray-50 p-3 rounded-lg text-sm border">
+                                <span class="hl-sub">Ich</span> rufe an, <span class="hl-konn">damit</span> <span class="hl-sub">die Firma</span> ein Angebot <span class="hl-verb">erstellt</span>.
+                            </div>
+                            <div class="mt-4 text-indigo-600 text-sm font-semibold flex items-center gap-1 opacity-80 group-hover:opacity-100">
+                                <span>Click for detailed examples</span> ➔
+                            </div>
+                            <p class="text-xs text-gray-500 mt-2 border-t pt-2">*Note: "damit" CAN also be used when subjects are the same, but "um zu" is preferred.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Structure 3: Während -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden fade-in">
+                <div class="bg-cyan-50 px-6 py-4 border-b border-gray-200">
+                    <h3 class="text-2xl font-bold text-cyan-900">3. The Two Faces of "während"</h3>
+                    <p class="text-sm text-cyan-700 mt-1">The connector "während" always creates a Nebensatz (verb at the end), but it has two totally different meanings. Click below for details!</p>
+                </div>
+                <div class="p-6 md:p-8 space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div onclick="openS3Card1Modal()" class="bg-white border border-gray-200 p-5 rounded-xl shadow-sm cursor-pointer hover:border-cyan-400 hover:shadow-md transition-all group relative">
+                            <div class="absolute top-4 right-4 text-cyan-300 group-hover:text-cyan-500 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <h4 class="font-bold text-lg text-cyan-800 mb-2 group-hover:text-cyan-600 transition-colors">1. Temporal Bedeutung (Time)</h4>
+                            <p class="text-sm text-gray-600 mb-3">Means "While / During the time that". Two things happening at the exact same time.</p>
+                            <p class="text-base mb-1"><span class="hl-konn">Während</span> man studiert, <span class="hl-verb">kann</span> man Berufe kennenlernen.</p>
+                            <div class="mt-4 text-cyan-600 text-sm font-semibold flex items-center gap-1 opacity-80 group-hover:opacity-100">
+                                <span>Click for detailed examples</span> ➔
+                            </div>
+                        </div>
+                        
+                        <div onclick="openS3Card2Modal()" class="bg-white border border-gray-200 p-5 rounded-xl shadow-sm cursor-pointer hover:border-cyan-400 hover:shadow-md transition-all group relative">
+                            <div class="absolute top-4 right-4 text-cyan-300 group-hover:text-cyan-500 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <h4 class="font-bold text-lg text-cyan-800 mb-2 group-hover:text-cyan-600 transition-colors">2. Adversative Bedeutung (Contrast)</h4>
+                            <p class="text-sm text-gray-600 mb-3">Means "Whereas / While (on the other hand)". Used to contrast two opposite ideas.</p>
+                            <p class="text-base mb-1"><span class="hl-konn">Während</span> einige früh einen Wunsch haben, <span class="hl-verb">probieren</span> andere verschiedene Berufe aus.</p>
+                            <div class="mt-4 text-cyan-600 text-sm font-semibold flex items-center gap-1 opacity-80 group-hover:opacity-100">
+                                <span>Click for detailed examples</span> ➔
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center pt-8 pb-12">
+                <button onclick="switchView('quiz')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-full shadow-lg transition transform hover:scale-105 text-lg">
+                    I'm Ready! Start the 60-Q Quiz ➔
+                </button>
+            </div>
+
+        </section>
+
+        <!-- ========================================== -->
+        <!-- QUIZ VIEW                                  -->
+        <!-- ========================================== -->
+        <section id="view-quiz" class="view-hidden max-w-3xl mx-auto w-full fade-in pb-12">
+            
+            <!-- Quiz Header / Progress -->
+            <div id="quiz-header" class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 mb-6">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="flex items-center gap-3">
+                        <span id="q-counter" class="text-sm font-bold text-gray-500 uppercase tracking-wider">Question 1 / 60</span>
+                        <span id="level-badge" class="text-xs font-bold px-2 py-1 rounded uppercase tracking-wide">Beginner</span>
+                    </div>
+                    <span id="score-counter" class="text-sm font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">Score: 0</span>
+                </div>
+                <!-- Progress Bar -->
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                    <div id="progress-bar" class="bg-indigo-600 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Quiz Question Container -->
+            <div id="quiz-container" class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-200">
+                <h3 id="question-text" class="text-xl md:text-2xl font-medium text-gray-900 mb-8 leading-relaxed">
+                    <!-- Question injected here -->
+                </h3>
+
+                <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Options injected here -->
+                </div>
+
+                <!-- Feedback Area -->
+                <div id="feedback-area" class="mt-6 p-5 rounded-xl hidden border">
+                    <div id="feedback-title" class="font-bold text-lg mb-1"></div>
+                    <div id="feedback-desc" class="text-gray-700"></div>
+                </div>
+
+                <!-- Next Button -->
+                <div class="mt-8 text-right">
+                    <button id="next-btn" onclick="nextQuestion()" class="hidden bg-gray-900 hover:bg-black text-white font-bold py-3 px-8 rounded-xl transition duration-200 shadow-md">
+                        Next Question ➔
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Results Container -->
+            <div id="results-container" class="hidden bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-200 text-center">
+                <div class="text-6xl mb-6">🏆</div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">Quiz Complete!</h2>
+                <p class="text-xl text-gray-600 mb-8">You scored <span id="final-score" class="font-bold text-indigo-600 text-2xl"></span> out of <span id="total-questions">60</span>.</p>
+                
+                <div id="results-message" class="text-lg font-medium p-6 rounded-xl mb-8"></div>
+
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <button onclick="startQuiz()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-xl transition shadow-md">
+                        Retry Quiz
+                    </button>
+                    <button onclick="switchView('explainer')" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-3 px-8 rounded-xl transition border border-gray-300">
+                        Review Explainer
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- ========================================== -->
+    <!-- MODAL OVERLAY                              -->
+    <!-- ========================================== -->
+    <div id="info-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center px-4">
+        <!-- Backdrop -->
+        <div id="modal-backdrop" class="absolute inset-0 bg-gray-900 bg-opacity-60 transition-opacity" onclick="closeModal()"></div>
+        <!-- Modal Content Box -->
+        <div id="modal-content-box" class="bg-white rounded-2xl shadow-2xl z-10 w-full max-w-2xl mx-auto overflow-hidden transform transition-all flex flex-col max-h-[85vh]">
+            <!-- Header -->
+            <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center bg-indigo-50">
+                <h3 id="modal-title" class="text-xl font-bold text-indigo-900">Title</h3>
+                <button onclick="closeModal()" class="text-indigo-400 hover:text-indigo-700 bg-white rounded-full p-1 focus:outline-none transition-colors">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <!-- Body -->
+            <div id="modal-body" class="p-6 overflow-y-auto text-gray-700 space-y-4 bg-white">
+                <!-- Content injected here via JS -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- DATA: 60 Questions (3 Difficulty Levels) ---
+        const quizData = [
+            // LEVEL 1: BEGINNER (20 Questions - Basic Meaning & Simple Syntax)
+            { level: "Beginner", q: "Ich bleibe heute zu Hause, _____ ich krank bin.", options: ["weil", "denn", "deshalb", "obwohl"], a: "weil", exp: "The verb 'bin' is at the end, so we need a Nebensatz connector for 'reason' (weil)." },
+            { level: "Beginner", q: "Ich bleibe heute zu Hause, _____ ich bin krank.", options: ["denn", "weil", "da", "deshalb"], a: "denn", exp: "'denn' requires position 0 (Hauptsatz + Hauptsatz), so the verb 'bin' stays in position 2." },
+            { level: "Beginner", q: "Ich bin krank, _____ bleibe ich zu Hause.", options: ["deshalb", "denn", "weil", "obwohl"], a: "deshalb", exp: "The verb 'bleibe' is directly behind the gap (Inversion). 'deshalb' is a Hauptsatz connector that forces inversion." },
+            { level: "Beginner", q: "Er geht spazieren, _____ es regnet.", options: ["obwohl", "trotzdem", "denn", "daher"], a: "obwohl", exp: "We need a contrast connector (Konzessiv). The verb 'regnet' is at the end, requiring a Nebensatz connector like 'obwohl'." },
+            { level: "Beginner", q: "Es regnet, _____ geht er spazieren.", options: ["trotzdem", "obwohl", "weil", "da"], a: "trotzdem", exp: "Inversion (Verb 'geht' follows the gap). For contrast, we use the adverbial connector 'trotzdem'." },
+            { level: "Beginner", q: "Welcher Konnektor leitet einen Nebensatz ein (Verb am Ende)?", options: ["da", "denn", "deshalb", "darum"], a: "da", exp: "'da' works exactly like 'weil' and pushes the conjugated verb to the end." },
+            { level: "Beginner", q: "Welcher Konnektor erfordert eine Inversion (Verb direkt dahinter)?", options: ["deswegen", "denn", "weil", "da"], a: "deswegen", exp: "'deswegen' acts as position 1 in the sentence, so the verb must take position 2 (directly after it)." },
+            { level: "Beginner", q: "Ich lerne viel, _____ ich die Prüfung bestehen möchte.", options: ["weil", "deshalb", "trotzdem", "denn (verb am Ende falsch)"], a: "weil", exp: "Verb 'möchte' at the end = Nebensatz. 'weil' gives the reason." },
+            { level: "Beginner", q: "Ich lerne viel, _____ möchte ich die Prüfung bestehen.", options: ["deshalb", "weil", "da", "obwohl"], a: "deshalb", exp: "Verb 'möchte' immediately follows the gap. 'deshalb' indicates the consequence." },
+            { level: "Beginner", q: "Wir haben Hunger, _____ gehen wir ins Restaurant.", options: ["daher", "denn", "weil", "da"], a: "daher", exp: "'daher' functions exactly like 'deshalb' (Folge/Consequence) with inversion." },
+            { level: "Beginner", q: "Er war sehr müde, _____ ist er früh ins Bett gegangen.", options: ["darum", "weil", "obwohl", "denn"], a: "darum", exp: "'darum' means 'therefore'. The verb 'ist' directly follows it (Inversion)." },
+            { level: "Beginner", q: "_____ ich gestern lange gearbeitet habe, bin ich heute müde.", options: ["Da", "Denn", "Deshalb", "Trotzdem"], a: "Da", exp: "'Da' means 'since/because'. When a Nebensatz starts the sentence, the verb in the Hauptsatz comes directly after the comma." },
+            { level: "Beginner", q: "Ich trinke Kaffee, _____ ich bin müde.", options: ["denn", "weil", "da", "deswegen"], a: "denn", exp: "Position 0 connector! Subject 'ich' is pos 1, verb 'bin' is pos 2." },
+            { level: "Beginner", q: "Wir haben kein Geld, _____ können wir nicht in den Urlaub fahren.", options: ["deswegen", "denn", "weil", "obwohl"], a: "deswegen", exp: "Consequence + Inversion ('können' is right after the connector)." },
+            { level: "Beginner", q: "Ich gehe ins Bett, _____ ich sehr müde bin.", options: ["da", "denn", "deshalb", "trotzdem"], a: "da", exp: "Synonym for 'weil'. Pushes the verb 'bin' to the end." },
+            { level: "Beginner", q: "Er hat viel gegessen, _____ hat er noch Hunger.", options: ["trotzdem", "obwohl", "deshalb", "weil"], a: "trotzdem", exp: "Contrast + Inversion. 'He ate a lot, NEVERTHELESS he is still hungry.'" },
+            { level: "Beginner", q: "Das Auto ist kaputt, _____ wir müssen mit dem Bus fahren. (Achtung auf das Subjekt!)", options: ["denn", "deshalb", "weil", "da"], a: "denn", exp: "Look closely: '... [gap] wir müssen'. No inversion! Verb is in pos 2 after subject. Therefore, it MUST be 'denn' (pos 0)." },
+            { level: "Beginner", q: "Ich rufe an, _____ einen Tisch zu reservieren.", options: ["um", "damit", "ohne", "anstatt"], a: "um", exp: "Basic infinitive clause with 'zu'. Expresses purpose (Absicht)." },
+            { level: "Beginner", q: "Ich habe den ganzen Tag gearbeitet, _____ eine Pause zu machen.", options: ["ohne", "um", "damit", "anstatt"], a: "ohne", exp: "Einschränkung (Restriction). I worked WITHOUT taking a break." },
+            { level: "Beginner", q: "_____ fernzusehen, sollte er lieber lernen.", options: ["Anstatt", "Ohne", "Um", "Damit"], a: "Anstatt", exp: "Alternative. INSTEAD OF watching TV, he should learn." },
+
+            // LEVEL 2: INTERMEDIATE (20 Questions - Same vs Diff Subject, Nuanced Syntax)
+            { level: "Intermediate", q: "Die Firma gibt viel Geld aus, _____ neue Mitarbeiter zu finden.", options: ["um", "damit", "ohne", "sodass"], a: "um", exp: "Same subject (Die Firma). 'um... zu + Infinitiv' is the correct form." },
+            { level: "Intermediate", q: "Ich spreche langsam, _____ Sie mich besser verstehen.", options: ["damit", "um", "ohne dass", "weil"], a: "damit", exp: "Different subjects (Ich vs. Sie). You cannot use 'um... zu'. Must use 'damit'." },
+            { level: "Intermediate", q: "Wir geben dem Kind Geld, _____ es sich ein Eis kaufen kann.", options: ["damit", "um", "dass", "weil"], a: "damit", exp: "Different subjects (Wir vs. es). 'damit' expresses purpose (Ziel)." },
+            { level: "Intermediate", q: "Er ging nach Hause, _____ sich zu verabschieden.", options: ["ohne", "ohne dass", "anstatt dass", "damit"], a: "ohne", exp: "Same subject (Er). 'ohne... zu' is correct." },
+            { level: "Intermediate", q: "Der Lehrer erklärt die Grammatik nochmal, _____ die Studenten sie besser begreifen.", options: ["damit", "um", "ohne dass", "weil"], a: "damit", exp: "Different subjects (Der Lehrer vs. die Studenten). Expresses intention." },
+            { level: "Intermediate", q: "Sie verließ den Raum, _____ jemand sie bemerkt hat.", options: ["ohne dass", "ohne ... zu", "damit", "um ... zu"], a: "ohne dass", exp: "Different subjects (Sie vs. jemand). Must use 'ohne dass' instead of 'ohne zu'." },
+            { level: "Intermediate", q: "_____ zu lernen, spielt er den ganzen Tag Videospiele.", options: ["Anstatt", "Ohne", "Um", "Damit"], a: "Anstatt", exp: "Alternative action, same subject. 'Anstatt... zu + Infinitiv'." },
+            { level: "Intermediate", q: "Wir machen die Musik leiser, _____ die Nachbarn sich nicht beschweren.", options: ["damit", "um", "weil", "sodass"], a: "damit", exp: "Intention (Ziel) with different subjects (Wir vs. die Nachbarn)." },
+            { level: "Intermediate", q: "Ich helfe dir, _____ du die Aufgabe schneller beendest.", options: ["damit", "um", "weil", "deshalb"], a: "damit", exp: "Different subjects (Ich vs. du), expressing a goal." },
+            { level: "Intermediate", q: "Ich trinke einen Espresso, _____ wach zu bleiben.", options: ["um", "damit", "ohne", "anstatt"], a: "um", exp: "Same subject. 'um... zu' is the most natural choice for expressing personal purpose." },
+            { level: "Intermediate", q: "Er hat das Meeting abgesagt, _____ mich vorher zu informieren.", options: ["ohne", "ohne dass", "anstatt", "um"], a: "ohne", exp: "Same subject (Er). He canceled without informing me." },
+            { level: "Intermediate", q: "_____ dass der Chef zustimmt, können wir das Projekt nicht starten.", options: ["Ohne", "Um", "Anstatt", "Damit"], a: "Ohne", exp: "'Ohne dass' because subjects are different (Chef vs. wir) and it's a restriction (Einschränkung)." },
+            { level: "Intermediate", q: "Der Zug hatte Verspätung, _____ wir den Anschlussflug verpasst haben.", options: ["sodass", "damit", "um", "deshalb"], a: "sodass", exp: "'sodass' introduces a consecutive Nebensatz (Consequence), pushing the verb 'haben' to the end." },
+            { level: "Intermediate", q: "Wir haben uns so beeilt, _____ wir trotzdem zu spät kamen.", options: ["dass", "sodass", "damit", "um"], a: "dass", exp: "When 'so' is in the Hauptsatz ('so beeilt'), the Nebensatz is completed with just 'dass' (Folge/Result)." },
+            { level: "Intermediate", q: "Er sprach so leise, _____ man ihn kaum verstehen konnte.", options: ["dass", "sodass", "damit", "um"], a: "dass", exp: "Again, 'so leise' is split from 'dass'. Consequence." },
+            { level: "Intermediate", q: "Welcher Satz ist grammatikalisch RICHTIG?", options: ["Ich lerne Deutsch, um ich in Berlin arbeiten kann.", "Ich lerne Deutsch, damit ich in Berlin arbeiten kann.", "Ich lerne Deutsch, damit in Berlin zu arbeiten.", "Ich lerne Deutsch, um ich in Berlin arbeiten zu können."], a: "Ich lerne Deutsch, damit ich in Berlin arbeiten kann.", exp: "'damit' takes a full clause. 'um' requires a 'zu + infinitive' and drops the subject." },
+            { level: "Intermediate", q: "_____ einige Kollegen lieber im Büro arbeiten, bleiben andere lieber im Homeoffice.", options: ["Während", "Da", "Obwohl", "Weil"], a: "Während", exp: "Adversative meaning (Contrast). 'Whereas some..., others...'." },
+            { level: "Intermediate", q: "Er hat die Prüfung bestanden, _____ er kaum gelernt hat.", options: ["obwohl", "trotzdem", "während", "denn"], a: "obwohl", exp: "Nebensatz connector for contrast (Gegengrund)." },
+            { level: "Intermediate", q: "Ich bin Vegetarier, _____ meine Frau gerne Fleisch isst.", options: ["während", "obwohl", "da", "weil"], a: "während", exp: "Contrasting two situations (Adversativ)." },
+            { level: "Intermediate", q: "_____ der Fahrt haben wir viel Musik gehört.", options: ["Während", "Damit", "Obwohl", "Um"], a: "Während", exp: "Trick question! Here 'während' is used as a preposition taking the Genitive ('der Fahrt'), not a connector. Still means 'during'." },
+
+            // LEVEL 3: ADVANCED (20 Questions - Complex Transformations & Nuances)
+            { level: "Advanced", q: "Rewrite: 'Ich rufe an, weil ich das Event buchen möchte.'", options: ["Ich rufe an, um das Event zu buchen.", "Ich rufe an, damit ich das Event buchen möchte.", "Ich rufe an, anstatt das Event zu buchen.", "Ich rufe an, weil das Event zu buchen."], a: "Ich rufe an, um das Event zu buchen.", exp: "Since subjects are the same and it expresses intent, 'um... zu' replaces the 'weil' clause cleanly." },
+            { level: "Advanced", q: "Rewrite: 'Er ging weg und hat nichts gesagt.'", options: ["Er ging weg, ohne etwas zu sagen.", "Er ging weg, ohne dass er etwas gesagt hat.", "Er ging weg, um nichts zu sagen.", "Er ging weg, anstatt etwas zu sagen."], a: "Er ging weg, ohne etwas zu sagen.", exp: "Same subject, expressing a restriction/lack of action -> 'ohne... zu'." },
+            { level: "Advanced", q: "Rewrite: 'Sie haben nicht telefoniert, sondern eine Mail geschrieben.'", options: ["Anstatt zu telefonieren, haben sie eine Mail geschrieben.", "Ohne zu telefonieren, haben sie eine Mail geschrieben.", "Damit sie nicht telefonieren, haben sie eine Mail geschrieben.", "Um zu telefonieren, haben sie eine Mail geschrieben."], a: "Anstatt zu telefonieren, haben sie eine Mail geschrieben.", exp: "Expressing an alternative -> 'anstatt zu'." },
+            { level: "Advanced", q: "Was drückt dieser Satz aus? 'Er trägt eine Brille, damit er besser sehen kann.'", options: ["Absicht / Ziel (final)", "Grund (kausal)", "Gegengrund (konzessiv)", "Folge (konsekutiv)"], a: "Absicht / Ziel (final)", exp: "'damit' describes the intention or goal." },
+            { level: "Advanced", q: "Was drückt dieser Satz aus? 'Es hat geschneit, sodass die Straßen glatt waren.'", options: ["Folge (konsekutiv)", "Grund (kausal)", "Gegengrund (konzessiv)", "Absicht (final)"], a: "Folge (konsekutiv)", exp: "'sodass' describes the consequence or result of the main clause." },
+            { level: "Advanced", q: "Welcher Satz ist FALSCH?", options: ["Ich spare Geld, damit ich ein Auto kaufen kann.", "Ich spare Geld, um ein Auto zu kaufen.", "Ich spare Geld, damit ein Auto zu kaufen.", "Ich spare Geld, weil ich ein Auto kaufen will."], a: "Ich spare Geld, damit ein Auto zu kaufen.", exp: "'damit' cannot be combined with 'zu + Infinitiv'. It requires a fully conjugated clause." },
+            { level: "Advanced", q: "_____ ich koche, deckt mein Mann den Tisch. (Welche Bedeutung hat 'während' hier?)", options: ["Temporal (Zeit)", "Adversativ (Gegensatz)", "Kausal (Grund)", "Final (Ziel)"], a: "Temporal (Zeit)", exp: "The actions are happening at the same time." },
+            { level: "Advanced", q: "_____ München sehr teuer ist, ist Berlin relativ günstig. (Bedeutung?)", options: ["Adversativ (Gegensatz)", "Temporal (Zeit)", "Konzessiv (Gegengrund)", "Kausal (Grund)"], a: "Adversativ (Gegensatz)", exp: "Contrasting two situations (expensive vs cheap)." },
+            { level: "Advanced", q: "Choose the exact equivalent: 'Weil er krank war, blieb er zu Hause.'", options: ["Er war krank, deshalb blieb er zu Hause.", "Er war krank, weil er zu Hause blieb.", "Er war krank, trotzdem blieb er zu Hause.", "Er blieb zu Hause, obwohl er krank war."], a: "Er war krank, deshalb blieb er zu Hause.", exp: "Kausal Nebensatz swapped to a Kausal Hauptsatz requires a Consequence connector like 'deshalb'." },
+            { level: "Advanced", q: "Choose the exact equivalent: 'Obwohl es regnet, gehen wir raus.'", options: ["Es regnet, trotzdem gehen wir raus.", "Es regnet, deshalb gehen wir raus.", "Es regnet, denn wir gehen raus.", "Wir gehen raus, weil es regnet."], a: "Es regnet, trotzdem gehen wir raus.", exp: "Konzessiv Nebensatz ('obwohl') replaced by Konzessiv Hauptsatz ('trotzdem')." },
+            { level: "Advanced", q: "Der Akku war fast leer, _____ habe ich das Handy ausgeschaltet.", options: ["daher", "denn", "weil", "sodass"], a: "daher", exp: "'daher' functions like 'deshalb' (Inversion, Folge)." },
+            { level: "Advanced", q: "Er arbeitet viel, _____ er müde ist. (Which one is logically absurd but grammatically correct?)", options: ["obwohl", "weil", "damit", "sodass"], a: "obwohl", exp: "It makes logical sense: He works a lot ALTHOUGH he is tired. 'weil' would mean he works *because* he is tired, which is weird." },
+            { level: "Advanced", q: "Welche Struktur hat dieser Satz: 'Ich rufe an, weil ich das Teamevent buchen möchte.'", options: ["Hauptsatz + Nebensatz", "Hauptsatz + Hauptsatz", "Hauptsatz + Hauptsatz (Inversion)", "Infinitivsatz"], a: "Hauptsatz + Nebensatz", exp: "'weil' pushes the verb 'möchte' to the end." },
+            { level: "Advanced", q: "Er hat sich nicht entschuldigt, _____ er einen Fehler gemacht hat.", options: ["obwohl", "trotzdem", "deshalb", "daher"], a: "obwohl", exp: "Verb at the end (Nebensatz). Logic dictates contrast: He didn't apologize ALTHOUGH he made a mistake." },
+            { level: "Advanced", q: "Sie kam zu spät, _____ der Bus eine Panne hatte.", options: ["da", "denn", "deswegen", "trotzdem"], a: "da", exp: "Nebensatz for reason. Synonymous with 'weil'." },
+            { level: "Advanced", q: "Sie kam zu spät, _____ hatte der Bus eine Panne. (Wait, is this logical?)", options: ["The grammar is correct, but the logic is reversed.", "It's perfect grammar and logic.", "The grammar is wrong.", "It's a Konzessiv clause."], a: "The grammar is correct, but the logic is reversed.", exp: "Saying 'She was late, THEREFORE the bus broke down' is grammatically correct inversion, but logically absurd." },
+            { level: "Advanced", q: "Wir haben uns beeilt, _____ den Zug noch _____.", options: ["um ... zu erwischen", "damit ... erwischen", "ohne ... zu erwischen", "anstatt ... zu erwischen"], a: "um ... zu erwischen", exp: "Same subject, expressing intention." },
+            { level: "Advanced", q: "Er ging an mir vorbei, _____ mich _____.", options: ["ohne ... zu grüßen", "ohne dass ... grüßen", "anstatt ... zu grüßen", "um ... zu grüßen"], a: "ohne ... zu grüßen", exp: "Same subject, expressing lack of expected action." },
+            { level: "Advanced", q: "_____ dass ich etwas gesagt habe, wusste er Bescheid.", options: ["Ohne", "Anstatt", "Um", "Damit"], a: "Ohne", exp: "'Ohne dass' (Different subjects: ich vs. er)." },
+            { level: "Advanced", q: "Was ist das Synonym für 'darum'?", options: ["deshalb", "trotzdem", "denn", "weil"], a: "deshalb", exp: "Both are adverbial consequence connectors requiring inversion." }
+        ];
+
+        // --- APP STATE ---
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answeringAllowed = true;
+        let shuffledQuestions = [];
+
+        // --- DOM ELEMENTS ---
+        const viewExplainer = document.getElementById('view-explainer');
+        const viewQuiz = document.getElementById('view-quiz');
+        const btnExplainer = document.getElementById('btn-explainer');
+        const btnQuiz = document.getElementById('btn-quiz');
+        
+        const quizHeader = document.getElementById('quiz-header');
+        const quizContainer = document.getElementById('quiz-container');
+        const resultsContainer = document.getElementById('results-container');
+        const qCounter = document.getElementById('q-counter');
+        const scoreCounter = document.getElementById('score-counter');
+        const levelBadge = document.getElementById('level-badge');
+        const progressBar = document.getElementById('progress-bar');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const feedbackArea = document.getElementById('feedback-area');
+        const feedbackTitle = document.getElementById('feedback-title');
+        const feedbackDesc = document.getElementById('feedback-desc');
+        const nextBtn = document.getElementById('next-btn');
+
+        // Style configurations for levels
+        const levelStyles = {
+            "Beginner": "bg-green-100 text-green-800",
+            "Intermediate": "bg-yellow-100 text-yellow-800",
+            "Advanced": "bg-red-100 text-red-800"
+        };
+
+        // --- FUNCTIONS (Modals) ---
+        const modalOverlay = document.getElementById('info-modal');
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const modalBox = document.getElementById('modal-content-box');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+
+        function openModal(title, content) {
+            modalTitle.innerHTML = title;
+            modalBody.innerHTML = content;
+            
+            modalOverlay.classList.remove('hidden');
+            modalBackdrop.classList.add('modal-fade-in');
+            modalBackdrop.classList.remove('modal-fade-out');
+            modalBox.classList.add('modal-scale-in');
+            
+            // Prevent body scrolling
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modalBackdrop.classList.remove('modal-fade-in');
+            modalBackdrop.classList.add('modal-fade-out');
+            
+            setTimeout(() => {
+                modalOverlay.classList.add('hidden');
+                modalBox.classList.remove('modal-scale-in');
+                document.body.style.overflow = ''; // Restore body scrolling
+            }, 200); // match animation duration
+        }
+
+        function openRule1Modal() {
+            const content = `
+                <div class="mb-4 text-lg text-gray-800">
+                    When the person or thing performing the action in the main clause is the <strong>exact same</strong> as in the dependent clause, we can make the sentence shorter and more elegant by dropping the subject and using an infinitive verb at the end.
+                </div>
+                
+                <div class="space-y-5">
+                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-blue-200 text-blue-800 text-xs font-bold px-2 py-1 rounded uppercase">Purpose</span>
+                            <h4 class="font-bold text-blue-900 text-lg">um ... zu</h4>
+                        </div>
+                        <p class="text-sm text-blue-800 mb-2">Translates to: <em>"in order to"</em></p>
+                        <div class="bg-white p-3 rounded-lg shadow-sm border border-blue-100 mb-2">
+                            <p class="text-gray-900 font-medium">🇩🇪 <span class="text-blue-600 font-bold underline">Ich</span> lerne Deutsch, <span class="text-indigo-600 font-bold">um</span> in Berlin <span class="text-indigo-600 font-bold">zu arbeiten</span>.</p>
+                        </div>
+                        <p class="text-sm text-gray-600">🇬🇧 <em>I am learning German in order to work in Berlin.</em> (Notice how "I" am doing the learning, and "I" will be doing the working. Same subject!)</p>
+                    </div>
+
+                    <div class="bg-red-50 p-4 rounded-xl border border-red-100">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-red-200 text-red-800 text-xs font-bold px-2 py-1 rounded uppercase">Restriction</span>
+                            <h4 class="font-bold text-red-900 text-lg">ohne ... zu</h4>
+                        </div>
+                        <p class="text-sm text-red-800 mb-2">Translates to: <em>"without doing [something]"</em></p>
+                        <div class="bg-white p-3 rounded-lg shadow-sm border border-red-100 mb-2">
+                            <p class="text-gray-900 font-medium">🇩🇪 <span class="text-red-600 font-bold underline">Er</span> geht, <span class="text-indigo-600 font-bold">ohne</span> ein Wort <span class="text-indigo-600 font-bold">zu sagen</span>.</p>
+                        </div>
+                        <p class="text-sm text-gray-600">🇬🇧 <em>He leaves without saying a word.</em></p>
+                    </div>
+
+                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-emerald-200 text-emerald-800 text-xs font-bold px-2 py-1 rounded uppercase">Alternative</span>
+                            <h4 class="font-bold text-emerald-900 text-lg">(an)statt ... zu</h4>
+                        </div>
+                        <p class="text-sm text-emerald-800 mb-2">Translates to: <em>"instead of doing [something]"</em></p>
+                        <div class="bg-white p-3 rounded-lg shadow-sm border border-emerald-100 mb-2">
+                            <p class="text-gray-900 font-medium">🇩🇪 <span class="text-indigo-600 font-bold">Anstatt zu schlafen</span>, spiele <span class="text-emerald-600 font-bold underline">ich</span> Videospiele.</p>
+                        </div>
+                        <p class="text-sm text-gray-600">🇬🇧 <em>Instead of sleeping, I play video games.</em></p>
+                    </div>
+                </div>
+            `;
+            openModal("Rule 1: Same Subject (Infinitive)", content);
+        }
+
+        function openRule2Modal() {
+            const content = `
+                <div class="mb-4 text-lg text-gray-800">
+                    When the main clause has one subject (e.g., "I") and the dependent clause has a <strong>different</strong> subject (e.g., "the company"), you <strong>cannot</strong> use the short infinitive form. You must write a full Nebensatz (dependent clause) with a conjugated verb at the end.
+                </div>
+                
+                <div class="space-y-5">
+                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-blue-200 text-blue-800 text-xs font-bold px-2 py-1 rounded uppercase">Purpose</span>
+                            <h4 class="font-bold text-blue-900 text-lg">damit</h4>
+                        </div>
+                        <p class="text-sm text-blue-800 mb-2">Translates to: <em>"so that"</em></p>
+                        <div class="bg-white p-3 rounded-lg shadow-sm border border-blue-100 mb-2">
+                            <p class="text-gray-900 font-medium">🇩🇪 <span class="text-blue-600 font-bold underline">Ich</span> helfe dir, <span class="text-indigo-600 font-bold">damit</span> <span class="text-amber-600 font-bold underline">du</span> die Prüfung <span class="text-red-600 font-bold">bestehst</span>.</p>
+                        </div>
+                        <p class="text-sm text-gray-600">🇬🇧 <em>I am helping you so that you pass the exam.</em> ("I" am helping, but "you" are passing. Two different subjects!)</p>
+                    </div>
+
+                    <div class="bg-red-50 p-4 rounded-xl border border-red-100">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-red-200 text-red-800 text-xs font-bold px-2 py-1 rounded uppercase">Restriction</span>
+                            <h4 class="font-bold text-red-900 text-lg">ohne dass</h4>
+                        </div>
+                        <p class="text-sm text-red-800 mb-2">Translates to: <em>"without [someone] doing [something]"</em></p>
+                        <div class="bg-white p-3 rounded-lg shadow-sm border border-red-100 mb-2">
+                            <p class="text-gray-900 font-medium">🇩🇪 <span class="text-red-600 font-bold underline">Sie</span> geht, <span class="text-indigo-600 font-bold">ohne dass</span> <span class="text-amber-600 font-bold underline">er</span> es <span class="text-red-600 font-bold">merkt</span>.</p>
+                        </div>
+                        <p class="text-sm text-gray-600">🇬🇧 <em>She leaves without him noticing it.</em></p>
+                    </div>
+
+                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-emerald-200 text-emerald-800 text-xs font-bold px-2 py-1 rounded uppercase">Alternative</span>
+                            <h4 class="font-bold text-emerald-900 text-lg">(an)statt dass</h4>
+                        </div>
+                        <p class="text-sm text-emerald-800 mb-2">Translates to: <em>"instead of [someone] doing [something]"</em></p>
+                        <div class="bg-white p-3 rounded-lg shadow-sm border border-emerald-100 mb-2">
+                            <p class="text-gray-900 font-medium">🇩🇪 <span class="text-indigo-600 font-bold">Anstatt dass</span> <span class="text-amber-600 font-bold underline">der Chef</span> <span class="text-red-600 font-bold">kocht</span>, bestellen <span class="text-emerald-600 font-bold underline">wir</span> Pizza.</p>
+                        </div>
+                        <p class="text-sm text-gray-600">🇬🇧 <em>Instead of the boss cooking, we order pizza.</em></p>
+                    </div>
+                </div>
+            `;
+            openModal("Rule 2: Different Subjects (dass-Sätze)", content);
+        }
+
+        function openS1Card1Modal() {
+            const content = `
+                <div class="mb-4 text-lg text-gray-800">
+                    When using these connectors, the dependent clause acts like a container where the conjugated verb gets pushed to the <strong>very end</strong>.
+                </div>
+                
+                <div class="space-y-5">
+                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-blue-200 text-blue-800 text-xs font-bold px-2 py-1 rounded uppercase">Reason (Kausal)</span>
+                            <h4 class="font-bold text-blue-900 text-lg">weil / da</h4>
+                        </div>
+                        <p class="text-sm text-blue-800 mb-2">Expresses the cause. (Because / Since)</p>
+                        <div class="bg-white p-3 rounded-lg shadow-sm border border-blue-100 mb-2">
+                            <p class="text-gray-900 font-medium">🇩🇪 Ich bleibe zu Hause, <span class="text-indigo-600 font-bold">weil</span> ich krank <span class="text-red-600 font-bold">bin</span>.</p>
+                        </div>
+                        <p class="text-sm text-gray-600">🇬🇧 <em>I am staying home because I am sick.</em></p>
+                    </div>
+
+                    <div class="bg-amber-50 p-4 rounded-xl border border-amber-100">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-amber-200 text-amber-800 text-xs font-bold px-2 py-1 rounded uppercase">Contrast (Konzessiv)</span>
+                            <h4 class="font-bold text-amber-900 text-lg">obwohl</h4>
+                        </div>
+                        <p class="text-sm text-amber-800 mb-2">Introduces an unexpected result or obstacle. (Although / Even though)</p>
+                        <div class="bg-white p-3 rounded-lg shadow-sm border border-amber-100 mb-2">
+                            <p class="text-gray-900 font-medium">🇩🇪 Wir gehen spazieren, <span class="text-indigo-600 font-bold">obwohl</span> es stark <span class="text-red-600 font-bold">regnet</span>.</p>
+                        </div>
+                        <p class="text-sm text-gray-600">🇬🇧 <em>We are going for a walk even though it is raining heavily.</em></p>
+                    </div>
+
+                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-emerald-200 text-emerald-800 text-xs font-bold px-2 py-1 rounded uppercase">Consequence (Konsekutiv)</span>
+                            <h4 class="font-bold text-emerald-900 text-lg">so ..., dass / sodass</h4>
+                        </div>
+                        <p class="text-sm text-emerald-800 mb-2">Shows the result of an action. (So that)</p>
+                        <div class="bg-white p-3 rounded-lg shadow-sm border border-emerald-100 mb-2">
+                            <p class="text-gray-900 font-medium">🇩🇪 Es war so kalt, <span class="text-indigo-600 font-bold">dass</span> der See <span class="text-red-600 font-bold">zugefroren ist</span>.</p>
+                        </div>
+                        <p class="text-sm text-gray-600">🇬🇧 <em>It was so cold that the lake froze over.</em></p>
+                    </div>
+                </div>
+            `;
+            openModal("Nebensatz (Verb at the End)", content);
+        }
+
+        function openS1Card2Modal() {
+            const content = `
+                <div class="mb-4 text-lg text-gray-800">
+                    The connector acts as a <strong>bridge</strong> (Position 0) between two independent main clauses. It does not affect the word order at all. The Subject takes Position 1, and the Verb takes Position 2 as normal.
+                </div>
+                
+                <div class="space-y-5">
+                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-blue-200 text-blue-800 text-xs font-bold px-2 py-1 rounded uppercase">Reason (Kausal)</span>
+                            <h4 class="font-bold text-blue-900 text-lg">denn</h4>
+                        </div>
+                        <p class="text-sm text-blue-800 mb-2">Provides the reason for the previous statement. (For / Because)</p>
+                        <div class="bg-white p-3 rounded-lg shadow-sm border border-blue-100 mb-2">
+                            <p class="text-gray-900 font-medium">🇩🇪 Ich bleibe zu Hause, <span class="text-indigo-600 font-bold">denn</span> ich <span class="text-red-600 font-bold">bin</span> krank.</p>
+                        </div>
+                        <p class="text-sm text-gray-600">🇬🇧 <em>I am staying home, for I am sick.</em></p>
+                        <p class="text-xs text-gray-500 mt-2 italic">Notice how the verb "bin" stays in position 2, right after the subject "ich".</p>
+                    </div>
+                </div>
+            `;
+            openModal("Hauptsatz + Hauptsatz (Position 0)", content);
+        }
+
+        function openS1Card3Modal() {
+            const content = `
+                <div class="mb-4 text-lg text-gray-800">
+                    In German main clauses, the conjugated verb MUST be in Position 2. When you start the clause with an adverbial connector (like <em>deshalb</em>), the connector takes up <strong>Position 1</strong>. Therefore, the verb must immediately follow it, pushing the subject to Position 3. This swap of Subject and Verb is called <strong>Inversion</strong>.
+                </div>
+                
+                <div class="space-y-5">
+                    <div class="bg-amber-50 p-4 rounded-xl border border-amber-100">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-amber-200 text-amber-800 text-xs font-bold px-2 py-1 rounded uppercase">Contrast (Konzessiv)</span>
+                            <h4 class="font-bold text-amber-900 text-lg">trotzdem</h4>
+                        </div>
+                        <p class="text-sm text-amber-800 mb-2">Means "nevertheless" or "in spite of that".</p>
+                        <div class="bg-white p-3 rounded-lg shadow-sm border border-amber-100 mb-2">
+                            <p class="text-gray-900 font-medium">🇩🇪 Es regnet, <span class="text-indigo-600 font-bold">trotzdem</span> <span class="text-red-600 font-bold">gehen</span> wir spazieren.</p>
+                        </div>
+                        <p class="text-sm text-gray-600">🇬🇧 <em>It is raining, nevertheless we are going for a walk.</em></p>
+                    </div>
+
+                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-emerald-200 text-emerald-800 text-xs font-bold px-2 py-1 rounded uppercase">Consequence (Konsekutiv)</span>
+                            <h4 class="font-bold text-emerald-900 text-lg">deshalb, darum, daher, deswegen</h4>
+                        </div>
+                        <p class="text-sm text-emerald-800 mb-2">Means "therefore" or "that is why". (All four are synonyms!)</p>
+                        <div class="bg-white p-3 rounded-lg shadow-sm border border-emerald-100 mb-2">
+                            <p class="text-gray-900 font-medium">🇩🇪 Ich bin krank, <span class="text-indigo-600 font-bold">deshalb</span> <span class="text-red-600 font-bold">bleibe</span> ich zu Hause.</p>
+                        </div>
+                        <p class="text-sm text-gray-600">🇬🇧 <em>I am sick, therefore I am staying home.</em></p>
+                    </div>
+                </div>
+            `;
+            openModal("Hauptsatz (Inversion)", content);
+        }
+
+        function openS3Card1Modal() {
+            const content = `
+                <div class="mb-4 text-lg text-gray-800">
+                    When used temporally, <em>während</em> connects two actions that are happening at the exact same time. It pushes the verb to the end of the clause.
+                </div>
+                
+                <div class="space-y-5">
+                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-blue-200 text-blue-800 text-xs font-bold px-2 py-1 rounded uppercase">Time / Simultaneous</span>
+                            <h4 class="font-bold text-blue-900 text-lg">während (While)</h4>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg shadow-sm border border-blue-100 mb-2">
+                            <p class="text-gray-900 font-medium">🇩🇪 <span class="text-indigo-600 font-bold">Während</span> ich koche, <span class="text-red-600 font-bold">deckt</span> mein Mann den Tisch.</p>
+                        </div>
+                        <p class="text-sm text-gray-600">🇬🇧 <em>While I am cooking, my husband is setting the table.</em></p>
+                        
+                        <div class="bg-white p-3 rounded-lg shadow-sm border border-blue-100 mb-2 mt-3">
+                            <p class="text-gray-900 font-medium">🇩🇪 Bitte nicht stören, <span class="text-indigo-600 font-bold">während</span> ich <span class="text-red-600 font-bold">telefoniere</span>.</p>
+                        </div>
+                        <p class="text-sm text-gray-600">🇬🇧 <em>Please do not disturb while I am on the phone.</em></p>
+                    </div>
+                </div>
+            `;
+            openModal("Während: Temporal Meaning", content);
+        }
+
+        function openS3Card2Modal() {
+            const content = `
+                <div class="mb-4 text-lg text-gray-800">
+                    When used adversatively, <em>während</em> contrasts two opposite facts or situations. It acts exactly like the English words "whereas" or "while (on the other hand)". It still pushes the verb to the end.
+                </div>
+                
+                <div class="space-y-5">
+                    <div class="bg-amber-50 p-4 rounded-xl border border-amber-100">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-amber-200 text-amber-800 text-xs font-bold px-2 py-1 rounded uppercase">Contrast / Comparison</span>
+                            <h4 class="font-bold text-amber-900 text-lg">während (Whereas)</h4>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg shadow-sm border border-amber-100 mb-2">
+                            <p class="text-gray-900 font-medium">🇩🇪 <span class="text-indigo-600 font-bold">Während</span> München sehr teuer ist, <span class="text-red-600 font-bold">ist</span> Berlin relativ günstig.</p>
+                        </div>
+                        <p class="text-sm text-gray-600">🇬🇧 <em>Whereas Munich is very expensive, Berlin is relatively cheap.</em></p>
+                        
+                        <div class="bg-white p-3 rounded-lg shadow-sm border border-amber-100 mb-2 mt-3">
+                            <p class="text-gray-900 font-medium">🇩🇪 Mein Bruder liebt Sport, <span class="text-indigo-600 font-bold">während</span> ich lieber Bücher <span class="text-red-600 font-bold">lese</span>.</p>
+                        </div>
+                        <p class="text-sm text-gray-600">🇬🇧 <em>My brother loves sports, while I prefer to read books.</em></p>
+                    </div>
+                </div>
+            `;
+            openModal("Während: Adversative Meaning", content);
+        }
+
+        // --- FUNCTIONS (View/Quiz Logic) ---
+        
+        function switchView(view) {
+            if (view === 'explainer') {
+                viewExplainer.classList.remove('view-hidden');
+                viewQuiz.classList.add('view-hidden');
+                btnExplainer.className = "px-6 py-2 rounded-md font-semibold text-sm transition-all bg-white shadow-sm text-indigo-600";
+                btnQuiz.className = "px-6 py-2 rounded-md font-semibold text-sm transition-all text-gray-500 hover:text-gray-800";
+            } else {
+                viewExplainer.classList.add('view-hidden');
+                viewQuiz.classList.remove('view-hidden');
+                btnQuiz.className = "px-6 py-2 rounded-md font-semibold text-sm transition-all bg-white shadow-sm text-indigo-600";
+                btnExplainer.className = "px-6 py-2 rounded-md font-semibold text-sm transition-all text-gray-500 hover:text-gray-800";
+                
+                // Start quiz if not started
+                if (shuffledQuestions.length === 0 || currentQuestionIndex >= quizData.length) {
+                    startQuiz();
+                }
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function shuffleArray(array) {
+            let curId = array.length;
+            while (0 !== curId) {
+                let randId = Math.floor(Math.random() * curId);
+                curId -= 1;
+                let tmp = array[curId];
+                array[curId] = array[randId];
+                array[randId] = tmp;
+            }
+            return array;
+        }
+
+        function startQuiz() {
+            // Keep questions in order to naturally progress from Beginner -> Intermediate -> Advanced
+            shuffledQuestions = JSON.parse(JSON.stringify(quizData));
+            
+            // Shuffle only the options for each question
+            shuffledQuestions.forEach(q => {
+                q.shuffledOptions = shuffleArray([...q.options]);
+            });
+
+            currentQuestionIndex = 0;
+            score = 0;
+            
+            quizHeader.classList.remove('hidden');
+            quizContainer.classList.remove('hidden');
+            resultsContainer.classList.add('hidden');
+            
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            answeringAllowed = true;
+            const currentQ = shuffledQuestions[currentQuestionIndex];
+            
+            // Update UI
+            qCounter.innerText = `Question ${currentQuestionIndex + 1} / ${shuffledQuestions.length}`;
+            scoreCounter.innerText = `Score: ${score}`;
+            progressBar.style.width = `${((currentQuestionIndex) / shuffledQuestions.length) * 100}%`;
+            
+            // Update Level Badge
+            levelBadge.innerText = currentQ.level;
+            levelBadge.className = `text-xs font-bold px-2 py-1 rounded uppercase tracking-wide ${levelStyles[currentQ.level]}`;
+            
+            // Replace blanks with styled lines
+            let formattedQ = currentQ.q.replace(/_____/g, '<span class="text-indigo-600 font-bold border-b-2 border-indigo-600 px-4">_____</span>');
+            questionText.innerHTML = formattedQ;
+            
+            optionsContainer.innerHTML = '';
+            feedbackArea.classList.add('hidden');
+            nextBtn.classList.add('hidden');
+
+            currentQ.shuffledOptions.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.innerHTML = opt;
+                btn.className = "text-left bg-gray-50 hover:bg-gray-100 text-gray-800 font-medium py-4 px-5 rounded-xl border-2 border-gray-100 transition duration-200 ease-in-out text-lg shadow-sm";
+                btn.onclick = () => selectAnswer(btn, opt, currentQ.a, currentQ.exp);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function selectAnswer(selectedBtn, selectedOpt, correctOpt, explanation) {
+            if (!answeringAllowed) return;
+            answeringAllowed = false;
+
+            const isCorrect = selectedOpt === correctOpt;
+            const allBtns = optionsContainer.children;
+
+            for (let btn of allBtns) {
+                btn.disabled = true;
+                btn.classList.remove('hover:bg-gray-100', 'shadow-sm', 'cursor-pointer');
+                
+                // Decode HTML entities if necessary
+                const btnText = document.createElement('textarea');
+                btnText.innerHTML = btn.innerHTML;
+                const decodedBtnText = btnText.value;
+
+                if (decodedBtnText === correctOpt) {
+                    btn.className = "text-left bg-green-500 text-white font-medium py-4 px-5 rounded-xl border-2 border-green-600 shadow-md";
+                } else if (btn === selectedBtn && !isCorrect) {
+                    btn.className = "text-left bg-red-500 text-white font-medium py-4 px-5 rounded-xl border-2 border-red-600";
+                } else {
+                    btn.classList.add('opacity-40');
+                }
+            }
+
+            feedbackArea.classList.remove('hidden', 'bg-green-50', 'border-green-200', 'text-green-900', 'bg-red-50', 'border-red-200', 'text-red-900');
+            
+            if (isCorrect) {
+                score++;
+                selectedBtn.classList.add('correct-anim');
+                feedbackArea.classList.add('bg-green-50', 'border-green-200');
+                feedbackTitle.innerHTML = "✅ Richtig! (Correct)";
+                feedbackTitle.className = "font-bold text-lg mb-1 text-green-700";
+                feedbackDesc.className = "text-green-900";
+            } else {
+                selectedBtn.classList.add('wrong-anim');
+                feedbackArea.classList.add('bg-red-50', 'border-red-200');
+                feedbackTitle.innerHTML = "❌ Falsch! (Incorrect)";
+                feedbackTitle.className = "font-bold text-lg mb-1 text-red-700";
+                feedbackDesc.className = "text-red-900";
+            }
+
+            feedbackDesc.innerHTML = explanation;
+            scoreCounter.innerText = `Score: ${score}`;
+            nextBtn.classList.remove('hidden');
+            
+            // Scroll down smoothly
+            nextBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < shuffledQuestions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            quizHeader.classList.add('hidden');
+            quizContainer.classList.add('hidden');
+            resultsContainer.classList.remove('hidden');
+            
+            document.getElementById('final-score').innerText = score;
+            document.getElementById('total-questions').innerText = shuffledQuestions.length;
+            const resultsMsg = document.getElementById('results-message');
+            
+            const percentage = score / shuffledQuestions.length;
+            
+            if (percentage >= 0.9) {
+                resultsMsg.innerHTML = "<strong>🏆 Sprachmeister! (Language Master!)</strong><br>You have completely mastered German connectors and sentence structure. Incredible work!";
+                resultsMsg.className = "text-lg font-medium p-6 rounded-xl mb-8 bg-green-50 text-green-800 border border-green-200";
+            } else if (percentage >= 0.7) {
+                resultsMsg.innerHTML = "<strong>👏 Sehr gut! (Very good!)</strong><br>You have a very strong understanding of connectors. Review the tricky 'um zu' vs 'damit' rules and you'll be perfect.";
+                resultsMsg.className = "text-lg font-medium p-6 rounded-xl mb-8 bg-blue-50 text-blue-800 border border-blue-200";
+            } else if (percentage >= 0.5) {
+                resultsMsg.innerHTML = "<strong>👍 Nicht schlecht! (Not bad!)</strong><br>You're getting the hang of it, but verb placement can still be tricky. Read through the explainer guide once more and try again!";
+                resultsMsg.className = "text-lg font-medium p-6 rounded-xl mb-8 bg-yellow-50 text-yellow-800 border border-yellow-200";
+            } else {
+                resultsMsg.innerHTML = "<strong>📚 Weiter üben! (Keep practicing!)</strong><br>German sentence structure takes time. Remember: Nebensatz puts the verb at the end! Review the Explainer tab and try again.";
+                resultsMsg.className = "text-lg font-medium p-6 rounded-xl mb-8 bg-red-50 text-red-800 border border-red-200";
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+    </script>
+</body>
+</html>
