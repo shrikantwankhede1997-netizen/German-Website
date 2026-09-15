@@ -1,5 +1,3 @@
----
----
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,16 +50,31 @@
     <p>Select a topic below to start practicing:</p>
 
     <ul>
-      <!-- This is the Jekyll code that creates the list automatically -->
-      {% for file in site.static_files %}
-        {% if file.path contains '/activities/' and file.extname == '.html' %}
-          <li>
-            <a href="{{ site.baseurl }}{{ file.path }}">
-              {{ file.basename | replace: '-', ' ' | capitalize }}
-            </a>
-          </li>
-        {% endif %}
-      {% endfor %}
+      <li>
+        <a href="/activities/arbeitsglossar-flashcards.html">
+          Arbeitsglossar flashcards
+        </a>
+      </li>
+      <li>
+        <a href="/activities/conjunctions.html">
+          Conjunctions
+        </a>
+      </li>
+      <li>
+        <a href="/activities/connectors.html">
+          Connectors
+        </a>
+      </li>
+      <li>
+        <a href="/activities/prateritum.html">
+          Prateritum
+        </a>
+      </li>
+      <li>
+        <a href="/activities/sentence-structure.html">
+          Sentence structure
+        </a>
+      </li>
     </ul>
 
 </body>

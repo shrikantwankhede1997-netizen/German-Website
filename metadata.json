@@ -1,0 +1,8 @@
+{
+  "name": "German Language Practice",
+  "description": "Interactive vocabulary and grammar exercises for learning German.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
